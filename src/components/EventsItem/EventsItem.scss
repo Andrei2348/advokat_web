@@ -1,0 +1,206 @@
+.events{
+  &__container{
+    display: flex;
+    position: relative;
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 265px;
+    background-color: $white;  
+    border-radius: 8px;  
+    box-shadow: 0px -2.5px 0px 0px $gray6 inset;  
+    box-shadow: 0px -2.5px 0px 0px $gray6;  
+    margin-bottom: 3px; 
+    transition: all ease 0.5s;
+    @include tablet{
+      display: grid;  
+      grid-template-columns: 0.6fr 50px 0.5fr 0.5fr 120px 210px;
+      padding-top: 0;
+      padding-bottom: 0;
+      align-items: center;
+    }
+    &-wrapper{
+      position: relative;
+    }
+    // свайп по горизонтали
+    &.move__left{
+      transform: translateX(-72px);
+    }
+  }
+  &__checkbox{
+    &-fee{
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      top: 190px;
+      left: 4px;
+      @include tablet{
+        position: relative;
+        top: 0;
+        left: 0;
+        width: auto;
+      }
+    }
+    &-type{
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      top: 190px;
+      right: 12px;
+      @include tablet{
+        position: relative;
+        top: 0;
+        right: auto;
+        width: auto;
+      }
+    }
+  }
+  &__input{
+    padding: 0 0 0 12px;
+    @include tablet{
+      padding: 14px 8px 16px 28px;
+    }
+  }
+  &__color{
+    padding: 0px 12px;
+    @include tablet{
+      padding: 14px 3px 16px;
+    }
+  }
+  &__select{
+    width: 100%;
+    @include tablet{
+      padding: 14px 8px 16px;
+    }
+    & .multiselect__tags {
+      overflow: hidden;
+      height: 52px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      height: 52px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16.94px;
+      text-align: left;
+      padding: 14px 16px;
+      box-sizing: border-box;
+      background: $white;
+      border: 1.4px solid $gray3;
+      border-radius: 14px;
+      color: $black;
+      outline: none;
+    }
+    & .multiselect__placeholder {
+      margin: 0;
+      color: $gray;
+    }
+  }
+  &__checkbox{
+    cursor: pointer;
+    color: $black;
+    width: 128px;
+    display: flex;
+    align-items: center;
+    @include textRegular(14);
+    @include checkbox;
+    &-wrapper{
+      display: flex;
+      justify-content: flex-start;
+      padding: 0 8px;
+      @include tablet{
+        align-items: flex-start;
+      }
+    }
+    &-inner{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      @include tablet{
+        margin: 12px 12px 12px 0;
+      }
+    }
+  }
+  &__checkbox:before {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &__checkbox.checked:after {
+    top: 55%;
+    transform: translateY(-50%);
+  }
+  &__delete-button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: none;
+    @include tablet{
+      display: block;
+      position: absolute;
+      right: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  &__delete-button svg{
+    height: 24px;
+    width: 24px;
+  }
+  .events__input{
+    &-notify{
+      position: absolute;
+      top: 100px;
+      width: calc(50% - 22px);
+      left: 12px;
+      @include tablet{
+        position: relative;
+        top: 0;
+        left: auto;
+        width: 100%;
+      }
+    }
+    &-mark{
+      position: absolute;
+      top: 100px;
+      right: 12px;
+      display: flex;
+      width: calc(50% - 22px);
+      @include tablet{
+        position: relative;
+        top: 0;
+        right: auto;
+        width: 100%;
+      }
+    }
+    &-wrapper{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      &-type{
+        width: 100%;
+      }
+    }
+    &-label{
+      margin-bottom:  8px;
+      color: $black;
+      @include textMedium(12);
+      @include tablet{
+        display: none;
+        margin-bottom: 0;
+      }
+      & span{
+        color: $red;
+        margin-left: 4px;
+      }
+      &-checkbox{
+        color: $black;
+        margin-bottom: 14px;
+        @include textMedium(16);
+      }
+      &.events__input-label-type{
+        padding-left: 12px;
+      }
+    }  
+  }
+}

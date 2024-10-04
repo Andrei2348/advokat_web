@@ -1,0 +1,70 @@
+{
+  "name": "lawyer",
+  "version": "0.0.0",
+  "private": true,
+  "author": "kaputin <kaputinea@gmail.com>",
+  "scripts": {
+    "serve": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint --ext .js,.ts,.vue, --ignore-path .gitignore --fix src",
+    "kill": "lsof -t -i tcp:3000,8080 | xargs kill -9",
+    "test": "vitest run",
+    "version-update": "yarn config set version-git-tag false && yarn version --new-version $VERSION && git push --tags &&  git add . && git commit -m \"version update\" && git push && echo \"Successfully released version: $VERSION\"",
+    "post-release": "git checkout master && git push && git push --tags && git checkout develop && git push"
+  },
+  "dependencies": {
+    "@vuepic/vue-datepicker": "^9.0.2",
+    "axios": "^1.7.3",
+    "dayjs": "^1.11.12",
+    "maska": "^3.0.0",
+    "pinia": "^2.2.1",
+    "vue": "^3.4.38",
+    "vue-color-kit": "^1.0.6",
+    "vue-multiselect": "^3.0.0",
+    "vue-router": "^4.4.3"
+  },
+  "devDependencies": {
+    "@pinia/testing": "^0.1.5",
+    "@types/lodash": "^4.17.7",
+    "@types/node": "^22.1.0",
+    "@types/vue-color": "^2",
+    "@types/vue-select": "^3.16.8",
+    "@types/vue-the-mask": "^0",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
+    "@vitejs/plugin-legacy": "^5.4.1",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-vue": "^9.27.0",
+    "jsdom": "^24.1.1",
+    "lint-staged": "^15.2.8",
+    "msw": "^2.3.5",
+    "prettier": "^3.3.3",
+    "sass": "^1.77.8",
+    "terser": "^5.31.5",
+    "typescript": "~5.5.4",
+    "vite": "5.4.2",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-svg-loader": "^5.1.0",
+    "vitest": "^2.0.5",
+    "vue-tsc": "^2.0.29",
+    "yorkie": "^2.0.0"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "license": "MIT",
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "yarn lint"
+    ]
+  },
+  "type": "module",
+  "packageManager": "yarn@4.3.1"
+}

@@ -1,0 +1,175 @@
+@mixin input {
+  height: 52px;
+  @include textRegular(14);
+  padding: 14px 16px;
+  box-sizing: border-box;
+  background: $white;
+  border: 1.4px solid $gray3;
+  border-radius: 14px;
+  color: $black;
+  outline: none;
+  &:focus {
+    outline: 3px solid $gray4;
+    border-color: $gray;
+  }
+  &:hover {
+    border-color: $gray;
+  }
+  &:disabled {
+    background: $gray5;
+    border-color: $gray2;
+  }
+  &.error {
+    outline: 3px solid $bgRed;
+    border-color: $red;
+  }
+}
+
+@mixin button($height: 52px) {
+  @include textMedium(14);
+  @include resetButton;
+  @include centering;
+  transition: background, opacity 0.2s linear;
+  height: $height;
+  padding: 17px 30px 18px 28px;
+  gap: 10px;
+  border-radius: 14px;
+  white-space: nowrap;
+}
+
+@mixin primaryButton($height: 52px) {
+  @include button($height);
+  background: $green;
+  color: $white;
+  &:hover {
+    background: $darkGreen;
+  }
+  &:disabled {
+    background: $lightGreen;
+    color: $gray2;
+    cursor: unset;
+  }
+}
+
+@mixin secondaryButton($height: 52px) {
+  @include button($height);
+  background: $lightGreen;
+  color: $darkGreen;
+  &:hover {
+    background: $lightGreen2;
+  }
+  &:disabled {
+    cursor: unset;
+    background: $lightGreen;
+    color: $gray2;
+  }
+}
+
+@mixin redButton($height: 52px) {
+  @include button($height);
+  background: $red;
+  color: $white;
+  &:hover {
+    background: $darkRed;
+  }
+  &:disabled {
+    background: $bgRed;
+    color: $gray2;
+    cursor: unset;
+  }
+}
+
+@mixin grayButton($height: 52px) {
+  @include button($height);
+  background: $gray4;
+  color: $gray;
+  &:hover {
+    color: $black;
+  }
+  &:disabled {
+    background: $gray4;
+    color: $gray2;
+    cursor: unset;
+  }
+}
+
+@mixin transparentButtonGreen($height: 52px) {
+  @include button($height);
+  background: transparent;
+  color: $green;
+  display: flex;
+  &:hover {
+    color: $darkGreen;
+  }
+  &:disabled {
+    color: $lightGreen;
+    cursor: unset;
+  }
+}
+
+@mixin radioButton {
+  @include textRegular(16);
+  position: relative;
+  padding-left: 36px;
+  input {
+    display: none;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid $gray2;
+  }
+  &.active {
+    &:before {
+      border: 2px solid $green;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      top: 5px;
+      left: 5px;
+      background: $green;
+      border-radius: 50%;
+    }
+  }
+}
+
+@mixin checkbox {
+  position: relative;
+  padding-left: 36px;
+  cursor: pointer;
+  input {
+    display: none;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $gray2;
+    border-radius: 4px;
+  }
+  &.checked {
+    &:before {
+      border-color: $green;
+      background-color: $green;
+    }
+    &:after {
+      content: '\2713'; 
+      position: absolute;
+      left: 3px;
+      top: -2px;
+      font-size: 20px;
+      color: $white;
+    }
+  }
+}

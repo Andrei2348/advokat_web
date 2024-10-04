@@ -1,0 +1,124 @@
+.aside{
+  width: 242px;
+  background-color: $white;
+  box-shadow: -1px 0px 0px 0px #DFE5F1 inset;
+  height: calc(100vh - 52px);
+  top: 52px;
+  border-top: 1px solid $gray4;
+  padding: 30px 10px;
+  transition: transform 0.5s;
+  overflow: hidden;
+  position: fixed;
+  z-index: 300;
+  @include notebook{
+    height: 100vh;
+    top: 0;
+    border-top: none;
+  }
+  &.collapsed .aside__menu-items::after{
+    width: 0;
+    right: 0;
+    left: auto;
+    @include notebook{
+      width: 34px;
+      right: 0;
+      left: auto;
+    }
+  }
+  &__burger{
+    margin-right: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+  &__burger svg{
+    height: 24px;
+    width: 24px;
+    stroke: $gray;
+  }
+  &.collapsed {
+    transform: translateX(-242px);
+    @include notebook{
+      transform: translateX(-158px);
+    }
+  }
+  &__header{
+    display: none;
+    @include notebook{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 60px;
+    }
+  }
+  &__header svg{
+    cursor: pointer;
+    margin-left: 22px;
+  }
+  &__menu-items{
+    position: relative;
+    padding: 0 0 30px 0;
+    &::after{
+      content: '';
+      width: 192px;
+      height: 1px;
+      background-color: $gray4;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      position: absolute;
+    }
+  }
+  &__menu-item{
+    padding: 12px 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all ease 0.5s;
+    height: 48px;
+    text-decoration: none;
+    & svg{
+      height: 24px;
+      width: 24px;
+      stroke: $gray;
+    }
+    & + .aside__menu-item{
+      margin-top: 14px;
+    }
+    &.router-link-active{
+      background-color: $green;
+    }
+    &.router-link-active .aside__menu-item--text{
+      color: $white;
+    }
+    &.router-link-active svg {
+      stroke: $white;
+    }
+    &.router-link-active.collapsed{
+      width: auto;
+      display: inline-flex;
+    }
+    & .aside__menu-item--text{
+      margin-left: 16px;
+      @include textRegular(16);
+      color: $gray;
+      opacity: 1;
+      visibility: visible;
+      white-space: nowrap;
+      transition: all ease-out 0.3s;
+    }
+    &.collapsed .aside__menu-item--text{
+      opacity: 0;
+      visibility: hidden;
+      width: 0;
+      display: none;
+    }
+    &.collapsed{
+      transform: translateX(155px);
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@mixin custom-scrollbar($track-color, $thumb-color) {  
+  &::-webkit-scrollbar {  
+    width: 6px;  
+  }  
+  &::-webkit-scrollbar-track {  
+    background: $track-color;  
+    border-radius: 38px;  
+  }  
+  &::-webkit-scrollbar-thumb {  
+    background: $thumb-color;  
+    border-radius: 38px;  
+    &:hover {  
+      background: lighten($thumb-color, 10%);  
+    }  
+  }  
+}
+
+@mixin hidden-scrollbar {  
+  &::-webkit-scrollbar {  
+    width: 0;  
+  }  
+  &::-webkit-scrollbar-track {  
+    background: transparent;  
+  }  
+  &::-webkit-scrollbar-thumb {  
+    background: transparent;   
+  }  
+}  

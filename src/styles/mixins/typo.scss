@@ -1,0 +1,83 @@
+@mixin heading($val) {
+  @if $val == 22 {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 26.63px;
+    text-align: left;
+  } @else if $val == 18 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 21.78px;
+    text-align: left;
+  }
+}
+
+@mixin textLink($val) {
+  @if $val == 14 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    text-align: left;
+    text-decoration: underline;
+    color: $blue;
+  } @else if $val == 12 {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    text-decoration: underline;
+    color: $blue;
+  }
+}
+
+@mixin textMedium($val) {
+  @if $val == 16 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19.36px;
+    text-align: left;
+  } @else if $val == 14 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.94px;
+    text-align: left;
+  } @else if $val == 12 {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14.52px;
+    text-align: left;
+  }
+}
+
+@mixin textRegular($val) {
+  @if $val == 16 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    text-align: left;
+  } @else if $val == 14 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    text-align: left;
+  } @else if $val == 12 {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.52px;
+    text-align: left;
+  }
+}
+
+@mixin textBold($val) {
+  @if $val == 14{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16.94px;
+    text-align: left;
+  } @else if $val == 12 {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 14.52px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,43 @@
+.table{
+    width: 100%;
+    &__header{
+        display: none;
+        @include tablet{
+            display: grid;  
+            background-color: $white;  
+            border-radius: 8px;  
+            box-shadow: 0px -2.5px 0px 0px $gray6 inset;  
+            box-shadow: 0px -2.5px 0px 0px $gray6;  
+            margin-bottom: 3px;
+            grid-template-columns: 1fr 0.6fr 90px 0.7fr 0.5fr 120px 0.6fr 60px 80px;
+        }
+        &-item{
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 17px 8px;
+            &:first-child{
+                padding-left: 36px;
+            }
+            &-span{
+                color: $red;
+                margin-left: 4px
+            }
+            & .table__header-item-text{
+                margin: 0;
+                display: flex;
+                align-items: center;
+                // white-space: nowrap;
+                color: $gray;
+                @include textMedium(12);
+            }
+            & svg{
+                height: 16px;
+                width: 16px;
+                stroke: $gray;
+                margin-left: 8px;
+            }
+        }
+    }
+}
+

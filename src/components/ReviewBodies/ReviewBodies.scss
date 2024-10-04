@@ -1,0 +1,109 @@
+.review__bodies{
+  &-container{
+    width: 100vw;
+    height: calc(100vh - 100px);
+    padding: 32px 16px 38px;
+    z-index: 0;
+    position: relative;
+    @include tablet{
+      padding: 32px 30px 38px;
+      width: 894px;
+    }
+    &.modal__content{
+      background-color: $gray4;
+      height: 100%;
+      @include tablet{
+        height: 438px;
+        background-color: $white;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+      }
+    }
+  }
+  &-add-button{
+    width: 100%;
+    margin-bottom: 32px;
+    @include primaryButton;
+    & svg{
+      stroke: $white;
+      width: 14px;
+      height: 14px;
+    }
+  }
+  &-table-items{
+    display: none;
+    @include tablet{
+      display: grid;
+      grid-template-columns: 0.7fr 0.7fr 1fr 0.7fr 0.8fr 1.5fr;
+      border-top: 3px solid $gray6;
+      border-bottom: 3px solid $gray6;
+    }
+  }
+  &-table-item{
+    padding: 17px 8px;
+    color: gray;
+    @include textMedium(12);
+    &-content{
+      margin-bottom: 10px;
+      width: 100%;
+      position: relative;
+      @include tablet{
+        margin-bottom: 0;
+        padding: 0;
+        background-color: transparent;
+        border-bottom: 3px solid $gray6;
+      }
+      &:last-child{
+        border-bottom: none;
+      }
+      &-wrapper{
+        @include tablet{
+          overflow-y: auto;
+          height: 250px;
+          @include custom-scrollbar($gray5, $gray2);
+        }
+      }
+    }
+    &-content-wrapper{
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column-reverse;
+      @include tablet{
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+    }
+    &-content:last-child{
+      @include tablet{
+        background-color: $blueLight;
+      }
+    }
+  }
+  &-inputs-wrapper{
+    min-height: 200px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    @include tablet{
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+  &-table-items-empty{
+    color: $black;
+    @include heading(16);
+    display: block;
+    padding-top: 16px;
+    text-align: center;
+  }
+  &-table-wrapper{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 180px);
+    @include hidden-scrollbar;
+    @include tablet{
+      overflow: hidden;
+    }
+  }
+}
+

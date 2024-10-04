@@ -1,0 +1,33 @@
+.planning{
+  &__wrapper{
+    margin-top: 10px;
+  }
+  &__title{
+    display: none;
+    @include tablet{
+      display: block;
+      margin-bottom: 20px;
+      margin-top: 32px;
+      color: $black;
+      @include heading(22);
+
+    }
+  }
+  &__empty-message{
+    background-color: $white;
+    padding: 17px 18px;
+    margin-bottom: 3px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    color: $black;
+    @include textRegular(14);
+  }
+  &__list{
+    margin: 0 16px;
+    @include tablet{
+      margin: 0;
+    }
+  }
+}

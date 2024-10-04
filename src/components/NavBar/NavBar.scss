@@ -1,0 +1,209 @@
+.navbar{
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  min-height: 52px;
+  position: fixed;
+  padding: 14px;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $white;
+  transition: all ease-out 0.5s;
+  justify-content: space-between;
+  z-index: 100;
+  box-shadow: 0 1px 1px #DFE5F1, 0 1px 1px #DFE5F1;
+  @include notebook{
+    left: auto;
+    margin-left: 36px;
+    justify-content: flex-end;
+    padding: 20px;
+    width: calc(100% - 242px);
+  }
+  &.collapsed{
+    width: 100%;
+    @include notebook{
+      width: calc(100% - 84px);
+    }
+  }
+  &__burger{
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    & svg{
+      height: 24px;
+      width: 24px;
+      stroke: $gray;
+    }
+    &-wrapper{
+      height: 24px;
+      width: auto;
+      @include notebook{
+        display: none;
+      }
+    }
+  }
+  &__smart-wrapper{
+    display: inline-flex;
+    gap: 20px;
+    & svg{
+      height: 24px;
+      width: 24px;
+    }
+    @include notebook{
+      display: none;
+    }
+  }
+  &__smart-info-text{
+    @include heading(16);
+    color: $black;
+    @include notebook{
+      display: none;
+    }
+  }
+  &__buttons-wrapper{
+    display: none;
+    @include notebook{
+      margin-left: 36px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+  &__notification{
+    &-wrapper{
+      cursor: pointer;
+      height: 24px;
+      width: 24px;
+      position: relative;
+    }
+    &-marker{
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      height: 7px;
+      width: 7px;
+      border-radius: 50%;
+      background-color: $red;
+    }
+  }
+  &__logout-menu--wrapper svg,
+  &__notification-wrapper svg{
+    height: 24px;
+    width: 24px;
+    stroke: $gray;
+  }
+  &__logout-menu--wrapper{
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+  }
+  &__avatar-wrapper{
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+  }
+  &__search{
+    &-input--wrapper{
+      display: none;
+      @include notebook{
+        width: 100%;
+        display: block;
+      }
+    }
+    &-wrapper{
+      display: none;
+      @include notebook{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        border: 1px solid $gray3;
+        height: 48px;
+        margin: 0;
+        border-radius: 14px;
+        padding: 0 10px;
+        position: relative;
+      }
+    }
+    &-input{
+      width: calc(100% - 30px);
+      padding: 7px 10px 6px;
+      border: none;
+      outline: none;
+      @include textRegular(14);
+      color: $gray;
+      background-color: $white;
+      &::placeholder{
+        color: $gray;
+      }
+    }
+    &-button{
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      outline: none;
+      background-color: transparent;
+      cursor: pointer;
+      & svg{
+        height: 24px;
+        width: 24px;
+        stroke: $gray;
+        cursor: pointer;
+      }
+    }
+  }
+  &__filters{
+    &-items{
+      display: none;
+      @include notebook{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0;
+      }
+    }
+    &-item{
+      display: flex;
+      align-items: center;
+      background-color: $green;
+      @include textMedium(14);
+      color: $white;
+      padding: 7px 10px 7px;
+      height: 30px;
+      border-radius: 8px;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      & svg{
+        height: 24px;
+        width: 24px;
+        stroke: $white;
+        margin-left: 6px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+// navbar__menu-dropdown
+::v-deep(.dropdown svg) {
+  height: 24px;
+  width: 24px;
+  stroke: $gray;
+}
+::v-deep(.dropdown .dropdown__menu) {
+  right: -10px;
+}
+::v-deep(.dropdown .dropdown__menu-top:after),
+::v-deep(.dropdown .dropdown__menu-bottom:before){
+  position: absolute;
+  content: '';
+  top: -7px;
+  right: 12px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 8px solid $white;
+  transform: rotate(0deg);
+}

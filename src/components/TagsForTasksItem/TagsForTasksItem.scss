@@ -1,0 +1,88 @@
+.events{
+  &__container{
+    display: flex;
+    padding: 12px 0;
+    background-color: $white;  
+    border-radius: 8px;  
+    box-shadow: 0px -2.5px 0px 0px $gray6 inset;  
+    box-shadow: 0px -2.5px 0px 0px $gray6;
+    transition: all ease 0.5s;
+    position: relative;
+    @include tablet{
+      padding: 0;
+      display: grid;  
+      grid-template-columns: 1fr 104px;
+      margin-bottom: 3px;
+    }
+    &-wrapper{
+      position: relative;
+    }
+    // свайп по горизонтали
+    &.move__left{
+      transform: translateX(-72px);
+    }
+  }
+  &__input{
+    padding-left: 12px;
+    @include tablet{
+      padding: 14px 8px 16px 28px;
+    }
+  }
+  &__color{
+    padding: 0 12px;
+    @include tablet{
+      padding: 14px 3px 16px;
+    }
+  }
+  &__delete-button{
+    display: none;
+    @include tablet{
+      display: block;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 24px;
+    }
+  }
+  &__delete-button svg{
+    height: 24px;
+    width: 24px;
+  }
+}
+.select__input-wrapper{
+  position: relative;
+  & .select__input{
+    margin-right: 60px;
+  }
+}
+
+.select__input-wrapper{
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+
+.select__input-label{
+    padding-left: 12px;
+    margin-bottom:  8px;
+    color: $black;
+    @include textMedium(12);
+    @include tablet{
+      display: none;
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+    & span{
+      color: $red;
+      margin-left: 3px;
+    }
+  }
+
+  .select__input-wrapper-tag{
+    width: 100%;
+  }

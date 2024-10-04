@@ -1,0 +1,108 @@
+.lawsuit{
+  &__edit-container{
+    overflow: auto;
+    height: calc(100vh - 120px);
+    width: 100vw;
+    @include tablet{
+      width: 1010px;
+      height: auto;
+      overflow: visible;
+    }
+  }
+  &__common-wrapper{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 32px 16px 122px;
+    height: 100%;
+    @include tablet{
+      padding: 32px 30px 122px;
+      gap: 18px;
+      flex-direction: row;
+      height: auto;
+    }
+  }
+  &__client-wrapper,
+  &__opponent--wrapper{
+    width: 100%;
+    @include tablet{
+      width: 486px;
+    }
+  }
+  &__input{
+    &-label{
+      color: $black;
+      margin-bottom: 14px;
+      display: block;
+      @include textMedium(14);
+    }
+    &-label-span{
+      color: $red;
+      margin-left: 3px;
+    }
+    &-rating-wrapper{
+      margin-bottom: 18px;
+      border-bottom: 1px solid $gray4;
+    }
+    &-wrap{
+      margin-bottom: 24px;
+    }
+  }
+  &__client{
+    &-select{
+      margin-bottom: 12px;
+    }
+    &-button{
+      @include primaryButton;
+    }
+    &-button-create{
+      width: 100%;
+      margin-bottom: 20px;
+      & svg{
+        stroke: $white;
+        width: 14px;
+        height: 14px;
+      }
+      &:disabled svg{
+        stroke: $gray2;
+      }
+    }
+    &-button-save{
+      margin-top: 22px;
+      @include primaryButton;
+      @include tablet{
+        position: absolute;
+        bottom: 58px;
+        left: 30px;
+      }
+    }
+  }
+  &__fabula{
+    &-wrapper{
+      margin: 24px 0 32px;
+    }
+    &-wrapper .form-element__field{
+      height: 104px !important;
+    }
+    &-textarea-input .form-element__field{
+      height: auto !important;
+    }
+  }
+}
+
+.table__content-documents-wrapper{
+ display: flex;
+ flex-direction: column;
+ gap: 18px;
+ @include tablet{
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+ }
+}
+
+.form-element textarea {
+  resize: none;
+  height: 120px;
+}

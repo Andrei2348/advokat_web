@@ -1,0 +1,104 @@
+.popup {
+  top: 0;
+  position: fixed;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background: rgba($black, 0.5);
+  overflow: scroll;
+  @include hideScrollBar;
+  @include tablet {
+    padding: 80px 0;
+  }
+  &.navigationIsOpen {
+    z-index: 10;
+  }
+  &__wrapper {
+    display: flex;
+    @include centering;
+    height: 100%;
+    @include tablet {
+      height: unset;
+    }
+  }
+  &__content {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    overflow-y: scroll;
+    background: $white;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    @include tablet {
+      height: auto;
+      overflow-y: visible;
+      width: 750px;
+    }
+    @include notebook {
+      width: 1000px;
+    }
+  }
+  &__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    @include resetButton;
+    border-radius: 50%;
+    @include centering;
+    transition: all 0.2s linear;
+    flex-shrink: 0;
+    z-index: 10;
+    @include tablet {
+      top: 16px;
+      right: -48px;
+    }
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: $gray3;
+      transition: all 0.2s linear;
+      @include tablet {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+  &__footer,
+  &__header {
+    display: flex;
+    background: $gray5;
+    @include heading(18);
+    color: $black;
+    padding: 20px;
+    @include tablet {
+      min-height: 80px;
+      padding: 24px 32px;
+    }
+  }
+  &__header {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 24px;
+    padding-top: 40px;
+    span {
+      width: 100%;
+      display: flex;
+      text-align: start;
+    }
+    @include tablet {
+      padding-top: 24px;
+    }
+  }
+  &__footer {
+    display: flex;
+    margin-top: auto;
+    justify-content: flex-end;
+    gap: 12px;
+    @include tablet {
+      margin-top: unset;
+    }
+  }
+}

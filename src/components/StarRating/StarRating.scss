@@ -1,0 +1,14 @@
+.star{
+  &-rating{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  & svg{
+    cursor: pointer;
+    fill: #E4F6E9;
+  }
+  &.filled svg{
+    fill: #54B975
+  }
+}

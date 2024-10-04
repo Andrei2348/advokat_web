@@ -1,0 +1,53 @@
+.work{
+  width: 100%;
+  margin-top: 10px;
+  @include tablet{
+    width: 50%;
+    margin-top: 0;
+  }
+  &__title{
+    color: $black;
+    @include textMedium(16);
+    margin-bottom: 20px;
+  }
+  &__input-wrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 16px;
+    width: 100%;
+    & .work__input{
+      width: 50%;
+    }
+  }
+  &__header{
+    display: flex;
+    flex-direction: column;
+    padding: 14px 28px;
+    background-color: $white;  
+    border-radius: 8px;  
+    box-shadow: 0px -2.5px 0px 0px $gray6 inset;  
+    box-shadow: 0px -2.5px 0px 0px $gray6;  
+    margin-bottom: 3px;
+    &-item{
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0;
+      &-span{
+        color: $red;
+        margin-left: 4px
+      }
+      & .work__header-item-text{
+        display: block;
+        padding-bottom: 14px;
+        @include textMedium(14);
+        color: $black;
+        white-space: nowrap;
+      }
+    }
+  }
+}

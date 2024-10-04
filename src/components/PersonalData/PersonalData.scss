@@ -1,0 +1,68 @@
+.personal__wrapper{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 24px;
+	padding: 24px 16px 16px;
+	@include tablet{
+		align-items: flex-start;
+		justify-content: space-between;
+		flex-direction: row;
+		background-color: $white;
+		padding: 24px 20px 104px;
+		border-radius: 12px;
+		position: relative;
+	}
+}
+.personal__profile-wrapper{
+	background-color: $white;
+	border-radius: 12px;
+	padding: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 22px;
+	@include tablet{
+		background-color: transparent;
+		border-radius: 0;
+		padding: 0;
+	}
+}
+.personal__subtitle{
+	color: $black;
+	@include textMedium(16);
+	margin-bottom: 22px;
+}
+.personal__main,
+.personal__contacts{
+	width: 100%;
+}
+.personal__buttons-wrapper{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: absolute;
+	bottom: 36px;
+	left: 20px;
+	right: 20px;
+}
+.personal__button-save{
+	@include primaryButton;
+}
+.personal__button-delete{
+	border: none;
+	outline: none;
+	color: $red;
+	background-color: transparent;
+	cursor: pointer;
+	@include textMedium(14);
+}
+.personal__contacts-label{
+	color: $black;
+	margin-bottom: 14px;
+	display: block;
+	@include textMedium(14);
+}
+.personal__contacts-label-span{
+	color: $red;
+	margin-left: 3px;
+}

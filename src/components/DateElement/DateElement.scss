@@ -1,0 +1,149 @@
+.custom{
+  &-prev-button{
+    position: absolute;
+    right: 34px;
+    top: 12px;
+  }
+  &-input{
+    &-field {
+      @include input;
+    }
+  }
+  &-datepicker-menu {
+    box-shadow: $shadow;
+    border-radius: 14px;
+  }
+  &-calendar{
+    &-cell {
+      border-radius: 50%;
+      @include textRegular(12);
+      color: $black;
+      padding: 7px;
+      &.dp__active_date {
+        background-color: $red;
+        color: $white;
+      }
+      &.dp__active_date:hover {
+        background-color: $red;
+        color: $white;
+      }
+      &:hover {
+        background-color: $green;
+        color: $white;
+      }
+      &.marked-cell{
+        border: 2px solid $green;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+.picker{
+  position: relative;
+  &__icon{
+    height: 24px;
+    width: 24px;
+    stroke: $gray;
+  }
+}
+div .dp__input_icon{
+  position: absolute;
+  right: 14px;
+  left: auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.dp--future{
+  color: $gray2;
+}
+.dp--clear-btn {
+  display: none !important;
+}
+.dp--header-wrap{
+  margin-bottom: 11px;
+}
+
+.dp{
+  &-custom-calendar .dp__calendar_item {
+    background-color: $red;
+  }
+  &__calendar_header{
+    &{
+      margin-bottom: 4px;
+    }
+    &_separator {
+      display: none;
+    }
+    &_item{
+      @include textBold(12);
+    }
+  }
+
+  &__month_year{
+    &_wrap{
+      justify-content: flex-start;
+      gap: 10px;
+    }
+    &_select {
+      width: auto;
+      padding: 0 6px;
+      &:hover{
+        background-color: $green;
+        color: $white;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  &__inner{
+    &_nav:hover{
+      background-color: $green;
+    }
+    &_nav:hover svg{
+      fill: $white;
+    }
+    &_wrap{
+      position: relative;
+      height: 52px;
+    }
+  }
+
+  &__overlay{
+    &_cell {
+      cursor: pointer;
+      color: $black;
+      text-align: center;
+      &_active {
+        cursor: pointer;
+        border-radius: 8px;
+        text-align: center;
+        background: $white;
+        color: $black;
+        border: 1px solid $green;
+      }
+      &:hover {
+        background: $green;
+        color: $white;
+      }
+    }
+    &_action{
+      background-color: $white;
+      &:hover{
+        background-color: $green;
+      }
+      &:hover svg{
+        fill: $white;
+      }
+    }
+  }
+  &__menu {
+    border-radius: 8px;
+    border: 1px solid $gray3;
+  }
+}
+.date__label{
+  @include textRegular(14);
+  color: $black;
+  margin-bottom: 14px;
+  display: inline-block;
+}

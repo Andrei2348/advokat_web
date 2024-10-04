@@ -1,0 +1,23 @@
+.events{
+  width: 100%;
+  &__table{
+    grid-template-columns: 0.6fr 50px 0.5fr 0.5fr 120px 210px;
+  }
+  &__title{
+    color: $black;
+    @include textMedium(16);
+    margin-bottom: 20px;
+  }
+  &__header-button{
+    &-create{
+      width: 100%;
+      margin-top: 10px;
+      @include primaryButton;
+    }
+    &-icon{
+      stroke: $white;
+      width: 14px;
+      height: 14px;
+    }  
+  }
+}

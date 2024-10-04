@@ -1,0 +1,45 @@
+.suggest__modal{
+  &-title{
+      @include heading(18);
+      margin-bottom: 12px;
+      color: $black;
+    }
+  &-text{
+    @include textRegular(14);
+    margin-bottom: 24px;
+    color: $black;
+  }
+  &-container{
+    width: 80vw;
+    padding: 22px 22px 24px;
+    @include screen(600px){
+      width: auto;
+    }
+  }
+}
+.suggest{
+  &__buttons-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 18px;
+    @include screen(600px){
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+    }
+  }
+  &__button{
+    @include screen(600px){
+      width: 200px;
+    }
+    &-cancel{
+      @include grayButton;
+    }
+    &-confirm{
+      @include redButton;
+    }
+  }
+}
+ 

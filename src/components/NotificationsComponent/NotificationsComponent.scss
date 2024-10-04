@@ -1,0 +1,34 @@
+.notifications {
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  width: 100%;
+
+  &.small {
+    gap: 4px;
+    padding: 8px;
+    @include textRegular(12);
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  &.large {
+    gap: 8px;
+    padding: 12px;
+    @include textRegular(14);
+    svg {
+      min-width: 24px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+  &.error {
+    fill: $red;
+    background-color: $bgRed;
+  }
+  &.done {
+    fill: $green;
+    background-color: $lightGreen;
+  }
+}

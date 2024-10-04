@@ -1,0 +1,135 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: $shadow;
+  padding: 60px 38px 44px;
+  background-color: $white;
+  border-radius: 12px;
+  color: $black;
+  max-width: 451px;
+  width: 100%;
+  &__logo {
+    margin: 0 auto 55px;
+    position: relative;
+    padding: 2px;
+    border-bottom: 2px solid $green;
+    @include textMedium(16);
+  }
+  &__code,
+  &__login {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    width: 100%;
+    &-description {
+      display: flex;
+      color: $gray;
+      margin-bottom: 22px;
+      @include textRegular(12);
+    }
+    &-title {
+      display: flex;
+      margin-bottom: 18px;
+      @include heading(18);
+    }
+    &-field {
+      margin-bottom: 16px;
+      &.--withDescription {
+        margin-bottom: 8px;
+      }
+    }
+    &-wrapper {
+      position: relative;
+      &-button {
+        position: absolute;
+        @include resetButton();
+        top: 17px;
+        right: 0;
+        z-index: 2;
+        fill: $gray;
+        @include tablet {
+          left: 318px;
+        }
+      }
+    }
+  }
+  &__options {
+    display: flex;
+    align-items: center;
+    gap: 46px;
+    margin-bottom: 32px;
+    &-item {
+      @include radioButton;
+    }
+  }
+  &__link {
+    align-items: flex-start;
+    margin: 2px 0 32px;
+    @include textLink(14);
+  }
+  &__enter {
+    @include primaryButton;
+  }
+  &__registration {
+    margin-top: 14px;
+    @include secondaryButton;
+  }
+  &__steps {
+    @include centering;
+    margin-top: 18px;
+    gap: 8px;
+    &-item {
+      cursor: pointer;
+      width: 6px;
+      height: 6px;
+      @include resetButton;
+      background: $gray4;
+      border-radius: 50%;
+      &.--current {
+        background: $gray2;
+      }
+    }
+  }
+  &__code {
+    &-title {
+      margin-bottom: 0;
+    }
+    &-description {
+      display: inline;
+      margin: 8px 0 18px;
+      @include textRegular(14);
+    }
+    &-phone {
+      display: inline;
+      @include resetButton;
+      @include textRegular(14);
+      color: $green;
+    }
+    &-subtitle {
+      margin: 2px 0 6px;
+      color: $gray;
+      @include centering;
+      @include textRegular(14);
+    }
+    &-timer {
+      gap: 6px;
+      @include centering;
+      margin-bottom: 32px;
+    }
+    &-time {
+      @include textRegular(14);
+    }
+    &-resend {
+      align-items: flex-start;
+      margin: 2px 0 32px;
+      @include textLink(14);
+      @include resetButton;
+      text-decoration: underline;
+      @include centering;
+    }
+  }
+  .notifications {
+    margin-bottom: 32px;
+  }
+}

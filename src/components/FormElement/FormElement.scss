@@ -1,0 +1,79 @@
+.form-element {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  align-items: start;
+  width: 100%;
+  position: relative;
+  gap: 14px;
+  &__name {
+    @include textMedium(14);
+    color: $black;
+    sup {
+      //color: $ruby01;
+    }
+  }
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+  }
+  &__field {
+    @include input;
+  }
+  textarea {
+    resize: none;
+    height: 80px;
+  }
+  &__error {
+    margin-top: 8px;
+    @include textRegular(12);
+    color: $red;
+    &-list {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__clear {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    cursor: pointer;
+  }
+
+  &__placeholder {
+    position: absolute;
+    left: 16px;
+    top: 17px;
+    z-index: 2;
+    @include textRegular(14);
+    color: $gray;
+  }
+  textarea,
+  input {
+    background-color: transparent;
+    position: relative;
+    z-index: 1;
+  }
+  textarea:required + .form-element__placeholder::after,
+  input:required + .form-element__placeholder::after {
+    content: "*";
+    color: $red;
+  }
+    textarea:disabled + .form-element__placeholder,
+  input:disabled + .form-element__placeholder {
+    color: $gray2;
+  }
+  textarea:focus + .form-element__placeholder,
+  input:focus + .form-element__placeholder {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+
+input[type='time']::-webkit-calendar-picker-indicator {
+  display: none;
+}

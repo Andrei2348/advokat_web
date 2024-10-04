@@ -1,0 +1,67 @@
+.color__picker{
+  background: transparent !important;
+  position: absolute;
+  right: 0;
+  z-index: 100;
+  display: none;
+  @include tablet{
+    right: auto;
+  }
+  &.visible{
+    display: block;
+  }
+  &-wrapper{
+    height: 52px;
+    width: 44px;
+    z-index: 0;
+  }
+  &-select-button{
+    margin-top: 10px;
+    width: 100%;
+    @include primaryButton(40px);
+  }
+  &-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    background-color: $lightGreen;
+    position: relative;
+    height: 52px;
+    width: 44px;
+    border-radius: 6px;
+    @include tablet{
+      background-color: transparent;
+    }
+  }
+  &-fill-button{
+    height: 52px;
+    width: 44px;
+    border-radius: 6px;
+    background-color: $gray;
+  }
+  &-top{
+   transform: translateY(-410px); 
+  }
+}
+
+::v-deep(.hue canvas){
+  height: 175px;
+  width: 14px;
+}
+.hu-color-picker {
+  padding: 20px;
+  border-radius: 16px;
+  width: 240px !important;
+}
+::v-deep(.color-type) {
+  display: none;
+}
+::v-deep(.color-alpha){
+  display: none;
+}
+::v-deep(.saturation canvas) {
+  width: 175px;
+  height: 175px;
+}

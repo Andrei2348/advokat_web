@@ -1,0 +1,98 @@
+.select{
+  &__option{
+    &-wrapper{
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      @include textRegular(14);
+      color: $black;
+    }
+    &-span{
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+    }
+  }
+  &__input{
+    & .select__chevron{
+      height: 16px;
+      width: 16px;
+      stroke: $gray;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(0deg);
+      transition: all ease 0.4s;
+    }
+    & .multiselect--active .select__chevron{
+      transform: translateY(-50%) rotate(180deg);
+    }
+    & .multiselect__select::before{
+     transform: rotate(180deg);
+    }
+    & .multiselect{
+      cursor: pointer;
+    &__option--highlight {
+      background: $gray5;
+      outline: none;
+      color: $black;
+      border-radius: 14px;
+    }
+    &__content-wrapper{
+      overflow-x: hidden;
+      background: #fff;
+      max-height: 240px;
+      overflow: auto;
+      border: 1px solid $gray5;
+      border-radius: 14px;
+      z-index: 50;
+      box-shadow: $shadow;
+      -webkit-overflow-scrolling: touch;
+      @include custom-scrollbar($gray5, $gray2);
+    }
+    &__tags{
+      overflow: hidden;
+      height: 52px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      @include input;
+    }
+    &__select {
+      width: 0;
+      height: 0;
+    }
+    &__select::before {
+      display: none;
+    }
+    &__single {
+      padding-left: 0px;
+      margin-bottom: 0px;
+      transform-origin: center;
+    }
+    &__element {
+      margin: 0 12px;
+    }
+    &__tags {
+      color: $black;
+      height: 52px;
+    }
+    &__option--selected {
+      background: $white;
+      color: $black;
+    }
+    &__option--selected.multiselect__option--highlight {
+      background: $gray5;
+      color: $black;
+    }
+  }
+    & span.multiselect__placeholder{
+      margin: 0;
+      @include textRegular(14);
+      color: $gray;
+    }
+    & .multiselect--active:not(.multiselect--above) .multiselect__tags{
+      border-radius: 14px;
+    }
+  }
+}

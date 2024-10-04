@@ -1,0 +1,279 @@
+.table__content{
+  &-category--color{
+    @include tablet{
+      width: 4px;
+      height: calc(100% - 26px);
+      position: absolute;
+      top: 50%;
+      left: 22px;
+      transform: translateY(-50%);
+      border-radius: 8px;
+      display: block;
+    }
+  }
+  &-actions-wrapper{
+    & svg{
+      height: 16px;
+      width: 16px;
+      cursor: pointer;
+    }
+  }
+  &-notes{
+    stroke: $green;
+  }
+  &-menu{
+    &-wrapper{
+      display: none;
+      &.visible{
+        display: block;
+      }
+    }
+    &-dropdown{
+      position: absolute;
+    }
+  }
+  &-item{
+    @include textMedium(12);
+    color: $black;
+    @include tablet{
+      margin: 0 0 0 8px;
+    }
+    &-text{
+      margin: 0;
+      text-decoration: none;
+      color: $black;
+      width: 50%;
+      @include textMedium(12);
+      @include tablet{
+        width: 100%;
+      }
+    }
+    &-container{
+      position: relative;
+    }
+    &-wrapper{
+      display: grid;  
+      background-color: $white;  
+      border-radius: 8px;  
+      box-shadow: 0px -2.5px 0px 0px $gray6 inset;  
+      box-shadow: 0px -2.5px 0px 0px $gray6;  
+      margin-bottom: 3px;
+      padding: 19px 8px;
+      position: relative;
+      align-items: center;
+      width: 100%;
+      transition: all ease 0.4s;
+
+      // свайп по горизонтали
+      &.move__left{
+        transform: translateX(-72px);
+      }
+      &.move__right{
+        transform: translateX(72px);
+      }
+      @include tablet{
+        padding: 19px 0;
+        grid-template-columns: 1fr 0.6fr 90px 0.7fr 0.5fr 120px 0.6fr 60px 80px;
+      }
+      @include notebook{
+        width: 100%;
+      }
+    }
+    &-days{
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 8px;
+      &-difference{
+        margin-left: 3px;
+        color: $red;
+        padding: 2px 7px;
+        background-color: $bgRed;
+        border-radius: 4px;
+        white-space: nowrap;
+      }
+    }
+    &.table__content-customer .table__content-item-link{
+      cursor: pointer;
+      text-decoration: underline;
+      margin: 0;
+      @include tablet{
+        padding-left: 36px;
+      }
+    }
+  }
+  &-span{
+    @include tablet{
+      display: none;
+    }
+  }
+  &-menu{
+    display: none;
+    @include tablet{
+      display: block;
+      height: 24px;
+      width: 24px;
+      position: relative;
+      right: 18px;
+      fill: $gray;
+    }
+  }
+  &-opponent{
+    position: absolute;
+    width: 45%;
+    z-index: 10;
+    right: 18px;
+    top: 27px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    @include tablet{
+      width: 100%;
+      position: static;
+      align-items: flex-start;
+    }
+    & .table__content-item-text{
+      text-align: right;
+      @include tablet{
+        text-align: left;
+        padding-right: 8px;
+      }
+    }
+    & .table__content-span{
+      margin-bottom: 10px;
+      display: inline-block;
+      @include tablet{ 
+        display: none;
+      }
+    }
+  }
+  &-span{
+    color: $gray;
+  }
+  &-item-days,
+  &-item-category,
+  &-item-instance,
+  &-item-events,
+  &-task{
+    display: none;
+    @include tablet{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    &.visible{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 13px;
+      @include tablet{
+        margin-top: 0;
+      }
+    }
+  }
+  &-customer{
+    display: block;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
+    padding-left: 10px;
+    padding-top: 8px;
+    @include tablet{ 
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+    & .table__content-span{
+      margin-bottom: 10px;
+      display: inline-block;
+      @include tablet{ 
+        display: none;
+      }
+    }
+    &.select__delete::before{
+      background-color: $bgRed;
+    }
+    &::before{
+      content: '';
+      position: absolute;
+      height: 73px;
+      width: 100%;
+      background-color: $lightGreen;
+      z-index: -10;
+      left: 0px;
+      top: 0px;
+      border-radius: 8px;
+      transition: all ease 0.4s;
+      @include tablet{   
+        display: none;
+      }
+    }
+  }
+  &-item{
+    &-link{
+      text-decoration: underline;
+    }
+    &-rating{
+      margin-top: 18px;
+      @include tablet{
+        margin-top: 0;
+      }
+    }
+  }
+  &-chevron{
+    height: 16px;
+    width: 16px;
+    stroke: $gray;
+    transition: all ease 0.4s;
+    &.active{
+      transform: rotate(180deg);
+    }
+  }
+  &-show-info{
+    @include tablet{   
+      display: none;
+    }
+  }
+  &-buttons-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: absolute;
+    top: 100px;
+    right: 8px;
+    @include tablet{
+      margin-top: 3px; 
+      top: 50%;
+      right: 50px;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.table__content-menu-dropdown{
+  @include tablet{
+    left: 80px;
+  }
+}
+
+.table__content-customer{
+  padding-right: 30px;
+}
+
+.table__content-decor{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  @include tablet{
+    left: auto;
+    right: 4px;
+  }
+}
+.table__content-task .table__content-item-text{
+  text-align: right;
+  @include tablet{
+    text-align: left;
+  }
+}

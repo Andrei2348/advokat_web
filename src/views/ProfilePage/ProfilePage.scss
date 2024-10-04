@@ -1,0 +1,57 @@
+.profile{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	margin-top: 50px;
+	@include showHideAside;
+	@include tablet{
+		padding: 20px;
+	}
+	@include notebook{
+		margin-top: 90px;
+	}
+	&.collapsed{
+		width: 100%;
+		@include notebook{
+			width: calc(100% - 84px);
+		}
+	}
+	&__logout-button{
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		flex-wrap: nowrap;
+		border: none;
+		outline: none;
+		color: $gray;
+		@include textMedium(14);
+		& svg{
+			margin-left: 3px;
+		}
+	}
+	&__header{
+		display: none;
+		@include tablet{
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 16px;
+		}
+	}
+	&__title{
+		color: $black;
+		@include heading(22);
+
+	}
+	&__bottom-wreapper{
+		margin-top: 32px;
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 20px;
+		width: 100%;
+	}
+}
+

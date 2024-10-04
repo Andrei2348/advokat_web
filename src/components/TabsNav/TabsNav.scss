@@ -1,0 +1,36 @@
+.tab{
+  &__nav-item{
+    cursor: pointer;
+    padding: 14px 32px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    display: inline-block;
+    color: $gray;
+    border: 1px solid $gray3;
+    background-color: $gray5;
+    border-bottom: 1px solid $gray3;
+    @include textMedium(14);
+    &.active{
+      background-color: $white;
+      color: $green;
+      border: 1px solid $white;
+      border-bottom: 1px solid $gray3;
+      cursor: default;
+    }
+  }
+  &__content{
+    &-item{
+      color: $gray;
+      @include textMedium(12);
+      padding: 0 8px;
+    }
+    &-header{
+      background-color: $white;
+      padding: 17px 18px 17px 68px;
+      margin-bottom: 3px;
+      display: grid;
+      grid-template-columns: (1fr 0.7fr 48px 200px 1fr);
+      border-radius: 8px;
+    }
+  }
+}

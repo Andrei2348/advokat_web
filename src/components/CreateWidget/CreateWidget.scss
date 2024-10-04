@@ -1,0 +1,37 @@
+.widget{
+    height: 58px;
+    width: 58px;
+    position: absolute;
+    cursor: move;
+    user-select: none;
+    z-index: 100;
+    &__wrapper{
+        min-height: 200px;
+        height: 100%;
+        width: 100vw;
+        position: relative;
+    }
+}
+::v-deep(.dropdown) {
+    height: 58px !important;
+    width: 58px !important;
+    background-color: $green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+}
+::v-deep(.dropdown__menu) {
+    width: 140px;
+}
+
+::v-deep(.dropdown__menu.dropdown__menu-top){
+    right: -10px;
+    top: auto;
+    bottom: 68px;
+}
+::v-deep(.dropdown__menu.dropdown__menu-bottom){
+    right: -10px;
+    top: 68px;
+    bottom: auto;
+}

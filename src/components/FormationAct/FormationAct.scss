@@ -1,0 +1,71 @@
+.formation__act{
+  &-container{
+    height: auto;
+    width: 90vw;
+    padding: 32px 16px;
+    @include screen('470px'){
+      padding: 32px 30px;
+      width: 462px;
+    }
+  }
+  &-inputs-wrapper{
+    display: flex;
+    gap: 18px;
+    flex-direction: column;
+    margin-bottom: 32px;
+    @include screen('470px'){
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-direction: row;
+    }
+  }
+  &-button{
+    width: 100%;
+    @include primaryButton;
+  }
+}
+
+::v-deep(.formation__act-since .dp--menu-wrapper) {
+  position: absolute;
+  transform: translateY(-39.2%);
+  @include screen('470px'){
+    transform: none;
+  } 
+}
+::v-deep(.formation__act-till .dp--menu-wrapper) {
+  position: absolute;
+  transform: translateY(52.4%);
+  @include screen('470px'){
+    transform: none;
+  } 
+}
+::v-deep(.dp__arrow_top) {
+  display: none;
+  @include screen('470px'){
+    display: block;
+    left: var(--dp-arrow-left);
+    top: 0;
+    height: 12px;
+    width: 12px;
+    background-color: var(--dp-background-color);
+    position: absolute;
+    border-inline-end: 1px solid var(--dp-menu-border-color);
+    border-top: 1px solid var(--dp-menu-border-color);
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+::v-deep(.dp__arrow_bottom) {
+  display: none;
+  @include screen('470px'){
+    display: block;
+    left: var(--dp-arrow-left);
+    bottom: 0;
+    height: 12px;
+    width: 12px;
+    background-color: var(--dp-background-color);
+    position: absolute;
+    border-inline-end: 1px solid var(--dp-menu-border-color);
+    border-bottom: 1px solid var(--dp-menu-border-color);
+    transform: translate(-50%, 50%) rotate(45deg);
+  }
+}

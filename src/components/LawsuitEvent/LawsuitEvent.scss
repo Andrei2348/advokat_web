@@ -1,0 +1,169 @@
+.lawsuit__event{
+  &-container{
+    position: relative;
+  }
+  &-wrapper{
+    background-color: $white;
+    padding: 12px 6px 12px 18px;
+    margin: 3px 0;
+    border-radius: 8px;
+    align-items: center;
+    position: relative;
+    transition: all ease 0.5s;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    @include tablet{
+      padding: 17px 18px 17px 68px;
+      display: grid;
+      gap: 0;
+      grid-template-columns: (1fr 0.7fr 48px 200px 1fr);
+    }
+
+    // свайп по горизонтали
+    &.move__left{
+      transform: translateX(-144px);
+    }
+    &.move__right{
+      transform: translateX(144px);
+    }
+  }
+  &-checkbox-wrapper{
+    display: none;
+    @include tablet{
+      display: block;
+      position: absolute;
+      left: 28px;
+      top: calc(50% - 10px);
+    }
+  }
+  &-task-color{
+    width: 4px;
+    height: calc(100% - 20px);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 8px;
+    left: 6px;
+    @include tablet{
+      left: 60px;
+    }
+  }
+  &-checkbox{
+    @include checkbox;
+  }
+  &-status{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    & .status__icon{
+      fill: $gray;
+      cursor: pointer;
+      &.important{
+        fill: $red;
+      }
+    }
+  }
+  &-item{
+    padding: 0 8px;
+    color: $black;
+    @include textRegular(12);
+  }
+  &-task{
+    @include textBold(12);
+    text-align: left;
+    text-decoration: underline;
+  }
+  &-cost{
+    display: block;
+    margin-top: 8px;
+    color: $green;
+    @include textRegular(12);
+  }
+  &-status-text{
+    padding: 2px 7px;
+    display: inline-block;
+    background-color: $gray4;
+    border-radius: 4px;
+    color: $black;
+  }
+  &-status-text.finished{
+    background-color: $lightGreen3;
+    color: $green;
+  }
+  &-date-day{
+    @include textRegular(12);
+    color: $black;
+    padding: 2px 7px;
+    display: inline-block;
+    background-color: $gray4;
+    border-radius: 4px;
+    &-remain{
+      margin-left: 8px;
+      color: $red;
+      padding: 2px 7px;
+      background-color: $bgRed;
+      border-radius: 4px;
+    }
+  }
+  &-buttons-wrapper{
+    position: absolute;
+    height: 16px;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    bottom: 8px;
+    right: 10px;
+    @include tablet{
+      top: calc(50% - 8px);
+      right: 38px;
+      bottom: auto;
+    }
+  }
+  &-button{
+    height: 16px;
+    width: 16px;
+    position: relative;
+    cursor: pointer;
+    & svg{
+      height: 16px;
+      width: 16px;
+      stroke: $blue;
+    }
+  }
+  &-menu{
+    display: none;
+    @include tablet{
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+  }
+  &-status-wrapper{
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    padding: 0;
+    @include tablet{
+      position: relative;
+      top: auto;
+      right: auto;
+      padding: 0 8px;
+    }
+  }
+  &-hours{
+    display: none;
+    @include tablet{
+      display: block;
+    }
+  }
+  &-note{
+    display: none;
+    @include tablet{
+      display: block;
+    }
+  }
+}
