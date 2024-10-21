@@ -2,22 +2,16 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { DefaultError } from '@/types/httpError'
 import { useApiCall } from '@/composables/useApiCall'
-import { useAuthStore } from '@/store/auth'
 import {
   userDataInfoApiCall,
   workShedulePartialChangeApiCall,
-  userChangeApiCall,
-  deleteUserApiCall,
 } from '@/api/user'
-import { WorkShedule, UserDataApiResponse, UserData } from '@/types/user'
-import { useRouter } from 'vue-router'
+import { WorkShedule, UserData, UserDataApiResponse } from '@/types/user'
 
 export const useUserStore = defineStore('user', () => {
   const errorFields = ref<null | DefaultError['error']>(null)
   const userInfo = ref<UserData | null>(null)
   const selectedItem = ref<WorkShedule | null>(null)
-  const authStore = useAuthStore()
-  const router = useRouter()
 
   const setValueByKey = <K extends keyof WorkShedule>(
     key: K,
@@ -68,24 +62,6 @@ export const useUserStore = defineStore('user', () => {
     true,
   )
 
-  const {
-    data: userChangedData,
-    executeApiCall: changeDataUser,
-    error: userChangeDataError,
-  } = useApiCall<UserDataApiResponse, DefaultError, UserData>(
-    userChangeApiCall,
-    true,
-  )
-
-  const {
-    data: userDeleteData,
-    executeApiCall: deleteUser,
-    error: userDeleteDataError,
-  } = useApiCall<UserDataApiResponse, DefaultError, UserData>(
-    deleteUserApiCall,
-    true,
-  )
-
   const setUserInfo = (payload: UserData) => {
     userInfo.value = payload
   }
@@ -95,6 +71,7 @@ export const useUserStore = defineStore('user', () => {
       await getUserInfo()
       if (userInfoData.value && userInfoData.value.success) {
         setUserInfo(userInfoData.value.data)
+        console.log(userInfoData.value.data)
       }
     } catch {
       if (userDataError.value?.data.error) {
@@ -118,37 +95,6 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  const changeDataUserRequest = async (payload: UserData | null) => {
-    if (payload) {
-      try {
-        await changeDataUser(payload)
-        if (userChangedData.value) {
-          setUserInfo(userChangedData.value.data)
-        }
-      } catch {
-        if (userChangeDataError.value?.data.error) {
-          errorFields.value = userChangeDataError.value.data.error
-        }
-      }
-    }
-  }
-
-  const deleteUserRequest = async () => {
-    try {
-      await deleteUser()
-      if (userDeleteData.value) {
-        if (userDeleteData.value.success) {
-          router.push('root')
-          authStore.clearStore()
-        }
-      }
-    } catch {
-      if (userDeleteDataError.value?.data.error) {
-        errorFields.value = userDeleteDataError.value.data.error
-      }
-    }
-  }
-
   return {
     getUserDataInfo,
     userInfo,
@@ -156,7 +102,5 @@ export const useUserStore = defineStore('user', () => {
     setValueByKey,
     isLoadingUserData,
     selectedItemValidate,
-    changeDataUserRequest,
-    deleteUserRequest,
   }
 })

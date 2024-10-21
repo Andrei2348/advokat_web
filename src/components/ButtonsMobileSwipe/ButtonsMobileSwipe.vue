@@ -1,29 +1,27 @@
 <template>
   <div>
-    <button
-      class="table__content-mobile table__content-mobile-edit"
-      @click="editLawsuitHandler()"
-    >
-      <SvgIcon :icon="extremeIconLeft" />
-    </button>
-    <button 
-      class="table__content-mobile table__content-default-left"
-      @click="averageLeftHandler()"
+    <div class="swipe__wrapper swipe__wrapper_place_left">
+      <button
+        v-for="btn of rightSwipeBtnsOnPage"
+        :key="JSON.stringify(btn)"
+        :class="['swipe__btn', btn.class]"
+        type="button"
+        @click="btn.handler"
       >
-      <svgIcon :icon="averageIconLeft" />
-    </button>
-    <button 
-      class="table__content-mobile table__content-default-right"
-      @click="averageRightHandler()"
+        <SvgIcon :icon="btn.icon" />
+      </button>
+    </div>
+    <div class="swipe__wrapper swipe__wrapper_place_right">
+      <button
+        v-for="btn of leftSwipeBtnsOnPage"
+        :key="JSON.stringify(btn)"
+        :class="['swipe__btn', btn.class]"
+        type="button"
+        @click="btn.handler"
       >
-      <svgIcon :icon="averageIconRight" />
-    </button>
-    <button
-      class="table__content-mobile table__content-mobile-delete"
-      @click="deleteLawsuitHandler()"
-    >
-      <SvgIcon :icon="extremeIconRight" />
-    </button>
+        <SvgIcon :icon="btn.icon" />
+      </button>
+    </div>
   </div>
 </template>
 

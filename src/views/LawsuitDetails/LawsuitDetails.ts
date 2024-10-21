@@ -95,7 +95,6 @@ export default defineComponent({
     }
 
     onBeforeMount(async () => {
-      uxuiStore.setCurrentPage('Дела')
       await createRequests()
       if (lawsuitDetails.value) {
         setStartData(lawsuitDetails.value, lawsuitStore)

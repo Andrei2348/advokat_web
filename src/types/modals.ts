@@ -1,5 +1,5 @@
 export type ModalContent = {
-  id: number | null
+  id?: number | null
   title: string
   text: string
   function: string

@@ -9,7 +9,7 @@
       :text-input="textInputOptions"
       locale="ru-RU"
       :space-confirm="true"
-      position="center"
+      position="right"
       auto-apply
       no-today
       required

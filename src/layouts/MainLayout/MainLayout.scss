@@ -1,15 +1,35 @@
-.notes{
+.notes {
   transition: 0.4s;
   opacity: 0;
   transform: translateX(100%);
 }
-.notes-leave-active, .notes-leave-to {
+.notes-leave-active,
+.notes-leave-to {
   transition: 0.4s;
   opacity: 0;
   transform: translateX(100%);
 }
-.notes-enter-active, .notes-enter-to{
+.notes-enter-active,
+.notes-enter-to {
   opacity: 1;
   transform: translateX(0);
   transition: 0.4s;
+}
+
+.main-layout {
+  position: absolute;
+  right: 20px;
+  color: $black;
+  @include textRegular(14);
+
+  @include tablet {
+    top: 82px;
+  }
+  @include notebook {
+    top: 118px;
+  }
+
+  &.large {
+    width: 472px;
+  }
 }

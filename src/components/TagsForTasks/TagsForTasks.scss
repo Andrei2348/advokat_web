@@ -1,18 +1,27 @@
-.events{
+.events {
   width: 100%;
-  @include tablet{
+  @include tablet {
     width: 50%;
   }
-  &__table{
+  &__table {
     grid-template-columns: 1fr 104px;
-   }
-  &__title{
+    padding: 16.5px 0 16.5px 28px;
+  }
+  &__items {
+    &:not(:last-child) {
+      margin-bottom: 10px;
+      @include tablet {
+        margin-bottom: 3px;
+      }
+    }
+  }
+  &__title {
     color: $black;
     @include textMedium(16);
     margin-bottom: 20px;
   }
-  &__header{
-    &-button-create{
+  &__header {
+    &-button-create {
       width: 100%;
       margin-top: 10px;
       @include primaryButton;
@@ -20,28 +29,28 @@
         width: calc(100% - 28px);
       }
     }
-    &-button-icon{
+    &-button-icon {
       stroke: $white;
       width: 14px;
       height: 14px;
-    }  
-    &-item{
+    }
+    &-item {
       display: flex;
       align-items: center;
       justify-content: flex-start;
       padding: 17px 8px;
-      &-span{
+      &-span {
         color: $red;
-        margin-left: 4px
+        margin-left: 4px;
       }
-      & .events__header-item-text{
+      & .events__header-item-text {
         @include textMedium(12);
         color: $gray;
         margin: 0;
         white-space: nowrap;
       }
     }
-    &-item:first-child{
+    &-item:first-child {
       padding-left: 28px;
     }
   }

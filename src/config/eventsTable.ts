@@ -1,6 +1,6 @@
-import { tableItems } from '@/types/lawsuit'
+import { TableItems } from '@/types/lawsuit'
 
-export const eventsItems: tableItems[] = [
+export const eventsItems: TableItems[] = [
   {
     id: 1,
     title: 'Тип',

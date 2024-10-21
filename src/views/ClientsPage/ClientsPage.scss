@@ -1,0 +1,8 @@
+.clients {
+  margin-top: 50px;
+  padding: 20px;
+  @include showHideAside;
+  @include notebook {
+    margin-top: 90px;
+  }
+}

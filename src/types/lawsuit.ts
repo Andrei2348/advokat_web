@@ -1,3 +1,6 @@
+import { Customer } from '@/types/customers'
+import { Task } from './tasks'
+
 export type LawsuitsFormSuccessResponse = {
   data: LawsuitForm[]
   success: boolean
@@ -16,8 +19,8 @@ export type LawsuitFormPayload = {
   customerId?: number
 }
 
-export type tableItems = {
-  id: number
+export type TableItems = {
+  id?: number
   title: string
   important?: boolean
 }
@@ -38,19 +41,6 @@ export type LawsuitEvent = {
   remainDays: number
   createdAt: string
   updatedAt: string
-}
-
-export type Customer = {
-  id: number
-  name: string
-  telegram: string
-  whatsApp: string
-  phone: string
-  email: string
-  lastActiveAt: string | null
-  deletedAt: string | null
-  createdAt: string
-  updatedAt: string | null
 }
 
 export type LawsuitCategory = {
@@ -133,7 +123,7 @@ type LawsuitEventCategory = {
   type: SelectedPlan | null
 }
 
-type Event = {
+export type Event = {
   comment: string | null
   cost: number | null
   createdAt: string
@@ -153,33 +143,6 @@ type Event = {
   task: string | null
 }
 
-type TaskTag = {
-  id: number
-  name: string
-  color: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type Task = {
-  event: string | null
-  task: string
-  comment: string
-  cost: number | null
-  createdAt: string
-  deadline: string
-  id: number | null
-  includeInReport: boolean
-  isImportant: boolean
-  lawsuitEvent: string | null
-  remainTimeDays: number | null
-  status: StatusType
-  taskTag: TaskTag
-  theme: string
-  toDoDate: string | null
-  updatedAt: string
-}
-
 export type TaskEvent = {
   task: Task
   event: Event
@@ -196,6 +159,8 @@ export type FormObjectRequest = {
 }
 
 export type SelectedPlan = 'event' | 'task'
+
+export type LawsuitTaskEventTableTab = 'Запланировано' | 'Выполнено'
 
 export type LawsuitCategoryResponseData = {
   success: number

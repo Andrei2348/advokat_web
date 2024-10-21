@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import { useTasksStore } from '@/store/tasks'
+import { useTagsStore } from '@/store/tags'
 import { tagsItems } from '@/config/tags'
 import TagsForTasksItem from '@/components/TagsForTasksItem/TagsForTasksItem.vue'
 
@@ -9,10 +9,10 @@ export default defineComponent({
     TagsForTasksItem,
   },
   setup() {
-    const tasksStore = useTasksStore()
+    const tagsStore = useTagsStore()
 
     return {
-      tasksStore,
+      tagsStore,
       tagsItems,
     }
   },

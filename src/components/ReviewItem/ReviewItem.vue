@@ -1,12 +1,10 @@
 <template>
   <div class="review__table-items-container">
     <ButtonsMobileSwipe
-      class="review__table-items-swipe"
       :item="item"
-      @editLawsuit="editAuthorities"
-      @deleteLawsuit="deleteAuthorities"
-      extremeIconLeft="edit2"
-      extremeIconRight="trash04"
+      :placement="'authorities'"
+      @editAuthority="editAuthorities"
+      @deleteAuthority="deleteAuthorities"
     />
     <div
       class="review__table-items"

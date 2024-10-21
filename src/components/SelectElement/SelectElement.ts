@@ -1,4 +1,4 @@
-import { defineComponent, onBeforeMount, PropType, ref, watch } from 'vue'
+import { defineComponent, PropType, ref, watch } from 'vue'
 import 'vue-multiselect/dist/vue-multiselect.css'
 import Multiselect from 'vue-multiselect'
 import { useUXUIStore } from '@/store/uxui'
@@ -17,6 +17,11 @@ export default defineComponent({
       type: String,
       required: false,
     },
+    groupSelect: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     placeholder: {
       type: String,
       default: '',
@@ -30,6 +35,11 @@ export default defineComponent({
       required: false,
       default: false,
     },
+    allowEmpty: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     value: {
       type: Object as PropType<{ id: string }>,
       default: null,
@@ -37,6 +47,14 @@ export default defineComponent({
     objectKey: {
       type: String,
       required: true,
+    },
+    multiple: {
+      type: Boolean,
+      default: false,
+    },
+    closeOnSelect: {
+      type: Boolean,
+      default: true,
     },
   },
   emits: ['dataChanged'],
@@ -54,19 +72,35 @@ export default defineComponent({
 
     watch(
       () => selected.value,
-      () => {
+      (newVal) => {
+        if (newVal === null) {
+          return
+        }
+        if (props.multiple) {
+          emit('dataChanged', props.objectKey, selected.value)
+
+          return
+        }
         emit('dataChanged', props.objectKey, selected.value?.id)
       },
     )
 
-    onBeforeMount(() => {
-      selected.value = props.value
-    })
+    watch(
+      () => props.value,
+      () => {
+        selected.value = props.value
+      },
+    )
+
+    const resetSelectedValue = () => {
+      selected.value = null
+    }
 
     return {
       selected,
       handleOpen,
       handleClose,
+      resetSelectedValue,
     }
   },
 })

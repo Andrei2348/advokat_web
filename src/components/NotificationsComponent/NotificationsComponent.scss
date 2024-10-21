@@ -31,4 +31,18 @@
     fill: $green;
     background-color: $lightGreen;
   }
+
+  span {
+    flex-grow: 1;
+  }
+
+  button {
+    @include resetButton;
+    display: flex;
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke: $gray2;
+    }
+  }
 }

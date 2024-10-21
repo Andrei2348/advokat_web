@@ -1,11 +1,11 @@
 import { defineComponent, PropType } from 'vue'
-import { tableItems } from '@/types/lawsuit'
+import { TableItems } from '@/types/lawsuit'
 
 export default defineComponent({
   name: 'TableHead',
   props: {
     items: {
-      type: Array as PropType<tableItems[]>,
+      type: Array as PropType<TableItems[]>,
     },
   },
 

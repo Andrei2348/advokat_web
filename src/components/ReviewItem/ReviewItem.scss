@@ -1,5 +1,5 @@
-.review__table{
-  &-items{
+.review__table {
+  &-items {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -8,128 +8,109 @@
     background-color: $white;
     padding: 20px 6px 12px;
     border-radius: 8px;
-    &-container{
+    &-container {
       position: relative;
     }
-    &-swipe{
-      @include tablet{
-        display: none;
-      }
-    }
-    &.move__left{
+    &.move__left {
       transform: translateX(-72px);
     }
-    &.move__right{
+    &.move__right {
       transform: translateX(72px);
     }
-    @include tablet{
+    @include tablet {
       display: grid;
       grid-template-columns: 0.7fr 0.7fr 1fr 0.7fr 0.8fr 1.5fr;
       align-items: center;
       position: relative;
-      background-color: $white;
+      background-color: transparent;
       padding: 0;
       border-radius: 0;
     }
   }
-  &-item{
+  &-item {
     display: flex;
     flex-direction: column;
     color: $black;
     @include textMedium(12);
-    @include tablet{
+    @include tablet {
       padding: 19px 8px;
       display: block;
     }
-    &::last-child{
+    &::last-child {
       padding-right: 33px;
       border-bottom: none;
     }
-    &-link{
+    &-link {
       @include textMedium(12);
       color: $blue;
       text-decoration: underline;
       white-space: nowrap;
     }
-    &-instance{
+    &-instance {
       display: none;
-      @include tablet{
+      @include tablet {
         display: block;
       }
     }
-    &-span{
+    &-span {
       @include textRegular(12);
       color: $gray;
-      @include tablet{
+      @include tablet {
         display: none;
       }
     }
-    &-lawsuit{
+    &-lawsuit {
       position: absolute;
       top: 28px;
-      right: 16px;
+      right: 36px;
       align-items: flex-end;
-      @include tablet{
+      @include tablet {
         position: relative;
         right: auto;
         top: auto;
       }
     }
-    &-bodies{
+    &-bodies {
       padding: 8px 10px;
       border-radius: 8px;
       background-color: $lightGreen;
-      @include tablet{
+      @include tablet {
         background-color: transparent;
         padding: 0;
         border-radius: 0;
       }
     }
-    &-wide{
+    &-wide {
       display: flex;
       justify-content: space-between;
       flex-direction: row;
     }
   }
-  &-menu{
+  &-menu {
     display: none;
-    @include tablet{
+    @include tablet {
       display: block;
-      right: 17px;
       position: absolute;
+      right: 17px;
+      top: calc(50% + 4px);
     }
   }
-  &-comment{
+  &-comment {
     padding-right: 30px;
   }
   &-comment .review__table-item-span,
   &-item-lawsuit .review__table-item-span,
-  &-item-bodies .review__table-item-span{
-    margin-bottom: 8px;;
+  &-item-bodies .review__table-item-span {
+    margin-bottom: 8px;
   }
 }
-::v-deep(.dropdown__menu-top){
-  right: -13px;
-  bottom: auto;
-  top: 26px;
+
+::v-deep(.dropdown__menu-top) {
+  right: -18px;
+  transform: translateY(-125%);
 }
 
-::v-deep(.dropdown__menu-bottom){
-  right: -13px;
-  bottom: auto;
-  top: 26px;
-}
-
-::v-deep(.dropdown__menu-top:after),
-::v-deep(.dropdown__menu-bottom:before){
-  position: absolute;
-  content: '';
-  top: -7px;
-  right: 13px;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 8px solid $white;
-  transform: rotate(0deg);
+::v-deep(.dropdown__menu-bottom) {
+  right: -18px;
+  top: 24px;
 }

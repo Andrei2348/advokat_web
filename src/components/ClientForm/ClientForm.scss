@@ -1,0 +1,156 @@
+.client-form {
+  display: grid;
+  row-gap: 24px;
+  padding: 24px 16px 25px;
+  margin-top: 14px;
+  border-radius: 12px;
+  background-color: $white;
+  @include tablet {
+    border-radius: 12px;
+    padding: 24px 20px 26px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 52px;
+    grid-template-areas:
+      'client client date date'
+      'phone email telegram whatsapp'
+      'btns btns btns btns';
+    gap: 22px 24px;
+  }
+
+  & > div {
+    &:nth-of-type(1) {
+      @include tablet {
+        grid-area: client;
+      }
+    }
+    &:nth-of-type(3) {
+      @include tablet {
+        grid-area: phone;
+      }
+    }
+    &:nth-of-type(4) {
+      @include tablet {
+        grid-area: email;
+      }
+    }
+    &:nth-of-type(5) {
+      @include tablet {
+        grid-area: telegram;
+      }
+    }
+    &:nth-of-type(6) {
+      @include tablet {
+        grid-area: whatsapp;
+      }
+    }
+    &:nth-of-type(7) {
+      @include tablet {
+        grid-area: btns;
+      }
+    }
+  }
+
+  &__date-wrapper {
+    display: grid;
+
+    @include tablet {
+      grid-area: date;
+    }
+  }
+
+  &__input-wrapper {
+    display: flex;
+    column-gap: 8px;
+
+    &-input {
+      position: relative;
+      flex-grow: 1;
+    }
+
+    &-copy {
+      @include resetButton;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 14px;
+      z-index: 5;
+    }
+
+    &-link {
+      @include centering;
+      display: flex;
+      width: 52px;
+      border-radius: 14px;
+      background-color: $gray5;
+
+      @include tablet {
+        display: none;
+      }
+
+      &_client {
+        display: none;
+      }
+
+      &_active {
+        background-color: $lightGreen;
+      }
+    }
+  }
+
+  &__input-title {
+    @include textMedium(14);
+    color: $black;
+    display: inline-block;
+    margin-bottom: 14px;
+    position: relative;
+
+    sup {
+      color: $red;
+      position: absolute;
+      top: -3px;
+      right: -6px;
+    }
+  }
+
+  &__btn-container {
+    @include tablet {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    button[type='submit'] {
+      @include primaryButton;
+      width: 100%;
+      margin-bottom: 30px;
+      @include tablet {
+        width: auto;
+        margin-bottom: 0;
+      }
+    }
+
+    button[type='button'] {
+      @include resetButton;
+      color: $red;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 0 auto;
+
+      @include tablet {
+        margin: 0;
+        background-color: $bgRed;
+        padding: 14px 28px;
+        border-radius: 14px;
+        @include textMedium(14);
+      }
+
+      svg {
+        display: none;
+        @include tablet {
+          display: block;
+        }
+      }
+    }
+  }
+}

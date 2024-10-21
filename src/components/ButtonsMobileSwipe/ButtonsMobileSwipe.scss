@@ -1,75 +1,85 @@
-.table__content{
-  &-default-left{
-    top: 0;
-    left: 80px;
-    background-color: $violetLight;
-    border: none;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-    & svg{
-      position: absolute;
-      left: 24px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
-  &-default-right{
-    top: 0;
-    right: 80px;
-    background-color: $bgRed;
-    border: none;
-    z-index: 0;
-    & svg{
-      position: absolute;
-      right: 24px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
-  &-mobile{
-    border: none;
+.swipe {
+  &__wrapper {
+    display: flex;
     position: absolute;
     top: 0;
-    width: 90px;
     height: 100%;
-    @include tablet{
+    overflow: hidden;
+    @include tablet {
       display: none;
     }
-    &-edit{
-      left: 0;
-      background-color: $blueLight;
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
-      & svg{
-        position: absolute;
-        left: 24px;
-        top: 50%;
-        transform: translateY(-50%);
+
+    &_place {
+      &_left {
+        left: 0;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+
+        svg {
+          left: 24px;
+        }
+      }
+      &_right {
+        right: 0;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+
+        svg {
+          right: 24px;
+        }
       }
     }
-    &-delete{
-      right: 0;
-      background-color: $bgRed;
-      border-top-right-radius: 8px;
-      border-bottom-right-radius: 8px;
-      & svg{
-        position: absolute;
-        right: 24px;
-        top: 50%;
-        transform: translateY(-50%);
+  }
+
+  &__btn {
+    @include resetButton;
+    @include centering;
+    width: 90px;
+    position: relative;
+
+    &_type {
+      &_edit {
+        background-color: $blueLight;
       }
-      &::before{
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 10px;
-        height: 80%;
-        width: 1px;
-        background-color: #F038104D;
-        transform: translateY(-50%);
+      &_remove {
+        background-color: $bgRed;
       }
+      &_user {
+        background-color: $violetLight;
+        svg {
+          stroke: $violet;
+        }
+      }
+      &_done {
+        background-color: $lightGreen;
+        svg {
+          fill: $green;
+        }
+        width: 73px;
+      }
+      &_bookmark {
+        background-color: $violetLight;
+        svg {
+          stroke: $violet;
+        }
+      }
+      &_report-remove {
+        background-color: $gray5;
+        width: 73px;
+      }
+
+      &_report-add {
+        background-color: $yellowLight;
+        width: 73px;
+      }
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 }
-
-

@@ -1,7 +1,7 @@
 import { MenuItemDropdown } from '@/types/createWidget'
-import { tableItems, LawsuitFormObject } from '@/types/lawsuit'
+import { TableItems, LawsuitFormObject } from '@/types/lawsuit'
 
-export const lawsuitItems: tableItems[] = [
+export const lawsuitItems: TableItems[] = [
   {
     id: 1,
     title: 'Клиент',
@@ -48,21 +48,6 @@ export const lawsuitAuthoritiesMenu: MenuItemDropdown[] = [
     title: 'Удалить',
     color: '#F03810',
     function: 'deleteAuthorities',
-  },
-]
-
-export const personMenu: MenuItemDropdown[] = [
-  {
-    id: 1,
-    title: 'Профиль',
-    color: '',
-    function: 'profileHandler',
-  },
-  {
-    id: 2,
-    title: 'Выйти',
-    color: '#F03810',
-    function: 'logoutHandler',
   },
 ]
 

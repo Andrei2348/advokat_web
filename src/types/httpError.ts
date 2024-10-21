@@ -3,13 +3,20 @@ export type HTTPError<T> = {
   data: T
 }
 
+type Errors = {
+  [key: string]: string[]
+}
+
 export type DefaultError = {
   data: null
   error: {
-    errors?: {
-      [key: string]: string[]
-    }
+    errors?: Errors
     error?: string
   }
   success: number
+}
+
+export type Error = {
+  errors?: Errors
+  message: string
 }

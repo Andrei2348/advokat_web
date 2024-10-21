@@ -3,7 +3,7 @@
     <h2 class="events__title">Настройка тэгов для задач</h2>
     <TableHead :items="tagsItems" class="events__table" />
     <div
-      v-for="item in tasksStore.tagsList"
+      v-for="item in tagsStore.tagsList"
       :key="item.id ? item.id : 565656565"
       class="events__items"
     >
@@ -11,8 +11,8 @@
     </div>
     <button
       class="events__header-button-create"
-      @click="tasksStore.setEmptyTag()"
-      :disabled="tasksStore.createTagsForTasksStatus"
+      @click="tagsStore.setEmptyTag()"
+      :disabled="tagsStore.createTagsForTasksStatus"
     >
       Добавить тэг
       <SvgIcon icon="plus" class="events__header-button-icon" />

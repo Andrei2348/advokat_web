@@ -68,6 +68,10 @@ export default defineComponent({
       return date.format('DD-MM-YYYY')
     }
 
+    const resetDate = () => {
+      date.value = null
+    }
+
     watch(
       () => props.disabled,
       (newDisabledValue) => {
@@ -93,6 +97,7 @@ export default defineComponent({
       format,
       uiOptions,
       getDayClass,
+      resetDate,
       textInputOptions,
     }
   },

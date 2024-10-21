@@ -1,0 +1,249 @@
+.element {
+  color: $black;
+  @include textRegular(12);
+
+  @include tablet {
+    padding-right: 8px;
+  }
+}
+
+.link {
+  cursor: pointer;
+  transition: opacity ease 0.4s;
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      opacity: 0.7;
+    }
+  }
+}
+
+.task-event {
+  position: relative;
+
+  &__wrapper {
+    background-color: $white;
+    padding: 12px 6px 12px 18px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-areas:
+      'date'
+      'theme'
+      'client';
+    row-gap: 8px;
+    border-radius: 8px;
+    position: relative;
+    transition: transform ease 0.4s;
+    align-items: center;
+    justify-items: baseline;
+
+    @include tablet {
+      padding: 17px 18px 17px 80px;
+      grid-template-columns: (1fr 0.7fr 48px 200px 1fr);
+      row-gap: 0;
+      justify-items: left;
+      margin-bottom: 3px;
+    }
+
+    &_task {
+      @include tablet {
+        grid-template-columns: 0.45fr 0.3fr 0.1fr 0.3fr minmax(120px, 0.28fr) 0.32fr 0.75fr;
+      }
+    }
+
+    &_late {
+      @include tablet {
+        background-color: $bgRed;
+      }
+    }
+
+    &.move__left {
+      transform: translateX(-144px);
+    }
+    &.move__right_type {
+      &_task {
+        transform: translateX(144px);
+      }
+      &_event {
+        transform: translateX(72px);
+      }
+    }
+  }
+  &__checkbox-wrapper {
+    display: none;
+
+    @include tablet {
+      display: block;
+      position: absolute;
+      left: 28px;
+    }
+  }
+  &__task-color {
+    width: 4px;
+    height: calc(100% - 20px);
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    transform: translateY(-50%);
+    border-radius: 8px;
+
+    @include tablet {
+      left: 64px;
+    }
+  }
+  &__checkbox {
+    @include checkbox;
+    cursor: pointer;
+  }
+  &__status-wrapper {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    display: flex;
+    flex-direction: row-reverse;
+    column-gap: 4px;
+    align-items: center;
+
+    @include tablet {
+      position: static;
+      display: block;
+    }
+  }
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    & .status__icon {
+      fill: $gray;
+      cursor: pointer;
+      &.important {
+        fill: $red;
+      }
+    }
+  }
+  &__theme {
+    @include textBold(12);
+    text-align: left;
+    @include tablet {
+      text-decoration: underline;
+    }
+  }
+  &__cost {
+    display: block;
+    color: $green;
+    @include textRegular(12);
+
+    @include tablet {
+      margin-top: 8px;
+    }
+  }
+  &__client {
+    background-color: $gray5;
+    border-radius: 4px;
+    padding: 4px;
+
+    @include tablet {
+      background-color: transparent;
+      border-radius: 0;
+      padding: 0;
+    }
+  }
+  &__status-text {
+    padding: 2px 7px;
+    display: inline-block;
+    background-color: $gray4;
+    border-radius: 4px;
+    color: $black;
+
+    &.finished {
+      background-color: $lightGreen3;
+      color: $green;
+    }
+  }
+  &__date {
+    @include textRegular(12);
+    color: $black;
+    grid-area: date;
+
+    @include tablet {
+      grid-area: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @include notebook {
+      flex-direction: row;
+    }
+
+    &-day-remain {
+      display: block;
+      text-wrap: nowrap;
+      @include tablet {
+        margin-left: 8px;
+        color: $red;
+        padding: 2px 7px;
+        background-color: $bgRed;
+        border-radius: 4px;
+        display: inline-block;
+        text-align: center;
+      }
+
+      &_late {
+        @include tablet {
+          background-color: $red;
+          color: $white;
+        }
+      }
+    }
+  }
+  &__buttons-wrapper {
+    position: absolute;
+    height: 16px;
+    display: flex;
+    right: 8px;
+    bottom: 12px;
+    justify-content: flex-end;
+    gap: 10px;
+    z-index: 10;
+
+    @include tablet {
+      top: 50%;
+      transform: translateY(-50%);
+      right: 38px;
+    }
+
+    .task-event__container {
+      position: relative;
+    }
+
+    svg {
+      height: 16px;
+      width: 16px;
+      position: relative;
+      stroke: $blue;
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    height: 16px;
+    top: calc(50% - 12px);
+    right: 24px;
+  }
+}
+
+::v-deep(.dropdown__menu-top) {
+  right: -18px;
+  transform: translateY(-105%);
+}
+
+::v-deep(.dropdown__menu-bottom) {
+  right: -18px;
+  top: 24px;
+}

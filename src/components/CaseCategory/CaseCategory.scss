@@ -1,27 +1,33 @@
-.events{
+.events {
   width: 100%;
   margin-top: 32px;
-  &__table{
-    grid-template-columns: 1.2fr 50px 1fr 1fr;
+  &__table {
+    grid-template-columns: 1.15fr 50px 1fr 1fr;
+    padding: 16.5px 0 16.5px 28px;
   }
-  &__title{
+  &__title {
     color: $black;
     @include textMedium(16);
     margin-bottom: 20px;
   }
-  &__header{
-    &-button-create{
+  &__header {
+    &-button-create {
       width: 100%;
       margin-top: 10px;
       @include primaryButton;
     }
-    &-button-icon{
+    &-button-icon {
       stroke: $white;
       width: 14px;
       height: 14px;
-    }  
+    }
+  }
+  &__items {
+    &:not(:last-child) {
+      margin-bottom: 10px;
+      @include tablet {
+        margin-bottom: 3px;
+      }
+    }
   }
 }
-
-
-

@@ -61,7 +61,7 @@
             >
             <div class="lawsuit__details-actions-wrapper">
               <button
-                class="lawsuit__button-icon"
+                class="lawsuit__button-lawsuit"
                 @click="
                   lawsuitDetails ? editDetailsHandler(lawsuitDetails) : null
                 "
@@ -69,11 +69,11 @@
                 <SvgIcon icon="edit" />
                 В планирование
               </button>
-              <button class="lawsuit__button-icon">
+              <button class="lawsuit__button-lawsuit">
                 <SvgIcon icon="paper" />
                 Заметки
               </button>
-              <button @click="getFormationAct" class="lawsuit__button-icon">
+              <button @click="getFormationAct" class="lawsuit__button-lawsuit">
                 <SvgIcon icon="file" />
                 Акт
               </button>
@@ -205,7 +205,10 @@
         </div>
       </div>
     </div>
-    <PlanningLawsuits v-if="!mainStore.isMobile || isPlanningView" />
+    <div v-if="!mainStore.isMobile || isPlanningView">
+      <h2 class="lawsuit__details-title">Планирование</h2>
+      <PlanningLawsuits />
+    </div>
   </div>
 </template>
 

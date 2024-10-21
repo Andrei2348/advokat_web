@@ -30,12 +30,12 @@ export const useSwipe = (isPermission: boolean) => {
 
   const handleSwipe = () => {
     const deltaX = touchEndX.value - touchStartX.value
-    if (deltaX > 200) {
+    if (deltaX > 100) {
       if (position.value < 1 && isSwipeAllowed.value) {
         position.value += 1
       }
     }
-    if (deltaX < -200) {
+    if (deltaX < -100) {
       if (position.value > -1 && isSwipeAllowed.value) {
         position.value -= 1
       }

@@ -1,0 +1,47 @@
+.tasks {
+  margin-top: 50px;
+  padding: 20px;
+  @include showHideAside;
+  @include notebook {
+    margin-top: 90px;
+  }
+  &_empty {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    margin-top: 0;
+  }
+  &__header {
+    display: grid;
+    grid-template-columns:
+      minmax(162px, 0.53fr) minmax(90px, 0.32fr) 0.1fr minmax(140px, 0.35fr) minmax(
+        120px,
+        0.33fr
+      )
+      0.35fr minmax(100px, 0.7fr);
+    padding: 17px 87px 17px 80px;
+  }
+  &__text {
+    @include textRegular(14);
+    color: $black;
+    text-align: center;
+    background-color: $white;
+    padding-block: 16.5px;
+    border-radius: 8px;
+  }
+
+  &__empty-container {
+    @include centering;
+    flex-direction: column;
+    row-gap: 16px;
+    color: $black;
+
+    h2 {
+      @include heading(22);
+    }
+
+    p {
+      @include textRegular(16);
+    }
+  }
+}

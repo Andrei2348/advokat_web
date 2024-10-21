@@ -1,5 +1,8 @@
 <template>
-  <div :class="['navbar', { collapsed: isAsideCollapsed }]">
+  <div
+    :class="['navbar', { collapsed: isAsideCollapsed }]"
+    v-click-outside="closeSearchOnMobile"
+  >
     <!-- Smart -->
     <div class="navbar__burger-wrapper">
       <button class="navbar__burger" @click="togglePanelHandler">
@@ -12,38 +15,84 @@
     </div>
 
     <div class="navbar__smart-wrapper">
-      <div class="navbar__notification-wrapper">
+      <div
+        :class="['navbar__notification-wrapper', { active: isSearchOpen }]"
+        @click="toggleSearchOnMobile"
+      >
         <SvgIcon icon="filter" />
       </div>
       <div class="navbar__notification-wrapper">
-        <DropdownMenu
-          :menuItems="personMenu"
-          menuIcon="userSmart"
-          class="navbar__menu-dropdown"
-          @profileHandler="navigateToProfileHandler"
-        />
+        <SvgIcon icon="userSmart" />
       </div>
     </div>
     <!-- ====== -->
 
-    <div class="navbar__search-wrapper">
-      <ul class="navbar__filters-items">
-        <li class="navbar__filters-item">
-          Категория дела: Гражданский процесс <SvgIcon :icon="'x'" />
+    <div
+      :class="[
+        'navbar__search-wrapper',
+        { open: (isMobile || isTablet) && isSearchOpen },
+      ]"
+      v-click-outside="filtersCloseHandler"
+    >
+      <div class="navbar__search-wrapper-header">
+        <span class="navbar__search-wrapper-title">Фильтры</span>
+        <SvgIcon
+          v-if="isMobile || isTablet"
+          class="navbar__search-wrapper-close"
+          icon="x"
+          @click="toggleSearchOnMobile"
+        />
+      </div>
+      <ul v-if="filtersSelection.length" class="navbar__filters-items">
+        <li
+          v-for="(selection, index) of filtersSelection.slice(0, 3)"
+          :key="JSON.stringify(selection)"
+          class="navbar__filters-item"
+        >
+          <span>{{ selection.title }}: {{ selection.value }}</span>
+          <button
+            class="navbar__filters-item-remove"
+            type="button"
+            @click.stop="onRemoveFilterClick(index, selection.parameter)"
+          >
+            <SvgIcon :icon="'x'" />
+          </button>
         </li>
       </ul>
-
-      <div class="navbar__search-input--wrapper">
-        <input
-          class="navbar__search-input"
-          v-model="query"
-          @input="onInputHandler"
-          placeholder="Введите поисковую фразу"
+      <form
+        novalidate
+        class="navbar__search-input--wrapper"
+        @submit.prevent="submitHandlerComputed"
+      >
+        <span class="navbar__search-wrapper-title">Поиск по фразе</span>
+        <div class="navbar__input-container">
+          <input
+            class="navbar__search-input"
+            v-model="query"
+            @mousedown="filtersOpenHandler"
+            placeholder="Введите поисковую фразу"
+          />
+          <button
+            class="navbar__search-button"
+            :type="isMobile || isTablet ? 'button' : 'submit'"
+          >
+            <SvgIcon icon="search" />
+          </button>
+        </div>
+        <SearchFilters
+          v-show="filterContent?.filtersList && areFiltersOpen"
+          :areButtonsShown="currentRoute.name !== 'clients'"
+          :content="filterContent?.filtersList"
+          :selectedFilters="filtersSelection"
+          :valuesChange="onValuesChange"
+          :resetSearchFields="resetSearchFields"
         />
-        <button class="navbar__search-button">
-          <SvgIcon icon="search" />
-        </button>
-      </div>
+        <SearchButtonsContainer
+          v-if="currentRoute.name === 'clients'"
+          :class="{ type_clients: currentRoute.name === 'clients' }"
+          @onResetBtnClick="resetSearchFields"
+        />
+      </form>
     </div>
 
     <div class="navbar__buttons-wrapper">
@@ -56,13 +105,7 @@
         <!--        <img src="../assets/images/avatar/Ellipse 1.jpg" alt="Avatar" />-->
       </div>
       <div class="navbar__logout-menu--wrapper">
-        <DropdownMenu
-          :menuItems="personMenu"
-          menuIcon="chevron-down"
-          class="navbar__menu-dropdown"
-          @profileHandler="navigateToProfileHandler"
-          @logoutHandler="logoutRequestHandler"
-        />
+        <SvgIcon icon="chevron-down" />
       </div>
     </div>
   </div>

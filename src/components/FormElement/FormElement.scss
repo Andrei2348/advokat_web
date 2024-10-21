@@ -56,13 +56,15 @@
     background-color: transparent;
     position: relative;
     z-index: 1;
+    font-family: inherit;
   }
+
   textarea:required + .form-element__placeholder::after,
   input:required + .form-element__placeholder::after {
-    content: "*";
+    content: '*';
     color: $red;
   }
-    textarea:disabled + .form-element__placeholder,
+  textarea:disabled + .form-element__placeholder,
   input:disabled + .form-element__placeholder {
     color: $gray2;
   }
@@ -73,7 +75,16 @@
   }
 }
 
-
 input[type='time']::-webkit-calendar-picker-indicator {
   display: none;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
 }

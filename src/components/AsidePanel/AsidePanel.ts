@@ -1,4 +1,4 @@
-import { defineComponent, onBeforeMount, computed, watch } from 'vue'
+import { defineComponent, computed, watch } from 'vue'
 import { useUXUIStore } from '@/store/uxui'
 import { useMainStore } from '@/store/main'
 import { menuItemsUser, menuItemsAdmin } from '@/config/asideMenuConfig'
@@ -18,8 +18,7 @@ export default defineComponent({
       uxuiStore.switchAside()
     }
 
-    const selectMenuHandler = (value: string): void => {
-      uxuiStore.setCurrentPage(value)
+    const selectMenuHandler = () => {
       if (mainStore.isMobile || (mainStore.isTablet && !mainStore.isNotebook)) {
         uxuiStore.switchAside()
       }
@@ -39,10 +38,6 @@ export default defineComponent({
         }
       },
     )
-
-    onBeforeMount(() => {
-      uxuiStore.setCurrentPage('Дела')
-    })
 
     return {
       togglePanelHandler,

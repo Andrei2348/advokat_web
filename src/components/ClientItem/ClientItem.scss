@@ -1,0 +1,151 @@
+.item-padding {
+  padding-inline: 8px;
+}
+
+.link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  color: $black;
+  transition: opacity 0.3s ease;
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  @media (hover: none) {
+    &:active {
+      opacity: 0.7;
+    }
+  }
+
+  &:visited {
+    color: $black;
+  }
+}
+
+.client-item {
+  position: relative;
+  height: 133px;
+
+  @include tablet {
+    height: 68px;
+  }
+
+  &__wrapper {
+    position: relative;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    align-items: center;
+    row-gap: 6px;
+    height: 100%;
+    background-color: $white;
+    padding: 8px 6px;
+    border-radius: 8px;
+    @include textRegular(12);
+    color: $black;
+    transition: transform ease 0.4s;
+
+    &.move__left {
+      transform: translateX(-72px);
+    }
+    &.move__right {
+      transform: translateX(72px);
+    }
+
+    @include tablet {
+      padding: 13px 36px;
+      grid-template-columns: 1fr 0.9fr 0.7fr 0.6fr 0.5fr;
+      grid-template-rows: 1fr;
+    }
+    @include notebook {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    &-status {
+      display: none;
+      position: absolute;
+
+      width: 4px;
+      height: 42px;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 8px;
+      background-color: $gray2;
+
+      @include tablet {
+        display: block;
+      }
+
+      &_active {
+        background-color: $green;
+      }
+    }
+
+    .client-item__column {
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      position: relative;
+
+      @include tablet {
+        flex-direction: row;
+        padding-inline: 8px;
+      }
+
+      &_status {
+        &_active {
+          background-color: $lightGreen;
+        }
+
+        &_inactive {
+          background-color: $gray5;
+        }
+      }
+
+      &-text {
+        color: $black;
+
+        &:visited {
+          color: $black;
+        }
+      }
+
+      .client-item__phone-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+
+        @include tablet {
+          display: none;
+        }
+      }
+    }
+
+    span {
+      color: $gray;
+
+      @include tablet {
+        display: none;
+      }
+    }
+
+    .client-item__additional {
+      display: none;
+      @include tablet {
+        display: inline;
+        color: inherit;
+      }
+    }
+
+    .client-item__menu-wrapper {
+      position: absolute;
+      top: 55%;
+      right: 28px;
+    }
+  }
+}

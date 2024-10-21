@@ -1,41 +1,49 @@
-.events{
-  &__container{
+.events {
+  &__container {
     position: relative;
     display: flex;
-    background-color: $white;  
-    border-radius: 8px;  
-    box-shadow: 0px -2.5px 0px 0px $gray6 inset;  
+    background-color: $white;
+    border-radius: 8px;
+    box-shadow: 0px -2.5px 0px 0px $gray6 inset;
     box-shadow: 0px -2.5px 0px 0px $gray6;
     padding: 12px 0 110px;
     margin-bottom: 3px;
     transition: all ease 0.5s;
-    @include tablet{
-      display: grid;  
+    @include tablet {
+      display: grid;
       grid-template-columns: 1.2fr 50px 1fr 1fr;
       padding: 0;
     }
     // свайп по горизонтали
-    &.move__left{
+    &.move__left {
       transform: translateX(-72px);
     }
-  &-wrapper{
-    position: relative;
+    &-wrapper {
+      position: relative;
+    }
   }
+  &__items {
+    &:not(:last-child) {
+      margin-bottom: 10px;
+      @include tablet {
+        margin-bottom: 3px;
+      }
+    }
   }
-  &__input{
+  &__input {
     padding-left: 12px;
-    @include tablet{
+    @include tablet {
       padding: 14px 8px 16px 28px;
     }
   }
-  &__color{
+  &__color {
     padding: 0 12px;
-    @include tablet{
+    @include tablet {
       padding: 14px 3px 16px;
     }
   }
-  &__select{
-    @include tablet{
+  &__select {
+    @include tablet {
       padding: 14px 8px 16px;
     }
     & .multiselect__tags {
@@ -62,18 +70,18 @@
       color: $gray;
     }
   }
-  &__checkbox{
+  &__checkbox {
     cursor: pointer;
     color: $black;
     @include textRegular(14);
     @include checkbox;
-    &-wrapper{
+    &-wrapper {
       display: flex;
       align-items: center;
       justify-content: flex-start;
       padding: 0 8px;
     }
-    &-inner{
+    &-inner {
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -84,9 +92,9 @@
     left: 3px;
     top: 2px;
   }
-  &__delete-button{
+  &__delete-button {
     display: none;
-    @include tablet{
+    @include tablet {
       display: block;
       border: none;
       background-color: transparent;
@@ -97,50 +105,50 @@
       right: 24px;
     }
   }
-  &__delete-button svg{
+  &__delete-button svg {
     height: 24px;
     width: 24px;
   }
 }
 
-.select__input{
-  &-label{
-    margin-bottom:  8px;
+.select__input {
+  &-label {
+    margin-bottom: 8px;
     color: $black;
     @include textMedium(12);
-    @include tablet{
+    @include tablet {
       display: none;
       margin-bottom: 0;
     }
-    & span{
+    & span {
       color: $red;
       margin-left: 3px;
     }
   }
-  &-wrapper{
+  &-wrapper {
     position: relative;
     display: flex;
     flex-direction: column;
-    & .select__input{
-      @include tablet{
+    & .select__input {
+      @include tablet {
         margin-right: 60px;
       }
     }
-    &-days{
+    &-days {
       left: 12px;
     }
-    &-hours{
+    &-hours {
       right: 12px;
-      & .events__select{
+      & .events__select {
         margin-right: 0;
       }
     }
     &-days,
-    &-hours{
+    &-hours {
       position: absolute;
       top: 105px;
       width: calc(50% - 22px);
-      @include tablet{
+      @include tablet {
         position: relative;
         top: 0;
         left: auto;
@@ -148,11 +156,11 @@
         width: 100%;
       }
     }
-    &-category{
+    &-category {
       width: 100%;
     }
     &-category .select__input-label,
-    &-color .select__input-label{
+    &-color .select__input-label {
       padding-left: 12px;
     }
   }

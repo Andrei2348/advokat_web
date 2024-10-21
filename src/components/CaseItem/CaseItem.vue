@@ -2,9 +2,8 @@
   <div class="events__container-wrapper">
     <ButtonsMobileSwipe
       :item="item"
-      @deleteLawsuit="deleteLawsuitCategoryHandler(item.id)"
-      extremeIconLeft="edit2"
-      extremeIconRight="trash04"
+      :placement="'categorySettings'"
+      @removeCategorySettings="deleteLawsuitCategoryHandler"
     />
 
     <div

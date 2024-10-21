@@ -39,9 +39,3 @@ export type AuthFormSuccessResponse = {
   }
   error: null
 }
-
-export type UserLogoutResponse = {
-  success: number
-  error: null | string
-  message: string
-}

@@ -1,54 +1,53 @@
-.events{
-  &__container{
+.events {
+  &__container {
     display: flex;
     position: relative;
     width: 100%;
     padding-top: 12px;
     padding-bottom: 265px;
-    background-color: $white;  
-    border-radius: 8px;  
-    box-shadow: 0px -2.5px 0px 0px $gray6 inset;  
-    box-shadow: 0px -2.5px 0px 0px $gray6;  
-    margin-bottom: 3px; 
+    background-color: $white;
+    border-radius: 8px;
+    box-shadow: 0px -2.5px 0px 0px $gray6 inset;
+    box-shadow: 0px -2.5px 0px 0px $gray6;
     transition: all ease 0.5s;
-    @include tablet{
-      display: grid;  
-      grid-template-columns: 0.6fr 50px 0.5fr 0.5fr 120px 210px;
-      padding-top: 0;
-      padding-bottom: 0;
+
+    @include tablet {
+      display: grid;
+      grid-template-columns: 0.58fr 50px 0.5fr 0.5fr 120px 210px;
+      padding: 0;
       align-items: center;
     }
-    &-wrapper{
+    &-wrapper {
       position: relative;
     }
     // свайп по горизонтали
-    &.move__left{
+    &.move__left {
       transform: translateX(-72px);
     }
   }
-  &__checkbox{
-    &-fee{
+  &__checkbox {
+    &-fee {
       position: absolute;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       top: 190px;
       left: 4px;
-      @include tablet{
+      @include tablet {
         position: relative;
         top: 0;
         left: 0;
         width: auto;
       }
     }
-    &-type{
+    &-type {
       position: absolute;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       top: 190px;
       right: 12px;
-      @include tablet{
+      @include tablet {
         position: relative;
         top: 0;
         right: auto;
@@ -56,21 +55,21 @@
       }
     }
   }
-  &__input{
+  &__input {
     padding: 0 0 0 12px;
-    @include tablet{
+    @include tablet {
       padding: 14px 8px 16px 28px;
     }
   }
-  &__color{
+  &__color {
     padding: 0px 12px;
-    @include tablet{
+    @include tablet {
       padding: 14px 3px 16px;
     }
   }
-  &__select{
+  &__select {
     width: 100%;
-    @include tablet{
+    @include tablet {
       padding: 14px 8px 16px;
     }
     & .multiselect__tags {
@@ -97,7 +96,7 @@
       color: $gray;
     }
   }
-  &__checkbox{
+  &__checkbox {
     cursor: pointer;
     color: $black;
     width: 128px;
@@ -105,19 +104,19 @@
     align-items: center;
     @include textRegular(14);
     @include checkbox;
-    &-wrapper{
+    &-wrapper {
       display: flex;
       justify-content: flex-start;
       padding: 0 8px;
-      @include tablet{
+      @include tablet {
         align-items: flex-start;
       }
     }
-    &-inner{
+    &-inner {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      @include tablet{
+      @include tablet {
         margin: 12px 12px 12px 0;
       }
     }
@@ -130,12 +129,12 @@
     top: 55%;
     transform: translateY(-50%);
   }
-  &__delete-button{
+  &__delete-button {
     border: none;
     background-color: transparent;
     cursor: pointer;
     display: none;
-    @include tablet{
+    @include tablet {
       display: block;
       position: absolute;
       right: 22px;
@@ -143,64 +142,64 @@
       transform: translateY(-50%);
     }
   }
-  &__delete-button svg{
+  &__delete-button svg {
     height: 24px;
     width: 24px;
   }
-  .events__input{
-    &-notify{
+  .events__input {
+    &-notify {
       position: absolute;
       top: 100px;
       width: calc(50% - 22px);
       left: 12px;
-      @include tablet{
+      @include tablet {
         position: relative;
         top: 0;
         left: auto;
         width: 100%;
       }
     }
-    &-mark{
+    &-mark {
       position: absolute;
       top: 100px;
       right: 12px;
       display: flex;
       width: calc(50% - 22px);
-      @include tablet{
+      @include tablet {
         position: relative;
         top: 0;
         right: auto;
         width: 100%;
       }
     }
-    &-wrapper{
+    &-wrapper {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      &-type{
+      &-type {
         width: 100%;
       }
     }
-    &-label{
-      margin-bottom:  8px;
+    &-label {
+      margin-bottom: 8px;
       color: $black;
       @include textMedium(12);
-      @include tablet{
+      @include tablet {
         display: none;
         margin-bottom: 0;
       }
-      & span{
+      & span {
         color: $red;
         margin-left: 4px;
       }
-      &-checkbox{
+      &-checkbox {
         color: $black;
         margin-bottom: 14px;
         @include textMedium(16);
       }
-      &.events__input-label-type{
+      &.events__input-label-type {
         padding-left: 12px;
       }
-    }  
+    }
   }
 }

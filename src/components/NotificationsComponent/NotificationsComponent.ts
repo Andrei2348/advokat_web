@@ -1,4 +1,5 @@
 import { defineComponent } from 'vue'
+import { useUXUIStore } from '@/store/uxui'
 
 export default defineComponent({
   name: 'NotificationsComponent',
@@ -15,8 +16,13 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    isInMain: {
+      type: Boolean,
+      required: false,
+    },
   },
   setup() {
-    return {}
+    const uxuiStore = useUXUIStore()
+    return { uxuiStore }
   },
 })

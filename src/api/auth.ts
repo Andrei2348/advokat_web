@@ -6,7 +6,6 @@ import {
   AuthFormSuccessResponse,
   RecoveryPasswordPayload,
   RegistrationPayload,
-  UserLogoutResponse,
 } from '@/types/auth'
 
 const loginApiCall = async (
@@ -69,18 +68,8 @@ const recoveryPasswordApiCall = async (
   return data
 }
 
-const logoutApiCall = async (
-  abortController?: AbortController,
-): Promise<UserLogoutResponse> => {
-  const { data } = await axios.post('/v1/auth/logout', {
-    signal: abortController?.signal,
-  })
-  return data
-}
-
 export {
   loginApiCall,
-  logoutApiCall,
   smsLoginApiCall,
   recoveryPasswordApiCall,
   registrationApiCall,

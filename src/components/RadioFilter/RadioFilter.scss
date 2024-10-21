@@ -1,0 +1,28 @@
+.radio-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: $black;
+  @include textMedium(16);
+
+  label {
+    display: flex;
+    column-gap: 8px;
+    align-items: end;
+    @include radioButton;
+    padding-left: 28px;
+    @include textRegular(14);
+    cursor: pointer;
+
+    &::before {
+      height: 20px;
+      width: 20px;
+    }
+    &.active {
+      &::after {
+        top: 50%;
+        transform: translateY(-70%);
+      }
+    }
+  }
+}

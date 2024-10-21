@@ -1,78 +1,77 @@
-.dropdown{
-    width: 24px;
-    height: 24px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 0;
-    left: 0;
+.dropdown__menu {
+  & {
+    position: absolute;
+    border-radius: 6px;
+    background-color: $white;
+    box-shadow: 0px 0px 10.2px 0px #9f9f9f47;
+    z-index: 200;
+    padding: 6px 0;
+  }
+  &-top {
+    right: -5px;
+    transform: translateY(-132%);
+  }
+  &-bottom {
+    right: -20px;
+    top: 14px;
+  }
+  &-button {
+    position: absolute;
+    bottom: -8px;
+    right: -5px;
     cursor: pointer;
-    &__icon{
-        position: absolute;
+  }
+  &.dropdown__menu-top:after {
+    position: absolute;
+    content: '';
+    bottom: -7px;
+    right: 12px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 8px solid $white;
+    transform: rotate(180deg);
+  }
+  &.dropdown__menu-bottom:before {
+    position: absolute;
+    content: '';
+    top: -7px;
+    right: 12px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 8px solid $white;
+  }
+  &-wrapper {
+    position: relative;
+    z-index: 11;
+  }
+  &-title {
+    @include textMedium(14);
+    color: $gray;
+    padding: 13px 10px 7px;
+    margin: 0;
+  }
+  &-items,
+  &-item {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  &-item {
+    @include textRegular(14);
+    color: $black;
+    cursor: pointer;
+    padding: 7px 10px;
+    transform: all ease-out 0.5s;
+    white-space: nowrap;
+    &.empty {
+      display: none;
     }
-    &__menu{
-        position: absolute;
-        border-radius: 6px;
-        background-color: $white;
-        box-shadow: 0px 0px 10.2px 0px #9F9F9F47;
-        z-index: 2000;
-        padding: 6px 0;
-        top: 0;
-        right: 0;
-        &-title{
-            @include textMedium(14);
-            color: $gray;
-            padding: 13px 10px 7px;
-            margin: 0;
-        }
-        &-item{
-            @include textRegular(14);
-            color: $black;
-            cursor: pointer;
-            padding: 7px 10px;
-            transform: all ease-out 0.5s;
-            white-space: nowrap;
-            &.empty{
-                display: none;
-            }
-            &:hover{
-                background-color: $gray5;
-            }
-        }
-        &-top{
-            right: -28px;
-            top: auto;
-            bottom: 26px;
-        }
-        &-bottom{
-            right: -28px;
-            bottom: auto;
-            top: 26px;
-        }
-        &-top:after{
-            position: absolute;
-            content: '';
-            bottom: -7px;
-            right: 28px;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 8px solid $white;
-            transform: rotate(180deg);
-        }
-        &-bottom:before{
-            position: absolute;
-            content: '';
-            top: -7px;
-            right: 28px;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 8px solid $white;
-        }
+    &:hover {
+      background-color: $gray5;
     }
-    
+  }
 }

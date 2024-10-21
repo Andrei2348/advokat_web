@@ -2,6 +2,26 @@
     width: 100%;
     &__header{
         display: none;
+        &-empty{
+            &-list{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+            &-title{
+                @include heading(22);
+                color: $black;
+                text-align: center;
+                margin-bottom: 16px;
+            }
+            &-text{
+                @include textRegular(16);
+                color: $black;
+                text-align: center;
+            }
+        }
         @include tablet{
             display: grid;  
             background-color: $white;  
@@ -9,8 +29,11 @@
             box-shadow: 0px -2.5px 0px 0px $gray6 inset;  
             box-shadow: 0px -2.5px 0px 0px $gray6;  
             margin-bottom: 3px;
-            grid-template-columns: 1fr 0.6fr 90px 0.7fr 0.5fr 120px 0.6fr 60px 80px;
+            grid-template-columns: 1fr 0.6fr 90px 0.7fr 0.5fr 140px 0.6fr 80px 80px;
         }
+        @include notebook{
+            grid-template-columns: repeat(8, 1fr);
+          } 
         &-item{
             display: flex;
             align-items: center;

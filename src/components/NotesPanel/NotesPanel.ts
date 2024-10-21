@@ -13,6 +13,7 @@ import { modalsContent } from '@/config/deleteModalsConfig'
 import { createNoteApiCall } from '@/api/notes'
 import { NoteFormSuccessResponse, NotesCreatePayload } from '@/types/notes'
 import { getFormatDate } from '@/helpers/dateFormatter'
+import { useLockBodyScroll } from '@/composables/useLockBodyScroll'
 
 export default defineComponent({
   name: 'NotesPanel',
@@ -24,6 +25,7 @@ export default defineComponent({
     const buttonIsDisabled = ref(true)
     const isErrorsExists = ref(false)
     const warningMessage = ref<string>('')
+    const { enableBodyScroll, disableBodyScroll } = useLockBodyScroll()
 
     const {
       data: notesData,
@@ -40,7 +42,7 @@ export default defineComponent({
 
     const handleDelete = (id: number) => {
       uxuiStore.setModalName('ConfirmationDelete')
-      uxuiStore.setModalContent(modalsContent[1], id)
+      uxuiStore.setModalContent(modalsContent['note'], id)
     }
 
     const closeOnEsc = (e: KeyboardEvent) => {
@@ -91,6 +93,7 @@ export default defineComponent({
     })
 
     onBeforeMount(async () => {
+      disableBodyScroll()
       window.addEventListener('keydown', closeOnEsc)
       await createRequest()
     })
@@ -99,6 +102,7 @@ export default defineComponent({
       isErrorsExists.value = false
       notesStore.clearNotesList()
       window.removeEventListener('keydown', closeOnEsc)
+      enableBodyScroll()
     })
 
     return {

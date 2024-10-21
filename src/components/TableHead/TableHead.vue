@@ -1,9 +1,13 @@
 <template>
-  <div class="table__header">
-    <div v-for="item in items" class="table__header-item" :key="item.id">
-      <p class="table__header-item-text">
+  <div class="table-head">
+    <div
+      v-for="item in items"
+      class="table-head__item"
+      :key="JSON.stringify(item)"
+    >
+      <p class="table-head__item-text">
         {{ item.title }}
-        <span class="table__header-item-span" v-if="item.important">*</span>
+        <span class="table-head__item-span" v-if="item.important">*</span>
       </p>
     </div>
   </div>

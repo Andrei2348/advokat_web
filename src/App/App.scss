@@ -18,6 +18,7 @@ body {
     background: $backgroundColor;
     display: flex;
     flex-direction: column;
+    position: relative;
     main {
       flex: 1;
     }
@@ -31,6 +32,9 @@ body {
     &.router-link-exact-active {
       //color: $red;
     }
+  }
+  button {
+    transition: background-color 0.3s linear;
   }
 }
 

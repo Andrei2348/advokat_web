@@ -1,0 +1,67 @@
+.client-table {
+  width: 100%;
+  color: $gray;
+  &__title {
+    @include textRegular(12);
+    margin-bottom: 18px;
+
+    @include tablet {
+      @include textRegular(14);
+    }
+  }
+
+  &__header {
+    display: none;
+    @include tablet {
+      display: grid;
+      padding-inline: 36px;
+      background-color: $white;
+      border-radius: 8px;
+      grid-template-columns: 1fr 0.9fr 0.7fr 0.6fr 0.5fr;
+      grid-template-rows: 1fr;
+    }
+    @include notebook {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    &-item {
+      display: flex;
+      column-gap: 8px;
+      @include textMedium(12);
+      color: inherit;
+      padding: 16px 8px;
+
+      &_interactive {
+        cursor: pointer;
+      }
+
+      svg {
+        stroke: $gray2;
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  &__categories-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+
+    .client-table__message {
+      display: block;
+      margin-top: 50px;
+      @include textRegular(14);
+      text-align: center;
+    }
+
+    td {
+      display: block;
+    }
+
+    &-clients {
+      display: grid;
+      row-gap: 3px;
+    }
+  }
+}

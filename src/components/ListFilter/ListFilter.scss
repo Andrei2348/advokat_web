@@ -1,0 +1,103 @@
+.list-filter {
+  background-color: $white;
+  width: 100%;
+  z-index: 20;
+  border: $gray3 solid 1px;
+  border-radius: 8px;
+  padding: 8px;
+  @include textRegular(14);
+  box-shadow: $shadow;
+
+  &__title {
+    display: block;
+    margin-bottom: 14px;
+    @include textMedium(16);
+  }
+
+  &__input {
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+    position: relative;
+    margin-bottom: 14px;
+    @include textMedium(14);
+    input {
+      @include input;
+    }
+
+    svg {
+      cursor: pointer;
+      position: absolute;
+      top: 55%;
+      right: 14px;
+      stroke: $gray;
+      width: 24px;
+      height: 24px;
+      stroke-width: 1.4px;
+    }
+  }
+
+  &__options-wrapper {
+    max-height: 100px;
+    min-height: 20px;
+    overflow-y: scroll;
+    @include hideScrollBar;
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+  }
+
+  &__checkbox {
+    @include checkbox;
+    cursor: pointer;
+    padding: 2px 0 0 28px;
+
+    &.checked {
+      &::after {
+        top: 3px;
+      }
+    }
+  }
+
+  &__radio {
+    display: flex;
+    column-gap: 8px;
+    align-items: end;
+    @include radioButton;
+    padding-left: 28px;
+    @include textRegular(14);
+    cursor: pointer;
+
+    &::before {
+      height: 20px;
+      width: 20px;
+    }
+    &.active {
+      &::after {
+        top: 50%;
+        transform: translateY(-70%);
+      }
+    }
+  }
+
+  &__btn-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+    margin-top: 14px;
+
+    @include tablet {
+      flex-direction: row;
+      column-gap: 30px;
+    }
+
+    button[type='button'] {
+      @include primaryButton;
+
+      &.cancel {
+        @include secondaryButton;
+      }
+    }
+  }
+}

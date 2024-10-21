@@ -69,7 +69,12 @@
 }
 
 @mixin textBold($val) {
-  @if $val == 14{
+  @if $val == 16 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.36px;
+    text-align: left;
+  } @else if $val == 14 {
     font-size: 14px;
     font-weight: 600;
     line-height: 16.94px;

@@ -1,0 +1,268 @@
+.gray-text {
+  @include textRegular(12);
+  color: $gray;
+}
+
+.blue-text {
+  color: $blue;
+
+  &_link {
+    @include textLink(14);
+  }
+}
+
+.event-box {
+  display: grid;
+  row-gap: 12px;
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: calc(100% - 16px * 2);
+  color: $black;
+  @include textRegular(14);
+  margin: 0 auto;
+  padding-block: 32px;
+
+  @include tablet {
+    width: 100%;
+    padding: 32px 30px;
+    min-width: 900px;
+  }
+
+  sup {
+    color: $red;
+  }
+
+  &__head {
+    @include resetFieldset;
+    display: grid;
+    row-gap: 14px;
+
+    &-status {
+      padding: 2px 7px;
+      display: inline-block;
+      border-radius: 4px;
+      margin-left: 10px;
+      &_type {
+        &_planned {
+          background-color: $gray4;
+          color: $black;
+        }
+        &_finished {
+          background-color: $lightGreen3;
+          color: $green;
+        }
+      }
+    }
+  }
+
+  &__checkbox {
+    @include checkbox;
+    cursor: pointer;
+    padding-left: 30px;
+    padding-top: 3px;
+    display: flex;
+    align-items: center;
+    &.checked::after {
+      top: 2px;
+    }
+  }
+
+  &__middle {
+    @include resetFieldset;
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+
+    @include tablet {
+      flex-direction: row;
+      column-gap: 38px;
+    }
+
+    &-time {
+      display: grid;
+      row-gap: 14px;
+      width: calc(190px * 2 + 18px);
+
+      &-inputs {
+        display: flex;
+        column-gap: 18px;
+      }
+
+      &-picker,
+      &-hours {
+        @include tablet {
+          min-width: 190px;
+          width: 100%;
+        }
+      }
+
+      &-cost {
+        row-gap: 14px;
+        @include tablet {
+          padding-top: 4px;
+        }
+      }
+    }
+  }
+
+  &__tag {
+    display: grid;
+    row-gap: 14px;
+  }
+
+  &__lawsuit {
+    @include resetFieldset;
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+
+    @include tablet {
+      flex-direction: row;
+      column-gap: 38px;
+    }
+
+    & > div {
+      @include tablet {
+        flex: 1 0 401px;
+      }
+    }
+  }
+
+  &__event {
+    background-color: $gray5;
+    padding: 16px;
+    border-radius: 14px;
+    position: relative;
+    display: grid;
+    row-gap: 14px;
+
+    &-bottom {
+      display: flex;
+      column-gap: 44px;
+      align-items: baseline;
+    }
+
+    &-remove-btn {
+      @include resetButton;
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+    }
+
+    &-add-btn {
+      @include resetButton;
+      color: $green;
+      @include textMedium(14);
+      transition: opacity 0.4s ease;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+
+      @media (hover: hover) {
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+
+      @media (hover: none) {
+        &:active {
+          opacity: 0.7;
+        }
+      }
+
+      svg {
+        width: 14px;
+        height: 14px;
+        stroke: $green;
+      }
+    }
+  }
+
+  &__btn-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    row-gap: 12px;
+
+    @include tablet {
+      flex-direction: row;
+    }
+  }
+
+  &__info {
+    &-lawsuit {
+      display: block;
+      width: 100%;
+      @include secondaryButton;
+      gap: 5px;
+      margin-top: 32px;
+
+      svg {
+        stroke: $green;
+        stroke-width: 1.8px;
+      }
+    }
+  }
+
+  &__form-controls {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 14px;
+
+    @include tablet {
+      justify-content: start;
+    }
+
+    button[type='submit'] {
+      @include resetButton;
+      background-color: $gray2;
+      padding: 18px 46px;
+      color: $white;
+      transition: background-color ease 0.4s;
+      border-radius: 14px;
+
+      flex-basis: 45%;
+
+      @include tablet {
+        flex-basis: auto;
+        width: 168px;
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: $gray;
+        }
+      }
+
+      @media (hover: none) {
+        &:active {
+          background-color: $gray;
+        }
+      }
+
+      &:disabled {
+        background-color: $gray4;
+        color: $gray2;
+        cursor: auto;
+      }
+    }
+
+    button[type='button'] {
+      @include primaryButton;
+      flex-basis: 45%;
+
+      @include tablet {
+        flex-basis: auto;
+        width: 168px;
+      }
+    }
+  }
+
+  &__delete-btn {
+    @include redButton;
+  }
+}

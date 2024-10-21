@@ -28,7 +28,7 @@ export default defineComponent({
 
     const deleteAuthorities = (id: number) => {
       uxuiStore.setModalName('ConfirmationDelete')
-      uxuiStore.setModalContent(modalsContent[2], id)
+      uxuiStore.setModalContent(modalsContent['authority'], id)
     }
 
     const editAuthorities = (item: AuthoritiesDataPayload) => {

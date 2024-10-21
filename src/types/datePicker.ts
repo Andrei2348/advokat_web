@@ -10,3 +10,9 @@ export interface UIOptions {
   menu: CustomClass
   input: CustomClass
 }
+
+// export type DateType = {
+//   year: number
+//   month: number
+//   day: number
+// }

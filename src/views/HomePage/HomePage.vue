@@ -1,19 +1,13 @@
 <template>
   <div :class="['home', { collapsed: uxuiStore.asideCollapsed }]">
-    <LawsuitTable
-      v-if="
-        lawsuitStore && lawsuitStore?.isLawsuitData?.length && !isLawsuitLoading
-      "
-    />
     <div
-      v-if="
-        !isLawsuitLoading && lawsuitStore && !lawsuitStore.isLawsuitData?.length
-      "
+      v-if="lawsuitStore && !lawsuitStore.isLawsuitData"
       class="home__message"
     >
       <h2 class="home__message-title">Список дел пуст</h2>
       <p class="home__message-text">Добавьте свое первое дело</p>
     </div>
+    <LawsuitTable v-else />
   </div>
 </template>
 

@@ -32,10 +32,10 @@
   }
   &__input{
     &-label{
+      @include textMedium(14);
       color: $black;
       margin-bottom: 14px;
       display: block;
-      @include textMedium(14);
     }
     &-label-span{
       color: $red;

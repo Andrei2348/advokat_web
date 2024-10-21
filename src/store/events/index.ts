@@ -22,8 +22,7 @@ import {
 
 export const useEventsStore = defineStore('events', () => {
   const errorFields = ref<null | DefaultError['error']>(null)
-  const changeStatusResponse = ref(false)
-  const partialChangeStatusResponse = ref(false)
+  const changeDataResponse = ref(false)
   const createEventsTypeStatus = ref(false)
 
   // Формирование данных для настроек
@@ -93,12 +92,8 @@ export const useEventsStore = defineStore('events', () => {
     true,
   )
 
-  const setStatusResponse = (): void => {
-    changeStatusResponse.value = !changeStatusResponse.value
-  }
-
-  const setPartialChangeStatusResponse = (): void => {
-    partialChangeStatusResponse.value = !partialChangeStatusResponse.value
+  const setDataResponse = (): void => {
+    changeDataResponse.value = !changeDataResponse.value
   }
 
   const setEventsTypes = (payload: EventCategory[] | null): void => {
@@ -174,7 +169,7 @@ export const useEventsStore = defineStore('events', () => {
     try {
       await setEventStatus(payload)
       if (changeEventData.value) {
-        setStatusResponse()
+        setDataResponse()
       }
     } catch {
       if (eventError.value?.data.error) {
@@ -190,7 +185,7 @@ export const useEventsStore = defineStore('events', () => {
         partialChangeEventData.value &&
         partialChangeEventData.value.success
       ) {
-        setPartialChangeStatusResponse()
+        setDataResponse()
       }
     } catch {
       if (partialEventError.value?.data.error) {
@@ -203,7 +198,7 @@ export const useEventsStore = defineStore('events', () => {
     try {
       await setDeleteData(payload)
       if (deleteEventData.value && deleteEventData.value.success) {
-        setStatusResponse()
+        setDataResponse()
       }
     } catch {
       if (deleteEventError.value?.data.error) {
@@ -273,11 +268,9 @@ export const useEventsStore = defineStore('events', () => {
 
   return {
     setEventsStatus,
-    changeStatusResponse,
-    setStatusResponse,
+    changeDataResponse,
+    setDataResponse,
     setPartialEventsChange,
-    partialChangeStatusResponse,
-    setPartialChangeStatusResponse,
     setDeleteEvent,
     eventsTypes,
     getEventsTypes,

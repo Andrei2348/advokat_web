@@ -5,16 +5,17 @@
       v-model="selected"
       :options="options"
       :label="label"
-      :searchable="false"
+      :searchable="searchable"
       :clear-on-select="false"
-      :allow-empty="false"
-      :close-on-select="true"
+      :allow-empty="allowEmpty"
+      :placeholder="placeholder"
+      :close-on-select="closeOnSelect"
       :show-labels="false"
+      :multiple="multiple"
+      :track-by="objectKey !== 'lawsuit' ? 'name' : 'opponent'"
       :option-height="104"
       @open="handleOpen"
       @close="handleClose"
-      :placeholder="placeholder"
-      track-by="name"
     >
       <template #singleLabel="props">
         <div class="select__option-wrapper">
@@ -24,7 +25,13 @@
             class="select__option-span"
           >
           </span>
-          {{ props.option.name }}
+          {{
+            props.option.name
+              ? props.option.name
+              : objectKey === 'lawsuit'
+                ? `${props.option.lawsuitCategory.name} ${props.option.opponent}`
+                : props.option.name
+          }}
           <SvgIcon icon="chevron-down" class="select__chevron" />
         </div>
       </template>
@@ -37,8 +44,17 @@
             class="select__option-span"
           >
           </span>
-          {{ props.option.name }}
+          {{
+            props.option && objectKey === 'lawsuit'
+              ? `${props.option.lawsuitCategory.name} ${props.option.opponent}`
+              : props.option.name
+          }}
         </div>
+      </template>
+      <template #selection="{ values }">
+        <span class="multiselect__single" v-if="values.length"
+          >Выбраных тэгов {{ values.length }}</span
+        >
       </template>
     </Multiselect>
   </div>

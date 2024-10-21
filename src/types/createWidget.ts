@@ -4,8 +4,9 @@ export type Position = {
 }
 
 export type MenuItemDropdown = {
-  id: number
+  id?: number
   title: string
-  color: string
+  color?: string
   function: string
+  routes?: { name: string; options?: any }[]
 }

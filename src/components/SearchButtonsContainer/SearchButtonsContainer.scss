@@ -1,0 +1,26 @@
+.search-btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  @include notebook {
+    margin-top: 22px;
+  }
+
+  button {
+    @include resetButton;
+    @include textMedium(14);
+    color: $white;
+    @include notebook {
+      display: none;
+    }
+
+    &[type='submit'] {
+      @include primaryButton;
+    }
+
+    &[type='reset'] {
+      @include secondaryButton;
+    }
+  }
+}

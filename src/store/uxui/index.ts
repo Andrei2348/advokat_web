@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
-import { ref, computed, watch } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { ModalContent, ModalNameContent } from '@/types/modals'
 import { SelectedPlan } from '@/types/lawsuit'
-import { useLockBodyScroll } from '@/composables/useLockBodyScroll'
 
 export const useUXUIStore = defineStore('uxui', () => {
   const asideCollapsed = ref(true)
@@ -11,7 +10,16 @@ export const useUXUIStore = defineStore('uxui', () => {
   const typeOfSelectedPlan = ref<SelectedPlan>('task')
   const currentPage = ref<string>('')
   const swipePermission = ref(true)
-  const { enableBodyScroll, disableBodyScroll } = useLockBodyScroll()
+  const isNotificationOpen = ref(false)
+  const notification = reactive<{
+    text: string
+    status: 'done' | 'error' | ''
+    size: 'large'
+  }>({
+    text: '',
+    status: 'done',
+    size: 'large',
+  })
 
   const modalName = ref<ModalNameContent>({
     modalName: '',
@@ -20,6 +28,20 @@ export const useUXUIStore = defineStore('uxui', () => {
 
   const modalContent = ref<ModalContent | null>(null)
   const getIsAdmin = computed(() => isAdmin.value)
+
+  const openNotification = (status: 'done' | 'error', text: string) => {
+    notification.status = status
+    notification.text = text
+    isNotificationOpen.value = true
+
+    setTimeout(closeNotification, 3000)
+  }
+
+  const closeNotification = () => {
+    isNotificationOpen.value = false
+    notification.status = ''
+    notification.text = ''
+  }
 
   const switchAside = () => {
     asideCollapsed.value = !asideCollapsed.value
@@ -60,20 +82,15 @@ export const useUXUIStore = defineStore('uxui', () => {
     modalContent.value = payload ? { ...payload, id } : null
   }
 
-  watch(
-    () => [notesPanelVisible.value, modalName.value.modalName],
-    ([notesVisible, modalName]) => {
-      notesVisible || modalName !== ''
-        ? disableBodyScroll()
-        : enableBodyScroll()
-    },
-  )
-
   return {
     asideCollapsed,
     isAdmin,
     notesPanelVisible,
     getIsAdmin,
+    isNotificationOpen,
+    notification,
+    openNotification,
+    closeNotification,
     switchAside,
     setAdmin,
     switchNotesPanel,
@@ -86,7 +103,7 @@ export const useUXUIStore = defineStore('uxui', () => {
     currentPage,
     setCurrentPage,
     removeCollapse,
-    setSwipePermission,
     swipePermission,
+    setSwipePermission,
   }
 })

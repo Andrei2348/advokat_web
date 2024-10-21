@@ -1,0 +1,177 @@
+.table {
+  width: 100%;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  color: $black;
+  padding: 24px 16px;
+  border-radius: 12px;
+  background-color: $gray5;
+
+  @include tablet {
+    padding: 0;
+    background-color: transparent;
+  }
+
+  caption {
+    @include textBold(16);
+    margin-bottom: 20px;
+  }
+
+  &__header {
+    display: none;
+    @include textMedium(12);
+    background-color: $white;
+    padding: 17px 28px;
+    color: $gray;
+    border-radius: 8px;
+    margin-bottom: 3px;
+
+    @include tablet {
+      display: block;
+    }
+
+    tr {
+      display: grid;
+      grid-template-columns: 1fr 0.7fr 0.9fr 0.6fr 0.5fr;
+      grid-template-rows: 1fr;
+      column-gap: 10px;
+
+      th {
+        font-weight: inherit;
+      }
+    }
+  }
+
+  &__lawsuit {
+    &-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 10px;
+      @include tablet {
+        row-gap: 3px;
+      }
+
+      td {
+        display: block;
+      }
+    }
+
+    &-item {
+      @include textRegular(12);
+      width: 100%;
+      background-color: $white;
+      border-radius: 8px;
+      padding: 12px 6px 12px 18px;
+      position: relative;
+      display: grid;
+      row-gap: 12px;
+      justify-content: flex-start;
+
+      @include tablet {
+        grid-template-columns: 1fr 0.7fr 0.9fr 0.6fr 0.5fr;
+        grid-template-rows: 1fr;
+        column-gap: 10px;
+        align-items: center;
+
+        padding: 15px 28px;
+      }
+
+      &-line {
+        width: 4px;
+        height: calc(100% - 12px * 2);
+        position: absolute;
+        top: 12px;
+        left: 6px;
+        background-color: $green;
+        border-radius: 8px;
+
+        @include tablet {
+          display: none;
+        }
+      }
+
+      &-header {
+        display: grid;
+        row-gap: 8px;
+        color: $black;
+
+        @include tablet {
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          cursor: pointer;
+        }
+
+        span {
+          color: $gray;
+          display: block;
+
+          @include tablet {
+            display: none;
+          }
+        }
+      }
+
+      &-end {
+        background-color: $gray5;
+        border-radius: 2px;
+        padding: 4px;
+
+        @include tablet {
+          background-color: transparent;
+          padding: 0;
+        }
+
+        span {
+          display: none;
+          @include tablet {
+            display: block;
+          }
+        }
+      }
+
+      &-category {
+        display: none;
+        @include tablet {
+          display: block;
+        }
+      }
+
+      &-waste {
+        position: absolute;
+        top: 12px;
+        left: 75%;
+        color: $darkGreen;
+        @include tablet {
+          color: inherit;
+          position: static;
+        }
+      }
+
+      &-status {
+        position: absolute;
+        top: 12px;
+        right: 6px;
+        border-radius: 10px;
+        padding: 2px 7px;
+
+        @include tablet {
+          position: static;
+          justify-self: start;
+        }
+
+        &_type {
+          &_active {
+            background-color: $yellowLight;
+            color: $yellow;
+          }
+
+          &_finished {
+            background-color: $lightGreen;
+            color: $darkGreen;
+          }
+        }
+      }
+    }
+  }
+}

@@ -26,32 +26,4 @@ const workShedulePartialChangeApiCall = async (
   return response.data
 }
 
-const userChangeApiCall = async (
-  abortController?: AbortController,
-  params?: Partial<UserData>,
-): Promise<UserDataApiResponse> => {
-  const response = await axios.put(
-    'v1/user',
-    { ...params },
-    {
-      signal: abortController?.signal,
-    },
-  )
-  return response.data
-}
-
-const deleteUserApiCall = async (
-  abortController?: AbortController,
-): Promise<UserDataApiResponse> => {
-  const response = await axios.delete('/v1/user', {
-    signal: abortController?.signal,
-  })
-  return response.data
-}
-
-export {
-  userDataInfoApiCall,
-  workShedulePartialChangeApiCall,
-  userChangeApiCall,
-  deleteUserApiCall,
-}
+export { userDataInfoApiCall, workShedulePartialChangeApiCall }

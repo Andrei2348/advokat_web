@@ -1,6 +1,6 @@
 import { defineComponent, PropType, ref, watch } from 'vue'
 import { TagForTasks } from '@/types/tasks'
-import { useTasksStore } from '@/store/tasks'
+import { useTagsStore } from '@/store/tags'
 import { useMainStore } from '@/store/main'
 import { useUXUIStore } from '@/store/uxui'
 import { useSwipe } from '@/composables/useSwipe'
@@ -15,7 +15,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const tasksStore = useTasksStore()
+    const tagsStore = useTagsStore()
     const mainStore = useMainStore()
     const uxuiStore = useUXUIStore()
     const selectedItem = ref<TagForTasks | null>(props.item)
@@ -43,9 +43,9 @@ export default defineComponent({
       resetPosition()
       if (id !== null) {
         uxuiStore.setModalName('ConfirmationDelete')
-        uxuiStore.setModalContent(modalsContent[6], id)
+        uxuiStore.setModalContent(modalsContent['tagForTask'], id)
       } else {
-        tasksStore.deleteTagsForTasks({ id })
+        tagsStore.deleteTagsForTasks({ id })
       }
     }
 
@@ -53,7 +53,7 @@ export default defineComponent({
       () => selectedItem.value,
       (newValue) => {
         if (newValue && newValue.name && newValue.color) {
-          tasksStore.saveTagObject(newValue)
+          tagsStore.saveTagObject(newValue)
         }
       },
       { deep: true },
@@ -62,7 +62,7 @@ export default defineComponent({
     return {
       setTagName,
       changeColor,
-      tasksStore,
+      tagsStore,
       onTouchStart,
       onTouchMove,
       onTouchEnd,

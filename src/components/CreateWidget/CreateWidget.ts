@@ -1,8 +1,11 @@
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, ref, computed, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import { Position } from '@/types/createWidget'
 import { menuItems } from '@/config/createWidgetConfig'
 import { useUXUIStore } from '@/store/uxui'
 import { useLawsuitStore } from '@/store/lawsuite'
+import { useClientsStore } from '@/store/client'
+import { useTasksStore } from '@/store/tasks'
 import { LawsuitEmptyObject } from '@/config/lawsuitTableHeadConfig'
 
 export default defineComponent({
@@ -10,10 +13,30 @@ export default defineComponent({
   setup() {
     const uxuiStore = useUXUIStore()
     const lawsuitStore = useLawsuitStore()
+    const clientsStore = useClientsStore()
+    const tasksStore = useTasksStore()
     const menuOpen = ref<boolean>(false)
     const position = ref<Position>({ x: 52, y: 32 })
     const dragging = ref<boolean>(false)
     const offset = ref<Position>({ x: 52, y: 32 })
+
+    const router = useRouter()
+
+    const createMenuItems = computed(() => {
+      const currentRoute = router.currentRoute.value
+      return menuItems.filter((item) => {
+        return item.routes?.some((route) => {
+          if (route.options) {
+            return (
+              route.name === currentRoute.name &&
+              route.options.inTable === clientsStore.isTableShown
+            )
+          } else {
+            return route.name === currentRoute.name
+          }
+        })
+      })
+    })
 
     const startDrag = (event: MouseEvent): void => {
       dragging.value = true
@@ -46,7 +69,19 @@ export default defineComponent({
       lawsuitStore.setSelectedLawsuit(null)
       uxuiStore.setModalName('EditLawsuit', 3)
     }
-    // ====================
+
+    const createClient = async () => {
+      if (router.currentRoute.value.name === 'clients') {
+        clientsStore.openForm()
+      } else {
+        await router.push('/clients')
+        clientsStore.openForm()
+      }
+    }
+
+    const createTask = () => {
+      tasksStore.openForm()
+    }
 
     watch(
       [dragging, position],
@@ -68,9 +103,11 @@ export default defineComponent({
       onDrag,
       stopDrag,
       position,
-      menuItems,
+      createMenuItems,
       dragging,
       createLawsuit,
+      createClient,
+      createTask,
     }
   },
 })

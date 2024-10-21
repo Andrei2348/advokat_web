@@ -5,7 +5,7 @@ import { useAuthorityStore } from '@/store/authorities'
 import { useLawsuitStore } from '@/store/lawsuite'
 import { useEventsStore } from '@/store/events'
 import { useTasksStore } from '@/store/tasks'
-import { useUserStore } from '@/store/user'
+import { useClientsStore } from '@/store/client'
 
 export default defineComponent({
   name: 'ConfirmationDelete',
@@ -16,10 +16,15 @@ export default defineComponent({
     const lawsuitStore = useLawsuitStore()
     const eventsStore = useEventsStore()
     const tasksStore = useTasksStore()
-    const userStore = useUserStore()
+    const clientsStore = useClientsStore()
 
     const deleteLawsuite = async (id: number) => {
       await lawsuitStore.deletelawsuitItem({ id })
+      uxuiStore.setModalName('')
+    }
+
+    const deleteClient = async (id: number) => {
+      await clientsStore.removeClientApiRequest(id)
       uxuiStore.setModalName('')
     }
 
@@ -34,10 +39,15 @@ export default defineComponent({
 
     const deleteEventTask = async (id: number) => {
       if (uxuiStore.typeOfSelectedPlan === 'event') {
-        eventsStore.setDeleteEvent({ id: id })
+        eventsStore.setDeleteEvent({ id })
       } else if (uxuiStore.typeOfSelectedPlan === 'task') {
-        tasksStore.setDeleteTask({ id: id })
+        await tasksStore.deleteTask({ id })
       }
+      uxuiStore.setModalName('')
+    }
+
+    const deleteTask = async (id: number) => {
+      await tasksStore.deleteTask({ id })
       uxuiStore.setModalName('')
     }
 
@@ -56,33 +66,33 @@ export default defineComponent({
       uxuiStore.setModalName('')
     }
 
-    const deleteUser = async () => {
-      await userStore.deleteUserRequest()
-    }
-
     const handleDelete = () => {
-      if (uxuiStore.modalContent?.id) {
+      const id = uxuiStore.modalContent?.id
+      if (id) {
         switch (uxuiStore.modalContent?.function) {
           case 'deleteLawsuite':
-            deleteLawsuite(uxuiStore.modalContent?.id)
+            deleteLawsuite(id)
+            break
+          case 'deleteClient':
+            deleteClient(id)
             break
           case 'deleteNote':
-            deleteNote(uxuiStore.modalContent?.id)
+            deleteNote(id)
             break
           case 'deleteEventTask':
-            deleteEventTask(uxuiStore.modalContent?.id)
+            deleteEventTask(id)
+            break
+          case 'deleteTask':
+            deleteTask(id)
             break
           case 'deleteAuthorities':
-            deleteAuthorities(uxuiStore.modalContent?.id)
+            deleteAuthorities(id)
             break
           case 'deleteEventType':
-            deleteEventType(uxuiStore.modalContent?.id)
+            deleteEventType(id)
             break
           case 'deleteLawsuitCategory':
-            deleteLawsuitCategory(uxuiStore.modalContent?.id)
-            break
-          case 'deleteUser':
-            deleteUser()
+            deleteLawsuitCategory(id)
             break
 
           default:

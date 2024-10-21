@@ -1,25 +1,18 @@
 <template>
-  <div class="tab__nav" v-if="!mainStore.isMobile">
+  <div class="tabs">
     <button
       v-for="tab in names"
-      :key="tab.name"
-      :class="['tab__nav-item', { active: tab.name === selectedTab }]"
-      @click="clickOnTab(tab.name)"
+      :key="tab"
+      :class="['tabs__item', { active: tab === selectedTab }]"
+      @click="clickOnTab(tab)"
+      type="button"
     >
-      {{ tab.name }}
+      {{ tab }}
     </button>
   </div>
-  <div class="tab__content">
-    <div class="tab__content-header" v-if="!mainStore.isMobile">
-      <p
-        v-for="item in lawsuitEventsHeader"
-        class="tab__content-item"
-        :key="item.id"
-      >
-        {{ item.title }}
-      </p>
-    </div>
-    <slot name="tab-planning" />
+  <div class="tabs__list">
+    <TableHead :items="headerItems" :class="$attrs.class" />
+    <slot />
   </div>
 </template>
 

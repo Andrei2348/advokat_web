@@ -1,35 +1,97 @@
-import { StatusType } from './lawsuit'
+import { LawsuitForm, StatusType } from './lawsuit'
+import { Customer } from './customers'
+import { Event } from './lawsuit'
 
-export type TaskChangeForm = {
+export type TaskSearchPayload = {
+  customerIds?: number[] | []
+  lawsuitIds?: number[] | []
+  taskTagIds?: number[] | []
+  itemsPerPage?: number
+  status?: 'planned' | 'finished'
+  since?: string | null
+  till?: string | null
+  isBillable?: boolean
+  theme?: string
+  page?: number
+  deadlineSort?: 'desc' | 'asc' | null
+}
+
+export type TaskStatusChangePayload = {
   id: number
   status: StatusType
 }
 
-export type TaskChangeFormResponse = {
+export type TaskResponse<T> = {
   success: number
-  data: TaskData
+  data: T
   error: string | null
 }
 
-export type TaskData = {
-  id: number
-  theme: string
-  is_important: boolean
-  status: string
-  deadline: string
-  to_do_date: string
-  cost: number | null
-  comment: string | null
-  created_at: string
-  updated_at: string
+export type TaskSearchData = {
+  data: Task[] | []
+  links: {
+    first: string
+    last: string
+    prev: null
+    next: null
+  }
+  meta: {
+    currentPage: number
+    from: number
+    lastPage: number
+    links: []
+    path: string
+    perPage: number
+    to: number
+    total: number
+  }
 }
 
-export type TaskPartialChangeForm = {
+export type PartialTask = {
   id: number
-  toDoDate?: string
+  theme: string
+  isImportant: boolean
+  status: StatusType
+  deadline: string
+  toDoDate: string
+  cost: number | null
+  comment: string | null
+  createdAt: string
+  updatedAt: string
+  includeInReport: boolean
+}
+
+export type Task = PartialTask & {
+  customer: Customer
+  taskTag: TagForTasks
+  lawsuitEvent: Event | null
+  lawsuit?: LawsuitForm | null
+}
+
+export type TaskPartialChangePayload = {
+  id: number
+  toDoDate?: string | null
   isImportant?: boolean
   includeInReport?: boolean
 }
+
+export type TaskCreatePayload = {
+  theme: string
+  deadline: string
+  taskTagId: number
+  isImportant?: boolean
+  cost: null | string
+  comment: null | string
+  customerId: null | number
+  lawsuitId: null | number
+}
+
+export type TaskChangePayload = TaskCreatePayload & {
+  id: number
+  lawsuitEventId: number | null
+}
+
+export type TaskTableTabs = 'Мой день' | 'Запланировано' | 'Архив'
 
 export type TagForTasks = {
   id: number | null

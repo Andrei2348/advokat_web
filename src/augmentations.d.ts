@@ -4,5 +4,6 @@ declare module 'vue-router' {
   interface RouteMeta {
     layout: string
     tKey?: string
+    title?: string
   }
 }

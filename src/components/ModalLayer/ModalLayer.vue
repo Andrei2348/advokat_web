@@ -1,6 +1,13 @@
 <template>
   <div class="modal__layer">
-    <div :class="['modal__wrapper', { 'empty-header': isEmptyHeader }]">
+    <div
+      :class="[
+        'modal__wrapper',
+        {
+          'empty-header': isEmptyHeader,
+        },
+      ]"
+    >
       <div class="modal__header">
         <slot name="modal__header" />
       </div>

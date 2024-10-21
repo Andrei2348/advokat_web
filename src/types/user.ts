@@ -1,3 +1,17 @@
+// export type UserData = {
+//   id: number
+//   name: string
+//   lastname: string
+//   surname: null | string
+//   email: string
+//   phone: string
+//   type: string
+//   startWorkingTime: string
+//   endWorkingTime: string
+//   workingTimeInterval: number
+//   roles: string[]
+// }
+
 export type WorkShedule = {
   startWorkingTime: string
   endWorkingTime: string
@@ -32,7 +46,7 @@ export type UserData = {
   surname: string | null
   email: string
   phone: string
-  type: userType
+  type: string
   startWorkingTime: string
   endWorkingTime: string
   workingTimeInterval: number
@@ -45,12 +59,4 @@ export type UserDataApiResponse = {
   success: number
   data: UserData
   error: string | null
-}
-
-export type userType = 'advocate' | 'lawyer'
-
-export type userSelectType = {
-  id: number
-  name: string
-  item: userType
 }

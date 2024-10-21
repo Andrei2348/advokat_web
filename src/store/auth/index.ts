@@ -4,13 +4,9 @@ import {
   getStorageItemWithExpiry,
   setStorageItemWithExpiry,
 } from '@/helpers/localStorageHelpers'
-import {
-  AuthFormSuccessResponse,
-  SMSLoginFormPayload,
-  UserLogoutResponse,
-} from '@/types/auth'
+import { AuthFormSuccessResponse, SMSLoginFormPayload } from '@/types/auth'
 import { useApiCall } from '@/composables/useApiCall'
-import { smsLoginApiCall, logoutApiCall } from '@/api/auth'
+import { smsLoginApiCall } from '@/api/auth'
 import { DefaultError } from '@/types/httpError'
 import { UserData } from '@/types/user'
 const authToken = getStorageItemWithExpiry<string>('authToken')
@@ -41,7 +37,6 @@ export const useAuthStore = defineStore<
       this.user = null
       localStorage.clear()
     },
-
     async writeData(payload: AuthFormSuccessResponse['data']) {
       const { accessToken, expiresIn, user, tokenType } = payload
       this.$patch({
@@ -53,7 +48,6 @@ export const useAuthStore = defineStore<
       setStorageItemWithExpiry(`user_${accessToken}`, user)
       setStorageItemWithExpiry(`tokenType_${accessToken}`, tokenType)
     },
-
     async smsLogin(payload: SMSLoginFormPayload) {
       const {
         data: authData,
@@ -73,28 +67,6 @@ export const useAuthStore = defineStore<
       } catch {
         if (loginError.value?.data.error.error) {
           this.error = { error: loginError.value?.data.error.error }
-        }
-      }
-    },
-
-    async logoutRequest() {
-      const {
-        data: logoutData,
-        executeApiCall: logoutAction,
-        error: logoutError,
-      } = useApiCall<UserLogoutResponse, DefaultError, SMSLoginFormPayload>(
-        logoutApiCall,
-        true,
-      )
-      this.error = null
-      try {
-        await logoutAction()
-        if (logoutData?.value?.success) {
-          await this.clearStore()
-        }
-      } catch {
-        if (logoutError.value?.data.error.error) {
-          this.error = { error: logoutError.value?.data.error.error }
         }
       }
     },

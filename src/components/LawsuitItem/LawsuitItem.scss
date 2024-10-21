@@ -22,6 +22,7 @@
     stroke: $green;
   }
   &-menu{
+      fill: $gray;
     &-wrapper{
       display: none;
       &.visible{
@@ -30,6 +31,8 @@
     }
     &-dropdown{
       position: absolute;
+      right: 27px;
+      top: 56%;
     }
   }
   &-item{
@@ -42,11 +45,7 @@
       margin: 0;
       text-decoration: none;
       color: $black;
-      width: 50%;
       @include textMedium(12);
-      @include tablet{
-        width: 100%;
-      }
     }
     &-container{
       position: relative;
@@ -71,11 +70,13 @@
       &.move__right{
         transform: translateX(72px);
       }
+      
       @include tablet{
         padding: 19px 0;
-        grid-template-columns: 1fr 0.6fr 90px 0.7fr 0.5fr 120px 0.6fr 60px 80px;
+        grid-template-columns: 1fr 0.6fr 90px 0.7fr 0.5fr 140px 0.6fr 80px 80px;
       }
       @include notebook{
+        grid-template-columns: repeat(8, 1fr);
         width: 100%;
       }
     }
@@ -107,20 +108,15 @@
       display: none;
     }
   }
+  
   &-menu{
     display: none;
     @include tablet{
       display: block;
-      height: 24px;
-      width: 24px;
-      position: relative;
-      right: 18px;
-      fill: $gray;
     }
   }
   &-opponent{
     position: absolute;
-    width: 45%;
     z-index: 10;
     right: 18px;
     top: 27px;
@@ -128,23 +124,8 @@
     flex-direction: column;
     align-items: flex-end;
     @include tablet{
-      width: 100%;
       position: static;
       align-items: flex-start;
-    }
-    & .table__content-item-text{
-      text-align: right;
-      @include tablet{
-        text-align: left;
-        padding-right: 8px;
-      }
-    }
-    & .table__content-span{
-      margin-bottom: 10px;
-      display: inline-block;
-      @include tablet{ 
-        display: none;
-      }
     }
   }
   &-span{
@@ -164,11 +145,8 @@
     &.visible{
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       margin-top: 13px;
-      @include tablet{
-        margin-top: 0;
-      }
     }
   }
   &-customer{
@@ -251,29 +229,7 @@
   }
 }
 
-.table__content-menu-dropdown{
-  @include tablet{
-    left: 80px;
-  }
-}
-
-.table__content-customer{
-  padding-right: 30px;
-}
-
-.table__content-decor{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%);
-  @include tablet{
-    left: auto;
-    right: 4px;
-  }
-}
-.table__content-task .table__content-item-text{
-  text-align: right;
-  @include tablet{
-    text-align: left;
-  }
+::v-deep(.dropdown__menu-top){
+  right: -18px;
+  transform: translateY(-118%);
 }

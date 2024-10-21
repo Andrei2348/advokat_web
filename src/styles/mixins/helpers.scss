@@ -15,6 +15,13 @@
   text-decoration: unset;
 }
 
+@mixin resetFieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
 @mixin hideScrollBar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -29,7 +36,7 @@
     -webkit-appearance: none;
     margin: 0;
   }
-  &[type=number] {
+  &[type='number'] {
     -moz-appearance: textfield;
   }
 }
@@ -37,14 +44,14 @@
 @mixin showHideAside {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  //min-height: 100vh;
   transition: all ease-out 0.5s;
-  @include notebook{
+  @include notebook {
     width: calc(100% - 242px);
     transform: translateX(242px);
   }
-  &.collapsed{
-    @include notebook{
+  &.collapsed {
+    @include notebook {
       width: calc(100% - 84px);
       transform: translateX(84px);
     }

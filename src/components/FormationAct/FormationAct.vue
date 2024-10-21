@@ -5,14 +5,12 @@
         label="Период с"
         placeholder="Период с"
         objectKey="since"
-        class="formation__act-since"
         @dataChanged="dataChange"
       />
       <DateElement
         label="Период по"
         placeholder="Период по"
         objectKey="till"
-        class="formation__act-till"
         @dataChanged="dataChange"
       />
     </div>

@@ -1,51 +1,32 @@
-.lawsuit{
-  &__buttons-nav{
-    display: flex;
-    justify-content: space-between;
-    padding: 16px;
-  }
-  &__container{
+.lawsuit {
+  &__container {
     margin-top: 60px;
-    min-height: 100vh;
     @include showHideAside;
-    @include tablet{
+    @include tablet {
       padding: 30px;
     }
-    @include notebook{
+    @include notebook {
       margin-top: 90px;
     }
   }
-  &__details{
-    &-client .lawsuit__details-name{
-      width: 50%;
-      @include tablet{
-        width: 100%;
-      }
-    }
-    &-wrapper{
+  &__details {
+    &-wrapper {
       background-color: $white;
       box-shadow: $shadow4;
       width: 100%;
       padding: 22px 16px 24px;
-      position: relative;
-      // Ссылка "Перейти в профиль"
-      // @include screen(690px){
-      //   padding: 24px 20px 130px;
-      //   position: static;
-      // }
-      @include tablet{
+      @include screen(690px) {
+        padding: 24px 20px;
+      }
+      @include tablet {
         border-radius: 12px;
       }
     }
-    &-contract--info:last-child{
-      border-bottom: 1px solid $gray4;
-      margin-bottom: 20px;
-    }
-    &-header{
+    &-header {
       display: flex;
       flex-direction: column;
       width: 100%;
-      @include tablet{
+      @include tablet {
         align-items: flex-start;
         flex-direction: row;
         justify-content: space-between;
@@ -55,91 +36,109 @@
         position: relative;
       }
     }
-    &-data-inner{     
-      &-info{
+    &-data-inner {
+      &-info {
         display: flex;
         justify-content: space-between;
         margin-bottom: 32px;
         position: relative;
         z-index: 10;
         padding: 8px 10px;
-        @include screen(690px){
+        &::before {
+          position: absolute;
+          content: '';
+          height: 73px;
+          width: 100%;
+          background-color: $lightGreen;
+          border-radius: 8px;
+          top: 0;
+          left: 0;
+          z-index: -10;
+        }
+        @include screen(690px) {
           padding: 0;
-          &::before{
+          &::before {
             display: none;
           }
         }
-        @include tablet{
+        @include tablet {
           margin-bottom: 0;
           align-items: flex-start;
           gap: 24px;
         }
       }
-      &-links{
+
+      &-links {
         display: flex;
         justify-content: space-between;
         margin-bottom: 32px;
         align-items: center;
-        @include tablet{
+        @include tablet {
           align-items: flex-start;
           margin-bottom: 0;
           justify-content: flex-start;
         }
       }
     }
-    &-content{
+    &-title {
+      margin-top: 32px;
+      margin-bottom: 20px;
+      color: $black;
+      @include heading(22);
+    }
+    &-content {
       @include textMedium(14);
       color: $black;
     }
-    &-actions-wrapper{
+    &-actions-wrapper {
       display: flex;
       align-items: center;
       gap: 8px;
-      @include tablet{
+      @include tablet {
         flex-direction: column;
         align-items: flex-start;
         gap: 4px;
       }
     }
-    &-contacts{
+    &-contacts {
       display: none;
-      @include screen(690px){
+      @include screen(690px) {
         margin: 0;
         display: block;
       }
-      @include tablet{
+      @include tablet {
         margin-right: 87px;
       }
     }
-    &-rating{
+    &-rating {
       margin: 0;
-      @include tablet{
+      @include tablet {
         margin-right: 63px;
       }
     }
-    &-label{
+    &-label {
       margin-bottom: 12px;
       color: $gray;
       @include textRegular(14);
       display: block;
-      &-nosmart{
+      &-nosmart {
         display: none;
-        @include screen(690px){
+        @include screen(690px) {
           display: block;
         }
       }
     }
-    &-name{
+    &-name {
       color: $black;
       @include textMedium(14);
     }
-    &-bold{
+    &-bold {
       @include textBold(14);
     }
-    &-actions .lawsuit__details-label{
+    &-actions .lawsuit__details-label {
       padding-left: 6px;
     }
-    &-decor{
+    &-decor {
       display: inline-block;
       height: 24px;
       width: 24px;
@@ -147,180 +146,186 @@
       left: 50%;
       top: 20px;
       transform: translateX(-50%);
-      @include tablet{
+      @include tablet {
         position: relative;
         top: 0;
         left: 0;
         transform: translateY(18px);
       }
     }
-    &-profile-link{
+    &-profile-link {
       position: absolute;
       left: 16px;
-      bottom: 0;
+      bottom: 12px;
       justify-content: flex-start;
       gap: 0;
       padding-left: 0 !important;
       @include transparentButtonGreen;
-      @include tablet{
+      @include tablet {
         left: 0;
       }
+
+      svg {
+        stroke: $green;
+        stroke-width: 1.8px;
+      }
     }
-    &-category-content{
+    &-category-content {
       display: flex;
       align-items: center;
       margin-bottom: 32px;
     }
-    &-circle{
+    &-circle {
       height: 10px;
       width: 10px;
       border-radius: 50%;
       margin-right: 11px;
       display: inline-block;
     }
-    &-section{
+    &-section {
       display: flex;
       flex-direction: column;
-      @include tablet{
+      @include tablet {
         flex-direction: row;
         align-items: flex-start;
         margin-top: 35px;
       }
-      &-inner{
-        &:first-child{
+      &-inner {
+        &:first-child {
           width: 100%;
           margin-bottom: 20px;
-          @include tablet{
+          @include tablet {
             width: 30%;
             height: 100%;
             margin-bottom: 0;
           }
-          @include screen(1270px){
+          @include screen(1270px) {
             width: 40%;
           }
         }
-        &:last-child{
+        &:last-child {
           width: 100%;
-          @include tablet{
+          @include tablet {
             padding-left: 26px;
             border-left: 1px solid $gray4;
           }
-          @include screen(1270px){
+          @include screen(1270px) {
             width: 70%;
           }
         }
       }
     }
-    &-review{
-      &-wrap{
+    &-review {
+      &-wrap {
         min-width: 180px;
       }
-      &-link{
+      &-link {
         justify-content: flex-start;
         gap: 0 !important;
         padding-left: 0 !important;
         @include transparentButtonGreen;
-        &-wrapper{
+        &-wrapper {
           display: inline-block;
         }
-        &-span{
+        &-span {
           margin-left: 4px;
         }
-        &-lawsuit{
+        &-lawsuit {
           color: $blue;
           text-decoration: underline;
         }
+
+        svg {
+          stroke: $green;
+          stroke-width: 1.8px;
+        }
       }
-      &-wrapper{
+      &-wrapper {
         display: flex;
         align-items: flex-start;
         flex-direction: column;
         width: 100%;
         gap: 24px;
-        @include screen(690px){
+        @include screen(690px) {
           flex-direction: row;
           gap: 40px;
         }
-        @include tablet{
+        @include tablet {
           gap: 69px;
         }
       }
-      &-text-wrapper{
+      &-text-wrapper {
         @include textRegular(14);
         width: 90%;
       }
-      &-text{
+      &-text {
         color: $black;
-        padding-bottom: 20px;
       }
-      &-court{
+      &-court {
         @include textBold(14);
         text-align: left;
       }
     }
-    &-note{
+    &-note {
       margin-top: 32px;
     }
   }
-  &__button{
-    &,
-    &-icon{
-      background-color: transparent;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      border: none;
-      outline: none;
-      color: $black;
-      text-decoration: none;
-      white-space: nowrap;
-      flex-wrap: nowrap;
-      @include textRegular(14);
-    }
-    & svg{
-      stroke: $black;
-      height: 16px;
-      width: 16px;
-      transform: rotate(-90deg);
-    }
-    &-left svg{
-      transform: rotate(90deg);
-    }
-    &-icon{
-      color: $gray;
-      @include textRegular(12);
-      & svg{
-        stroke: $gray;
-        cursor: pointer;
-        height: 24px;
-        width: 24px;;
-        @include tablet{
-          padding: 6px;
-          height: 36px;
-          width: 36px;
-        }
-      }
-      &:last-child svg{
-        stroke: $green;
-        background-color: $lightGreen;
-        @include tablet{
-          border-radius: 6px;
-        }
-      }
-      @include tablet{
-        gap: 4px;
-      }
-    }
-  }
-  &__details-data-inner-info{
-    background-color: $lightGreen;
-    border-radius: 8px;
-    padding: 8px 10px;
-    @include tablet{
-      padding: 0;
-      background-color: transparent;
-      border-radius: 0;
-    }
-  } 
 }
 
+.lawsuit__details-contract--info:last-child {
+  border-bottom: 1px solid $gray4;
+  margin-bottom: 20px;
+}
+.lawsuit__buttons-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+}
+.lawsuit__button,
+.lawsuit__button-lawsuit {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  outline: none;
+  color: $black;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  @include textRegular(14);
+}
+.lawsuit__button svg {
+  stroke: $black;
+  height: 16px;
+  width: 16px;
+  transform: rotate(-90deg);
+}
+.lawsuit__button-left svg {
+  transform: rotate(90deg);
+}
+.lawsuit__button-lawsuit {
+  color: $gray;
+  @include textRegular(12);
+  & svg {
+    stroke: $gray;
+    cursor: pointer;
+    height: 24px;
+    width: 24px;
+    @include tablet {
+      padding: 6px;
+      height: 36px;
+      width: 36px;
+    }
+  }
+  &:last-child svg {
+    stroke: $green;
+    background-color: $lightGreen;
+    @include tablet {
+      border-radius: 6px;
+    }
+  }
+  @include tablet {
+    gap: 4px;
+  }
+}

@@ -1,22 +1,22 @@
-.modal{
-  &__layer{
+.modal {
+  &__layer {
     height: 100vh;
     width: 100vw;
     background-color: $modalLayer;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 500;
+    z-index: 9999;
+    overflow-y: scroll;
   }
-  &__wrapper{
+  &__wrapper {
     background-color: $white;
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
     width: 100vw;
     box-shadow: $shadow;
-    @include tablet{
+    @include tablet {
       width: auto;
       height: auto;
       border-radius: 16px;
@@ -25,7 +25,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }
-    &.empty-header{
+    &.empty-header {
       width: auto;
       height: auto;
       border-radius: 16px;

@@ -15,7 +15,7 @@ export const useMainStore = defineStore<string, RootState, RootGetters>(
       isMobile: (state: RootState) => state.windowWidth < Breakpoints.TABLET,
       isTablet: (state: RootState) =>
         state.windowWidth >= Breakpoints.TABLET &&
-        state.windowWidth < Breakpoints.DESKTOP,
+        state.windowWidth < Breakpoints.NOTEBOOK,
       isNotebook: (state: RootState) =>
         state.windowWidth >= Breakpoints.NOTEBOOK &&
         state.windowWidth < Breakpoints.DESKTOP,

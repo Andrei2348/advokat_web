@@ -7,6 +7,7 @@ import {
   LawsuitForm,
   LawsuitFormPayload,
   LawsuitPartialFormObject,
+  LawsuitsFormSuccessResponse,
   LawsuitFormSuccessResponse,
   LawsuitFormObject,
   TaskEvent,
@@ -15,6 +16,7 @@ import {
   LawsuitCategoryResponseData,
 } from '@/types/lawsuit'
 import {
+  lawsuitApiCall,
   lawsuitChangeApiCall,
   lawsuitCreateApiCall,
   lawsuitEventsApiCall,
@@ -102,6 +104,15 @@ export const useLawsuitStore = defineStore('lawsuit', () => {
   }
 
   const {
+    data: lawsuitsData,
+    executeApiCall: getLawsuits,
+    error: lawsuitsError,
+  } = useApiCall<LawsuitsFormSuccessResponse, DefaultError, LawsuitFormPayload>(
+    lawsuitApiCall,
+    false,
+  )
+
+  const {
     data: lawsuitDeleteData,
     executeApiCall: deleteData,
     error: lawsuitDeleteError,
@@ -186,6 +197,19 @@ export const useLawsuitStore = defineStore('lawsuit', () => {
 
   const isLawsuitDeleteLoading = computed(() => isDeleteLoading.value)
   const isLawsuitData = computed(() => lawsuitData.value)
+
+  const getLawsuitList = async () => {
+    try {
+      await getLawsuits()
+      if (lawsuitsData.value) {
+        setLawsuitData(lawsuitsData.value.data)
+      }
+    } catch {
+      if (lawsuitsError.value?.data.error) {
+        errorFields.value = lawsuitsError.value.data.error
+      }
+    }
+  }
 
   const changeLawsuitList = (changedObject: LawsuitForm) => {
     if (!lawsuitData.value) {
@@ -409,6 +433,7 @@ export const useLawsuitStore = defineStore('lawsuit', () => {
     isLawsuitData,
     setLawsuitData,
     isLawsuitDeleteLoading,
+    getLawsuitList,
     deletelawsuitItem,
     changeLawsuitList,
     selectedLawsuitData,

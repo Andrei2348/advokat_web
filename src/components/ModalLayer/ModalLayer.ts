@@ -8,6 +8,7 @@ import {
   computed,
 } from 'vue'
 import { useUXUIStore } from '@/store/uxui'
+import { useLockBodyScroll } from '@/composables/useLockBodyScroll'
 
 export default defineComponent({
   name: 'ModalLayer',
@@ -16,6 +17,7 @@ export default defineComponent({
     const currentModalComponent = shallowRef<ReturnType<
       typeof defineAsyncComponent
     > | null>(null)
+    const { enableBodyScroll, disableBodyScroll } = useLockBodyScroll()
 
     watchEffect(() => {
       const componentName = uxuiStore.modalName.modalName
@@ -41,11 +43,13 @@ export default defineComponent({
     )
 
     onBeforeMount(() => {
+      disableBodyScroll()
       window.addEventListener('keydown', closeOnEsc)
     })
 
     onBeforeUnmount(() => {
       window.removeEventListener('keydown', closeOnEsc)
+      enableBodyScroll()
     })
 
     return {

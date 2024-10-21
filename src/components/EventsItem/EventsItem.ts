@@ -79,7 +79,7 @@ export default defineComponent({
       resetPosition()
       if (id !== null) {
         uxuiStore.setModalName('ConfirmationDelete')
-        uxuiStore.setModalContent(modalsContent[4], id)
+        uxuiStore.setModalContent(modalsContent['eventType'], id)
       } else {
         eventsStore.setDeleteEventsTypeById({ id })
       }

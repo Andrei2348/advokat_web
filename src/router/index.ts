@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { useAuthStore } from '@/store/auth'
+import { useClientsStore } from '@/store/client'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -34,6 +35,7 @@ const routes: Array<RouteRecordRaw> = [
     // component: () => import('@/App/App.vue'),
     meta: {
       layout: 'Main',
+      title: 'Дела',
     },
     children: [
       {
@@ -61,41 +63,21 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/CalendarPage/CalendarPage.vue'),
     meta: {
       layout: 'Main',
+      title: 'Календарь',
     },
   },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: () => import('@/views/ProfilePage/ProfilePage.vue'),
-    meta: {
-      layout: 'Main',
-    },
-  },
-
   {
     path: '/clients',
     name: 'clients',
+    component: () => import('@/views/ClientsPage/ClientsPage.vue'),
     meta: {
       layout: 'Main',
+      title: 'Клиенты',
     },
-    children: [
-      {
-        path: '',
-        name: 'clients',
-        component: () => import('@/views/ClientsPage/ClientsPage.vue'),
-        meta: {
-          layout: 'Main',
-        },
-      },
-      {
-        path: 'client',
-        name: 'client',
-        component: () => import('@/views/ClientDetails/ClientDetails.vue'),
-        meta: {
-          layout: 'Main',
-        },
-      },
-    ],
+    beforeEnter: () => {
+      const clientsStore = useClientsStore()
+      clientsStore.closeForm()
+    },
   },
 
   {
@@ -104,6 +86,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/FinancePage/FinancePage.vue'),
     meta: {
       layout: 'Main',
+      title: 'Финансы',
     },
   },
   {
@@ -112,6 +95,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/NotesPage/NotesPage.vue'),
     meta: {
       layout: 'Main',
+      title: 'Быстрые заметки',
     },
   },
   {
@@ -120,6 +104,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/SettingsPage/SettingsPage.vue'),
     meta: {
       layout: 'Main',
+      title: 'Настройки',
     },
   },
   {
@@ -128,6 +113,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/TasksPage/TasksPage.vue'),
     meta: {
       layout: 'Main',
+      title: 'Задачи',
     },
   },
   {

@@ -16,5 +16,4 @@ export type RootActions = {
   clearStore: () => Promise<void>
   smsLogin: (payload: SMSLoginFormPayload) => Promise<void>
   writeData: (payload: AuthFormSuccessResponse['data']) => Promise<void>
-  logoutRequest: () => Promise<void>
 }

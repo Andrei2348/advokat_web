@@ -1,0 +1,28 @@
+.element {
+  display: flex;
+  flex-direction: column;
+  row-gap: 14px;
+
+  & > div {
+    @include notebook {
+      max-width: 190px;
+    }
+  }
+}
+
+.date-range {
+  width: 100%;
+  color: $black;
+
+  &__title {
+    margin-bottom: 16px;
+    @include textMedium(16);
+  }
+
+  &__container {
+    @include textMedium(14);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 22px;
+  }
+}

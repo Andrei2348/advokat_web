@@ -1,0 +1,73 @@
+.list-selection {
+  border: $gray3 1.4px solid;
+  height: 52px;
+  border-radius: 14px;
+  position: relative;
+
+  @include tablet {
+  }
+
+  .arrow {
+    stroke: $gray;
+    stroke-width: 1.8px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 14px;
+  }
+
+  &__modal {
+    position: absolute;
+    top: calc(100% + 5px);
+  }
+
+  &__options {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 11px;
+    display: flex;
+    column-gap: 10px;
+    color: $white;
+    @include textMedium(14);
+    align-items: center;
+
+    &-placeholder {
+      @include textRegular(14);
+      color: $gray;
+    }
+
+    &-item {
+      height: 30px;
+      background-color: $gray;
+      display: flex;
+      align-items: center;
+      padding-inline: 10px;
+      border-radius: 8px;
+      column-gap: 5px;
+      text-wrap: nowrap;
+
+      span {
+        max-width: 65px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        @include tablet {
+          max-width: 80px;
+        }
+
+        &.single {
+          max-width: 300px;
+        }
+      }
+
+      .close {
+        stroke: $white;
+        stroke-width: 1.2px;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+    }
+  }
+}

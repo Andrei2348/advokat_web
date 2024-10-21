@@ -70,7 +70,7 @@ export default defineComponent({
       if (id !== null) {
         resetPosition()
         uxuiStore.setModalName('ConfirmationDelete')
-        uxuiStore.setModalContent(modalsContent[5], id)
+        uxuiStore.setModalContent(modalsContent['lawsuitCategory'], id)
       } else {
         lawsuitStore.deleteLawsuitCategory({ id })
       }

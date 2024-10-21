@@ -1,297 +1,195 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 import { DefaultError } from '@/types/httpError'
 import { useApiCall } from '@/composables/useApiCall'
+import { useUXUIStore } from '../uxui'
+import { modalsContent } from '@/config/deleteModalsConfig'
 import {
+  getTasksApiCall,
   taskChangeStatusApiCall,
   taskPartialChangeApiCall,
   deleteTaskApiCall,
-  getTagsForTasksApiCall,
-  createTagForTaskApiCall,
-  editTagForTaskApiCall,
-  deleteTagForTaskApiCall,
 } from '@/api/tasks'
 import {
-  TaskChangeForm,
-  TaskChangeFormResponse,
-  TaskPartialChangeForm,
-  TagForTaskResponse,
-  TagForTasksResponse,
-  TagForTasksForm,
-  TagForTasks,
+  PartialTask,
+  Task,
+  TaskSearchPayload,
+  TaskSearchData,
+  TaskStatusChangePayload,
+  TaskPartialChangePayload,
+  TaskResponse,
 } from '@/types/tasks'
+import { RootState, RootGetters, RootActions } from './types'
 
-export const useTasksStore = defineStore('tasks', () => {
-  const errorFields = ref<null | DefaultError['error']>(null)
-  const changeStatusResponse = ref(false)
-  const partialChangeStatusResponse = ref(false)
-  const tagsList = ref<TagForTasks[] | null>(null)
-  const arrayOfTags = ref<TagForTasks[] | null>([])
-  const createTagsForTasksStatus = ref(false)
-
-  // Включение/отключение кнопки создания нового типа
-  const setCreateTagsForTasksStatus = (payload: boolean): void => {
-    createTagsForTasksStatus.value = payload
-  }
-
-  const setEmptyTag = (): void => {
-    const emptyTag: TagForTasks = {
-      id: null,
-      name: '',
-      color: '',
-      createdAt: null,
-      updatedAt: null,
+export const useTasksStore = defineStore<
+  string,
+  RootState,
+  RootGetters,
+  RootActions
+>('tasks', {
+  state: () => {
+    return {
+      allTasks: null,
+      selectedTask: null,
+      errorFields: null,
+      changeStatusResponse: false,
+      currentPage: 1,
+      lastPage: 1,
+      searchParams: null,
     }
-    if (tagsList.value) {
-      tagsList.value.push(emptyTag)
-    } else {
-      tagsList.value = [emptyTag]
-    }
-    setCreateTagsForTasksStatus(true)
-  }
-
-  // Формирование массива с измененными объектами
-  const saveTagObject = (newObject: TagForTasks): void => {
-    if (arrayOfTags.value) {
-      const index = arrayOfTags.value.findIndex(
-        (item) => item.id === newObject.id,
+  },
+  getters: {
+    test: (state: RootState) => {
+      return () => console.log(state.errorFields)
+    },
+  },
+  actions: {
+    setError(error: DefaultError['error']) {
+      this.errorFields = error
+    },
+    async getTasks(params?: TaskSearchPayload) {
+      const {
+        data: allTasks,
+        executeApiCall: getAllTasks,
+        error: allTasksError,
+      } = useApiCall<TaskSearchData, DefaultError, TaskSearchPayload>(
+        getTasksApiCall,
+        true,
       )
-      if (index !== -1) {
-        arrayOfTags.value[index] = { ...arrayOfTags.value[index], ...newObject }
-      } else {
-        arrayOfTags.value.push(newObject)
+
+      if (params) {
+        this.searchParams = params
       }
-    }
-  }
 
-  const processArrayObjects = async () => {
-    if (Array.isArray(arrayOfTags.value)) {
-      for (const item of arrayOfTags.value) {
-        if (typeof item === 'object' && item !== null && 'id' in item) {
-          if (item.id !== null) {
-            editTagsForTasks(item)
-          } else {
-            await createTagsForTasks(item)
-          }
-        }
-      }
-    }
-    arrayOfTags.value = []
-  }
-
-  const replaceLastItem = (newItem: TagForTasks) => {
-    if (tagsList.value && tagsList.value.length > 0) {
-      tagsList.value[tagsList.value.length - 1] = newItem
-    }
-  }
-
-  const {
-    data: changeTaskData,
-    executeApiCall: setTaskStatus,
-    error: taskError,
-  } = useApiCall<TaskChangeFormResponse, DefaultError, TaskChangeForm>(
-    taskChangeStatusApiCall,
-    true,
-  )
-
-  const {
-    data: partialChangeTaskData,
-    executeApiCall: setTaskPartialChange,
-    error: partialTaskError,
-  } = useApiCall<TaskChangeFormResponse, DefaultError, TaskPartialChangeForm>(
-    taskPartialChangeApiCall,
-    true,
-  )
-
-  const {
-    data: deleteTaskData,
-    executeApiCall: setDeleteData,
-    error: deleteTaskError,
-  } = useApiCall<TaskChangeFormResponse, DefaultError, TaskPartialChangeForm>(
-    deleteTaskApiCall,
-    true,
-  )
-
-  const {
-    data: tagsForTasksData,
-    executeApiCall: getTagsForTasksData,
-    error: tagsForTasksError,
-  } = useApiCall<TagForTasksResponse, DefaultError, TagForTasksForm>(
-    getTagsForTasksApiCall,
-    true,
-  )
-
-  const {
-    data: createTagsForTasksData,
-    executeApiCall: createTagsData,
-    error: createTagError,
-  } = useApiCall<TagForTaskResponse, DefaultError, TagForTasks>(
-    createTagForTaskApiCall,
-    true,
-  )
-
-  const {
-    data: editTagsForTasksData,
-    executeApiCall: editTagsData,
-    error: editTagError,
-  } = useApiCall<TagForTaskResponse, DefaultError, TagForTasks>(
-    editTagForTaskApiCall,
-    true,
-  )
-
-  const {
-    data: deleteTagsForTasksData,
-    executeApiCall: deleteTagsData,
-    error: deleteTagError,
-  } = useApiCall<TagForTaskResponse, DefaultError, TagForTasksForm>(
-    deleteTagForTaskApiCall,
-    true,
-  )
-
-  const setStatusResponse = () => {
-    changeStatusResponse.value = !changeStatusResponse.value
-  }
-
-  const setPartialChangeStatusResponse = () => {
-    partialChangeStatusResponse.value = !partialChangeStatusResponse.value
-  }
-  const setTagList = (payload: TagForTasks[]) => {
-    tagsList.value = payload
-  }
-
-  const removeTaskFromList = (objectToRemove: TagForTasksForm) => {
-    if (tagsList.value) {
-      tagsList.value = tagsList.value.filter(
-        (object) => object.id !== objectToRemove.id,
-      )
-    }
-  }
-
-  const setTasksStatus = async (payload: TaskChangeForm) => {
-    try {
-      await setTaskStatus(payload)
-      if (changeTaskData.value && changeTaskData.value.success) {
-        setStatusResponse()
-      }
-    } catch {
-      if (taskError.value?.data.error) {
-        errorFields.value = taskError.value.data.error
-      }
-    }
-  }
-
-  const setPartialTasksChange = async (payload: TaskPartialChangeForm) => {
-    try {
-      await setTaskPartialChange(payload)
-      if (partialChangeTaskData.value && partialChangeTaskData.value.success) {
-        setPartialChangeStatusResponse()
-      }
-    } catch {
-      if (partialTaskError.value?.data.error) {
-        errorFields.value = partialTaskError.value.data.error
-      }
-    }
-  }
-
-  const setDeleteTask = async (payload: TaskPartialChangeForm) => {
-    try {
-      await setDeleteData(payload)
-      if (deleteTaskData.value && deleteTaskData.value.success) {
-        setStatusResponse()
-      }
-    } catch {
-      if (deleteTaskError.value?.data.error) {
-        errorFields.value = deleteTaskError.value.data.error
-      }
-    }
-  }
-
-  const getTagsForTasksList = async () => {
-    try {
-      await getTagsForTasksData()
-      if (tagsForTasksData.value) {
-        setTagList(tagsForTasksData.value.data)
-      }
-    } catch {
-      if (tagsForTasksError.value?.data.error) {
-        errorFields.value = tagsForTasksError.value.data.error
-      }
-    }
-  }
-
-  const createTagsForTasks = async (payload: TagForTasks) => {
-    try {
-      await createTagsData(payload)
-      if (
-        createTagsForTasksData.value &&
-        createTagsForTasksData.value.success
-      ) {
-        setCreateTagsForTasksStatus(false)
-        replaceLastItem(createTagsForTasksData.value.data)
-      }
-    } catch {
-      if (createTagError.value?.data.error) {
-        errorFields.value = createTagError.value.data.error
-      }
-    }
-  }
-
-  const editTagsForTasks = async (payload: TagForTasks) => {
-    try {
-      await editTagsData(payload)
-      if (editTagsForTasksData.value && editTagsForTasksData.value.success) {
-        setCreateTagsForTasksStatus(false)
-        console.log(editTagsForTasksData.value)
-      }
-    } catch {
-      if (editTagError.value?.data.error) {
-        errorFields.value = editTagError.value.data.error
-      }
-    }
-  }
-
-  // TagForTasks
-  const deleteTagsForTasks = async (payload: TagForTasksForm) => {
-    if (payload && payload.id) {
       try {
-        await deleteTagsData(payload)
-        if (
-          deleteTagsForTasksData.value &&
-          deleteTagsForTasksData.value.success
-        ) {
-          if (payload) {
-            removeTaskFromList(payload)
+        await getAllTasks(params)
+        if (allTasks.value) {
+          this.lastPage = allTasks.value.meta.lastPage
+          if (this.currentPage === 1) {
+            this.allTasks = allTasks.value
+          } else {
+            if (Array.isArray(this.allTasks?.data)) {
+              this.allTasks = {
+                data: [...this.allTasks.data, ...allTasks.value.data],
+                links: allTasks.value.links,
+                meta: allTasks.value.meta,
+              }
+            }
           }
         }
-      } catch {
-        if (deleteTagError.value?.data.error) {
-          errorFields.value = deleteTagError.value.data.error
+      } catch (error) {
+        if (allTasksError.value?.data.error) {
+          this.setError(allTasksError.value?.data.error)
         }
       }
-    } else if (payload && payload.id === null) {
-      removeTaskFromList(payload)
-      setCreateTagsForTasksStatus(false)
-    }
-  }
+    },
+    async loadMoreTasks() {
+      if (this.currentPage < this.lastPage) {
+        this.currentPage++
+        let newParams = { page: this.currentPage }
+        if (this.searchParams) {
+          newParams = { ...this.searchParams, ...newParams }
+        }
 
-  return {
-    setTasksStatus,
-    changeStatusResponse,
-    setStatusResponse,
-    setPartialTasksChange,
-    partialChangeStatusResponse,
-    setPartialChangeStatusResponse,
-    setDeleteTask,
-    getTagsForTasksList,
-    tagsList,
-    setTagList,
-    createTagsForTasks,
-    createTagsForTasksStatus,
-    setCreateTagsForTasksStatus,
-    setEmptyTag,
-    saveTagObject,
-    processArrayObjects,
-    deleteTagsForTasks,
-    arrayOfTags,
-  }
+        await this.getTasks(newParams)
+      }
+    },
+    async changeTaskStatus(params?: TaskStatusChangePayload) {
+      const {
+        data: changeTaskData,
+        executeApiCall: setTaskStatus,
+        error: taskError,
+      } = useApiCall<TaskResponse<Task>, DefaultError, TaskStatusChangePayload>(
+        taskChangeStatusApiCall,
+        true,
+      )
+
+      try {
+        await setTaskStatus(params)
+        if (changeTaskData.value?.data) {
+          this.replaceTask(changeTaskData.value?.data)
+        }
+        this.changeStatusResponse = !this.changeStatusResponse
+      } catch (error) {
+        if (taskError.value?.data.error) {
+          this.setError(taskError.value?.data.error)
+        }
+      }
+    },
+    async changePartiallyTask(params?: TaskPartialChangePayload) {
+      const {
+        data: partialChangeTaskData,
+        executeApiCall: changePartiallyTask,
+        error: partialTaskError,
+      } = useApiCall<
+        TaskResponse<Task>,
+        DefaultError,
+        TaskPartialChangePayload
+      >(taskPartialChangeApiCall, true)
+
+      try {
+        await changePartiallyTask(params)
+        if (partialChangeTaskData.value?.data) {
+          this.replaceTask(partialChangeTaskData.value?.data)
+        }
+      } catch (error) {
+        if (partialTaskError.value?.data.error) {
+          this.setError(partialTaskError.value?.data.error)
+        }
+      }
+    },
+    async deleteTask(params?: Partial<TaskPartialChangePayload>) {
+      const { executeApiCall: deleteTask, error: deleteTaskError } = useApiCall<
+        TaskResponse<''>,
+        DefaultError,
+        Partial<TaskPartialChangePayload>
+      >(deleteTaskApiCall, true)
+
+      try {
+        await deleteTask(params)
+        this.changeStatusResponse = !this.changeStatusResponse
+        this.replaceTask(undefined, params?.id)
+      } catch (error) {
+        if (deleteTaskError.value?.data.error) {
+          this.setError(deleteTaskError.value?.data.error)
+        }
+      }
+    },
+    replaceTask(newTaskObject?: PartialTask, removeTaskId?: number) {
+      if (!this.allTasks) {
+        return
+      }
+
+      if (newTaskObject) {
+        const taskIndex = this.allTasks?.data.findIndex(
+          (task: Task) => task.id === newTaskObject.id,
+        )
+        if (taskIndex !== undefined && this.allTasks.data) {
+          this.allTasks.data[taskIndex] = {
+            ...this.allTasks.data[taskIndex],
+            ...newTaskObject,
+          }
+        }
+      } else {
+        this.allTasks.data = this.allTasks.data.filter(
+          (task) => task.id !== removeTaskId,
+        )
+      }
+    },
+
+    openRemoveModal(id: number) {
+      const uxuiStore = useUXUIStore()
+      uxuiStore.setModalName('ConfirmationDelete')
+      uxuiStore.setModalContent(modalsContent['task'], id)
+    },
+    openForm() {
+      const uxuiStore = useUXUIStore()
+      uxuiStore.setModalName('TaskForm', 6)
+    },
+    setSelectedTask(task: Task) {
+      this.selectedTask = task
+    },
+    resetSelectedTask() {
+      this.selectedTask = null
+    },
+  },
 })

@@ -1,0 +1,21 @@
+.search-group {
+  display: flex;
+  flex-direction: column;
+  color: $black;
+  width: 100%;
+  row-gap: 14px;
+  position: relative;
+
+  @include notebook {
+    min-width: 428px;
+    row-gap: 22px;
+  }
+
+  &__title {
+    @include textMedium(16);
+  }
+
+  &__subtitle {
+    @include textMedium(14);
+  }
+}

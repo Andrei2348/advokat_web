@@ -38,7 +38,7 @@ export default defineComponent({
     const deleteLawsuit = (id: number): void => {
       resetPosition()
       uxuiStore.setModalName('ConfirmationDelete')
-      uxuiStore.setModalContent(modalsContent[0], id)
+      uxuiStore.setModalContent(modalsContent['lawsuit'], id)
     }
 
     const editLawsuit = (item: LawsuitForm): void => {

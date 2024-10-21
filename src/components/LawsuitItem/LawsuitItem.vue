@@ -2,10 +2,9 @@
   <div class="table__content-item-container">
     <ButtonsMobileSwipe
       :item="item"
+      :placement="'lawsuit'"
       @editLawsuit="editLawsuit"
       @deleteLawsuit="deleteLawsuit"
-      extremeIconLeft="edit2"
-      extremeIconRight="trash04"
     />
     <div
       class="table__content-item-wrapper"
@@ -26,17 +25,18 @@
       <div
         class="table__content-item table__content-customer"
         :class="{ select__delete: position === -1 }"
-        >
+      >
         <span class="table__content-span">Клиент</span>
         <router-link
           class="table__content-item-link"
           :to="`/lawsuit/${item.id}`"
+          v-if="item.customer && item.customer.name"
         >
           <p class="table__content-item-text">
             {{ item.customer.name }}
           </p>
         </router-link>
-        <SvgIcon icon="clientIcon" class="table__content-decor" />
+        <p v-else class="table__content-item-text"></p>
       </div>
 
       <div class="table__content-item table__content-opponent">
@@ -81,7 +81,7 @@
             class="table__content-item-days-difference"
             v-if="displayDaysDifference"
           >
-            {{ displayDaysDifference }}
+            {{ displayDaysDifference.text }}
           </span>
         </p>
       </div>
@@ -130,7 +130,7 @@
         <div class="table__content-menu">
           <DropdownMenu
             :menuItems="createMenuItems(item.status)"
-            menuIcon="menudots"
+            :menuIcon="'menudots'"
             class="table__content-menu-dropdown"
             @deleteLawsuit="deleteLawsuit(item.id)"
             @editLawsuit="editLawsuit(item)"
@@ -164,3 +164,5 @@
 
 <script lang="ts" src="./LawsuitItem.ts"></script>
 <style lang="scss" scoped src="./LawsuitItem.scss"></style>
+
+status": "planned

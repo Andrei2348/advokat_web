@@ -2,10 +2,10 @@
   <div class="widget__wrapper">
     <div
       class="widget"
-      :style="{ bottom: position.y + 'px', right: position.x + 'px' }"
       @mousedown="startDrag"
       @mouseup="stopDrag"
       @mousemove="onDrag"
+      :style="{ bottom: position.y + 'px', right: position.x + 'px' }"
     >
       <!-- @touchstart="startDrag"  
       @touchmove="onDrag"  
@@ -13,10 +13,11 @@
       <DropdownMenu
         class="widget__dropdown-menu"
         :title="'Создать:'"
-        :menuItems="menuItems"
+        :menuItems="createMenuItems"
         menuIcon="create"
-        :menuOpen="menuOpen"
         @createLawsuit="createLawsuit"
+        @createClient="createClient"
+        @createTask="createTask"
       />
     </div>
   </div>

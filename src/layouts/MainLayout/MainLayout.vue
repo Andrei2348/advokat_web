@@ -17,6 +17,14 @@
     <main>
       <slot />
     </main>
+    <NotificationsComponent
+      v-if="!isMobile && isNotificationOpen"
+      :text="notification.text"
+      :status="notification.status"
+      :size="notification.size"
+      :is-in-main="true"
+      class="main-layout"
+    />
     <CreateWidget />
     <!--    footer-->
   </div>

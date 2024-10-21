@@ -1,35 +1,33 @@
-.modal{
-  &__close-button{
+.modal {
+  &__close-button {
     background-color: transparent;
     cursor: pointer;
     border: none;
     outline: none;
-    & svg{
-      height: 16px;
-      width: 16px;
+    & svg {
+      height: 24px;
+      width: 24px;
       stroke: $gray;
     }
   }
-  &__header{
+  &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: $white;
     padding: 36px 16px 10px;
-    @include tablet{
+    @include tablet {
       padding: 36px 30px 0;
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
     }
-    &.config__header{
+    &.config__header {
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
     }
   }
-  &__title{
+  &__title {
     @include heading(18);
     color: $black;
   }
 }
-
-
