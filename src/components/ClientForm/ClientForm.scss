@@ -17,6 +17,14 @@
     gap: 22px 24px;
   }
 
+  &_new-client {
+    padding: 0 16px 0;
+    @include tablet {
+      padding: 0 30px 25px;
+      margin-top: 32px;
+    }
+  }
+
   & > div {
     &:nth-of-type(1) {
       @include tablet {
@@ -55,6 +63,7 @@
 
     @include tablet {
       grid-area: date;
+      align-content: baseline;
     }
   }
 
@@ -70,8 +79,7 @@
     &-copy {
       @include resetButton;
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
+      top: 14px;
       right: 14px;
       z-index: 5;
     }
@@ -80,6 +88,7 @@
       @include centering;
       display: flex;
       width: 52px;
+      height: 52px;
       border-radius: 14px;
       background-color: $gray5;
 
@@ -143,6 +152,18 @@
         padding: 14px 28px;
         border-radius: 14px;
         @include textMedium(14);
+
+        @media (hover: hover) {
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+
+        @media (hover: none) {
+          &:active {
+            opacity: 0.7;
+          }
+        }
       }
 
       svg {

@@ -10,7 +10,7 @@
       {{ tab }}
     </button>
   </div>
-  <div class="tabs__list">
+  <div class="tabs__list" ref="list">
     <TableHead :items="headerItems" :class="$attrs.class" />
     <slot />
   </div>

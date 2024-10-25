@@ -8,5 +8,5 @@ export type MenuItemDropdown = {
   title: string
   color?: string
   function: string
-  routes?: { name: string; options?: any }[]
+  routes?: string[]
 }

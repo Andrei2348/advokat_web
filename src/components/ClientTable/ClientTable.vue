@@ -1,5 +1,5 @@
 <template>
-  <table class="client-table">
+  <table ref="list" class="client-table">
     <caption v-if="firstGroupTitle" class="client-table__title">
       {{
         firstGroupTitle
@@ -40,11 +40,7 @@
           </h2>
           <ul class="client-table__categories-list-clients">
             <li v-for="client of val" :key="client.id">
-              <ClientItem
-                :item="client"
-                :is-active="client.isActive"
-                @client-click="clientClick"
-              />
+              <ClientItem :item="client" :is-active="client.isActive" />
             </li>
           </ul>
         </td>
@@ -62,7 +58,7 @@
               v-for="client of clients.sortedClientsWithoutLawsuit"
               :key="client.id"
             >
-              <ClientItem :item="client" @client-click="clientClick" />
+              <ClientItem :item="client" />
             </li>
           </ul>
         </td>

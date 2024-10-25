@@ -69,7 +69,7 @@
       justify-content: flex-start;
 
       @include tablet {
-        grid-template-columns: 1fr 0.7fr 0.9fr 0.6fr 0.5fr;
+        grid-template-columns: 0.67fr 0.47fr 0.61fr 0.75fr;
         grid-template-rows: 1fr;
         column-gap: 10px;
         align-items: center;
@@ -100,6 +100,17 @@
           text-decoration: underline;
           text-underline-offset: 3px;
           cursor: pointer;
+
+          @media (hover: hover) {
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+          @media (hover: none) {
+            &:active {
+              opacity: 0.7;
+            }
+          }
         }
 
         span {
@@ -126,6 +137,7 @@
           display: none;
           @include tablet {
             display: block;
+            margin-bottom: 8px;
           }
         }
       }
@@ -137,39 +149,43 @@
         }
       }
 
-      &-waste {
+      &-footer {
         position: absolute;
         top: 12px;
-        left: 75%;
-        color: $darkGreen;
+        right: 6px;
+        display: flex;
+        column-gap: 6px;
+        align-items: center;
         @include tablet {
-          color: inherit;
           position: static;
+          display: grid;
+          grid-template-columns: 1.2fr 1fr;
+          grid-template-rows: 1fr;
+          column-gap: 10px;
+          align-items: center;
+          justify-items: start;
+        }
+      }
+
+      &-waste {
+        color: $darkGreen;
+
+        @include tablet {
+          color: $black;
         }
       }
 
       &-status {
-        position: absolute;
-        top: 12px;
-        right: 6px;
-        border-radius: 10px;
+        border-radius: 4px;
         padding: 2px 7px;
-
-        @include tablet {
-          position: static;
-          justify-self: start;
+        &.planned {
+          background-color: $yellowLight;
+          color: $yellow;
         }
 
-        &_type {
-          &_active {
-            background-color: $yellowLight;
-            color: $yellow;
-          }
-
-          &_finished {
-            background-color: $lightGreen;
-            color: $darkGreen;
-          }
+        &.finished {
+          background-color: $lightGreen;
+          color: $darkGreen;
         }
       }
     }

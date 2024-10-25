@@ -53,7 +53,6 @@ export default defineComponent({
     const togglePanelHandler = (): void => {
       uxuiStore.switchAside()
     }
-    const isFormOpen = clientStore.isTableShown
 
     watch(
       () => currentRoute.value.name,
@@ -86,7 +85,7 @@ export default defineComponent({
     watch(
       () => filtersSelection.value,
       async () => {
-        if (currentRoute.value.name === 'clients') {
+        if (currentRoute.value.name === 'clients-table') {
           await handleClientsSearch()
         }
       },
@@ -107,7 +106,6 @@ export default defineComponent({
       )
 
       delete filterValues[parameter]
-      console.log(filterValues)
     }
 
     const saveSearchParams = (params: TaskSearchPayload) => {
@@ -140,7 +138,7 @@ export default defineComponent({
       })
       filtersSelection.value = []
       if (withRequiest) {
-        submitHandlerComputed.value(false)
+        submitHandlerComputed.value(null, false)
       }
     }
 
@@ -203,7 +201,10 @@ export default defineComponent({
       }
     }
 
-    const handlerSearchTasksFormSubmit = async (shouldClose?: boolean) => {
+    const handlerSearchTasksFormSubmit = async (
+      payload: Event | null,
+      shouldClose?: boolean,
+    ) => {
       const body = {
         customerIds: filterValues.customerIds,
         lawsuitIds: filterValues.lawsuitIds,
@@ -218,6 +219,7 @@ export default defineComponent({
       try {
         await tasksStore.getTasks(body)
         saveSearchParams(body)
+        await tasksStore.loadMoreTasks()
         if (!isMobile.value && !isTablet.value) {
           areFiltersOpen.value = false
           return
@@ -231,7 +233,7 @@ export default defineComponent({
     }
 
     const submitHandlers = {
-      clients: handleSearchClientsFormSubmit,
+      'clients-table': handleSearchClientsFormSubmit,
       tasks: handlerSearchTasksFormSubmit,
     }
 
@@ -246,7 +248,6 @@ export default defineComponent({
 
     return {
       query,
-      isFormOpen,
       isSearchOpen,
       areFiltersOpen,
       currentRoute,

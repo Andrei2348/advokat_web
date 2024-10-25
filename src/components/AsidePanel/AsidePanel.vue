@@ -12,7 +12,7 @@
         :to="item.route"
         :class="['aside__menu-item', { collapsed: isAsideCollapsed }]"
         :key="item.id"
-        @click="selectMenuHandler(item.title)"
+        @click="selectMenuHandler()"
       >
         <SvgIcon :icon="item.icon" />
         <p class="aside__menu-item--text">{{ item.title }}</p>

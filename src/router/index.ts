@@ -68,16 +68,30 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/clients',
-    name: 'clients',
-    component: () => import('@/views/ClientsPage/ClientsPage.vue'),
-    meta: {
-      layout: 'Main',
-      title: 'Клиенты',
-    },
-    beforeEnter: () => {
-      const clientsStore = useClientsStore()
-      clientsStore.closeForm()
-    },
+    children: [
+      {
+        path: '',
+        name: 'clients-table',
+        component: () => import('@/views/ClientsPage/ClientsPage.vue'),
+        meta: {
+          layout: 'Main',
+          title: 'Клиенты',
+        },
+      },
+      {
+        path: ':id',
+        name: 'client-details',
+        component: () => import('@/views/ClientDetails/ClientDetails.vue'),
+        meta: {
+          layout: 'Main',
+        },
+        async beforeEnter(to) {
+          const clientsStore = useClientsStore()
+          const id = Number(to.params.id)
+          await clientsStore.getClient({ id })
+        },
+      },
+    ],
   },
 
   {

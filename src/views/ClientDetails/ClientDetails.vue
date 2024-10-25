@@ -1,7 +1,9 @@
 <template>
-  <br /><br /><br /><br />
-  fdgfdgdfgdfgfdgdfgdfdgfdgfdg
+  <div :class="['client-details', { collapsed: isAsideCollapsed }]">
+    <ClientForm />
+  </div>
 </template>
 
 <script lang="ts" src="./ClientDetails.ts"></script>
-<style lang="scss" scoped src="./ClientDetails.scss"></style>
+
+<style scoped lang="scss" src="./ClientDetails.scss"></style>

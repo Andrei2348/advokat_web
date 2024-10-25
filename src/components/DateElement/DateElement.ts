@@ -19,6 +19,7 @@ export default defineComponent({
     placeholder: { type: String, required: false, default: '' },
     objectKey: { type: String, required: true },
     disabled: { type: Boolean, required: false, default: false },
+    yearRange: { type: Array<number>, required: false, default: [2020, 2040] },
   },
   emits: ['dataChanged'],
 
@@ -60,12 +61,12 @@ export default defineComponent({
     }
 
     const textInputOptions = {
-      format: 'MM-dd-yyyy',
+      format: 'dd.MM.yyyy',
     }
 
     const formatDate = (dateString: DateType) => {
       const date = dayjs(dateString)
-      return date.format('DD-MM-YYYY')
+      return date.format('DD.MM.YYYY')
     }
 
     const resetDate = () => {

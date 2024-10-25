@@ -1,7 +1,7 @@
 import {
   defineComponent,
+  DefineComponent,
   PropType,
-  useTemplateRef,
   ref,
   computed,
   watch,
@@ -11,7 +11,9 @@ import ListFilter from '@/components/ListFilter/ListFilter.vue'
 import { useClientsStore } from '@/store/client'
 import { useLawsuitStore } from '@/store/lawsuite'
 import clickOutside from '@/directives/clickOutside'
+import { useScrolling } from '@/composables/useScrolling'
 import { ListType, SearchFiltersListPanel } from '@/types/filters'
+import { Customer } from '@/types/customers'
 
 export default defineComponent({
   name: 'ListFilterSelection',
@@ -30,12 +32,13 @@ export default defineComponent({
     const isModalVisible = ref(false)
     const selectedValues = ref<number[]>([])
     const valuesForDisplaying = ref<any[]>([])
-    const modal = useTemplateRef<typeof ListFilter>('modal')
+    const modal = ref<DefineComponent<typeof ListFilter> | null>(null)
     const selection = ref<HTMLElement | null>(null)
+    const initialClients = ref<Customer[] | [] | null>(null)
     const clientsStore = useClientsStore()
     const lawsuitStore = useLawsuitStore()
 
-    const clientsListOptions = computed(() => clientsStore.allClients.data)
+    const clientsListOptions = computed(() => clientsStore.allClients?.data)
     const lawsuitListOptions = computed(() => lawsuitStore.lawsuitData)
 
     const listOptions = computed(() =>
@@ -95,7 +98,7 @@ export default defineComponent({
       emit('update:value', obj)
     }
 
-    const onGetValues = (data: number[]) => {
+    const onGetValues = async (data: number[]) => {
       onSelectionClose()
       if (!data.length) {
         return
@@ -117,13 +120,22 @@ export default defineComponent({
       }
       selectedValues.value = data
 
-      const filteredOptions = listOptions.value?.filter((item) =>
-        selectedValues.value.includes(item.id),
-      )
+      let filteredOptions
+      if (purpose === 'customerIds') {
+        filteredOptions = initialClients.value?.filter((item) =>
+          selectedValues.value.includes(item.id),
+        )
+      } else {
+        filteredOptions = listOptions.value?.filter((item) =>
+          selectedValues.value.includes(item.id),
+        )
+      }
+
       if (filteredOptions) {
         valuesForDisplaying.value = filteredOptions
       }
       emit('update:value', obj)
+      await clientsStore.getClients()
     }
 
     const getModalPosition = computed(() => {
@@ -138,8 +150,23 @@ export default defineComponent({
       }
     })
 
+    const handleClientsSearch = async (value: string) => {
+      await clientsStore.getClients({ name: value })
+    }
+
+    const handleClientsListScrolling = computed(() => {
+      const handler = useScrolling<typeof ListFilter>(
+        modal.value,
+        clientsStore.loadMoreClients,
+      )
+      return handler
+    })
+
     onMounted(async () => {
       await clientsStore.getClients()
+      if (clientsStore.allClients?.data) {
+        initialClients.value = clientsStore.allClients?.data
+      }
       await lawsuitStore.getLawsuitList()
     })
 
@@ -156,6 +183,8 @@ export default defineComponent({
       onSelectionClose,
       onRemoveDisplayedOptionBtnClick,
       onGetValues,
+      handleClientsSearch,
+      handleClientsListScrolling,
     }
   },
 })

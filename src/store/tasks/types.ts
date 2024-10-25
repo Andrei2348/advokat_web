@@ -5,7 +5,6 @@ import {
   TaskSearchData,
   TaskStatusChangePayload,
   TaskPartialChangePayload,
-  PartialTask,
 } from '@/types/tasks'
 
 export type RootState = {
@@ -28,8 +27,9 @@ export type RootActions = {
   changeTaskStatus: (params?: TaskStatusChangePayload) => Promise<void>
   changePartiallyTask: (params?: TaskPartialChangePayload) => Promise<void>
   deleteTask: (params?: Partial<TaskPartialChangePayload>) => Promise<void>
-  loadMoreTasks: (params: any) => Promise<void>
-  replaceTask: (newTask?: PartialTask, removeTaskId?: number) => void
+  loadMoreTasks: () => Promise<void>
+  addTask: (newTask: Task) => void
+  replaceTask: (newTask?: Task, removeTaskId?: number) => void
   openRemoveModal: (id: number) => void
   openForm: () => void
   setSelectedTask: (task: Task) => void

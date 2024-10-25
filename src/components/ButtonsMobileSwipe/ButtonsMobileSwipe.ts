@@ -43,94 +43,61 @@ export default defineComponent({
     'removeEventsSettings',
     'removeCategorySettings',
     'removeTaskTag',
+    'removeTransaction',
   ],
   setup(props, { emit }) {
     const { item } = toRefs(props)
 
-    const editLawsuitHandler = () => {
-      emit('editLawsuit', item.value)
-    }
-
-    const deleteLawsuitHandler = () => {
-      emit('deleteLawsuit', item.value.id)
-    }
-
-    const openClientHandler = () => {
-      emit('openClient', item.value.id)
-    }
-
-    const deleteClientHandler = () => {
-      emit('removeClient', item.value.id)
-    }
-
-    const completeTask = () => {
-      emit('completeTask')
-    }
-
-    const addTaskToTheDay = () => {
-      emit('addTaskToTheDay', item.value.id)
-    }
-
-    const deleteTask = () => {
-      emit('removeTask', item.value.id)
-    }
-
-    const deleteTaskFromReport = () => {
-      emit('removeTaskFromReport', item.value.id)
-    }
-
-    const addTaskToReport = () => {
-      emit('addTaskToReport', item.value.id)
-    }
-
-    const editAuthority = () => {
-      emit('editAuthority', item.value.id)
-    }
-
-    const removeAuthority = () => {
-      emit('removeAuthority', item.value.id)
-    }
-
-    const deleteEventSettings = () => {
-      emit('removeEventsSettings', item.value.id)
-    }
-
-    const deleteCategorySettings = () => {
-      emit('removeCategorySettings', item.value.id)
-    }
-
-    const deleteTaskTag = () => {
-      emit('removeTaskTag', item.value.id)
+    const buttonHandlers = {
+      editLawsuit: () => emit('editLawsuit', item.value),
+      deleteLawsuit: () => emit('deleteLawsuit', item.value.id),
+      openClient: () => emit('openClient', item.value.id),
+      deleteClient: () => emit('removeClient', item.value.id),
+      completeTask: () => emit('completeTask'),
+      addTaskToTheDay: () => emit('addTaskToTheDay', item.value.id),
+      deleteTask: () => emit('removeTask', item.value.id),
+      deleteTaskFromReport: () => emit('removeTaskFromReport', item.value.id),
+      addTaskToReport: () => emit('addTaskToReport', item.value.id),
+      editAuthority: () => emit('editAuthority', item.value.id),
+      removeAuthority: () => emit('removeAuthority', item.value.id),
+      deleteEventSettings: () => emit('removeEventsSettings', item.value.id),
+      deleteCategorySettings: () =>
+        emit('removeCategorySettings', item.value.id),
+      deleteTaskTag: () => emit('removeTaskTag', item.value.id),
+      deleteTransaction: () => emit('removeTransaction', item.value.id),
     }
 
     const handlers: { [key: string]: any } = {
       lawsuit: {
-        edit: editLawsuitHandler,
-        remove: deleteLawsuitHandler,
+        edit: buttonHandlers.editLawsuit,
+        remove: buttonHandlers.deleteLawsuit,
       },
       client: {
-        open: openClientHandler,
-        remove: deleteClientHandler,
+        open: buttonHandlers.openClient,
+        remove: buttonHandlers.deleteClient,
       },
       task: {
-        complete: completeTask,
-        bookmark: addTaskToTheDay,
-        remove: deleteTask,
-        removeFromReport: deleteTaskFromReport,
-        addToReport: addTaskToReport,
+        complete: buttonHandlers.completeTask,
+        bookmark: buttonHandlers.addTaskToTheDay,
+        remove: buttonHandlers.deleteTask,
+        removeFromReport: buttonHandlers.deleteTaskFromReport,
+        addToReport: buttonHandlers.addTaskToReport,
       },
       authorities: {
-        edit: editAuthority,
-        remove: removeAuthority,
+        edit: buttonHandlers.editAuthority,
+        remove: buttonHandlers.removeAuthority,
       },
       eventSettings: {
-        remove: deleteEventSettings,
+        remove: buttonHandlers.deleteEventSettings,
       },
       categorySettings: {
-        remove: deleteCategorySettings,
+        remove: buttonHandlers.deleteCategorySettings,
       },
       taskTagSettings: {
-        remove: deleteTaskTag,
+        remove: buttonHandlers.deleteTaskTag,
+      },
+      finance: {
+        remove: buttonHandlers.deleteTransaction,
       },
     }
 
@@ -165,10 +132,6 @@ export default defineComponent({
     return {
       rightSwipeBtnsOnPage,
       leftSwipeBtnsOnPage,
-      editLawsuitHandler,
-      deleteLawsuitHandler,
-      openClientHandler,
-      deleteClientHandler,
     }
   },
 })

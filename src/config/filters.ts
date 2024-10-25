@@ -1,7 +1,7 @@
 import { Filters } from '@/types/filters'
 
 export const filters: Filters = {
-  clients: {
+  'clients-table': {
     filtersList: {
       radio: {
         title: 'По статусам',

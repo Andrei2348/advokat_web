@@ -1,7 +1,16 @@
-import { defineComponent, computed, provide, onBeforeMount } from 'vue'
+import {
+  defineComponent,
+  DefineComponent,
+  ref,
+  computed,
+  provide,
+  onBeforeMount,
+  onBeforeUnmount,
+} from 'vue'
 import { useUXUIStore } from '@/store/uxui'
 import { useMainStore } from '@/store/main'
 import { useClientsStore } from '@/store/client'
+import { useScrolling } from '@/composables/useScrolling'
 import ClientTable from '@/components/ClientTable/ClientTable.vue'
 import ModalLayer from '@/components/ModalLayer/ModalLayer.vue'
 import ModalHeader from '@/components/ModalHeader/ModalHeader.vue'
@@ -19,34 +28,36 @@ export default defineComponent({
     const uxuiStore = useUXUIStore()
     const mainStore = useMainStore()
     const clientsStore = useClientsStore()
-    const isTableShown = computed(() => clientsStore.isTableShown)
-    const allClients = computed(() => clientsStore.allClients.data)
+    const allClients = computed(() => clientsStore.allClients?.data)
     const isMobile = computed(() => mainStore.isMobile)
+    const clientsList = ref<DefineComponent<typeof ClientTable> | null>(null)
 
     provide('isMobile', isMobile)
 
-    const openForm = () => {
-      if (isMobile.value) {
-        uxuiStore.setModalName('ClientForm', 5)
-        return
-      }
-      clientsStore.openForm()
-    }
-
-    const onClientClick = () => {
-      openForm()
-    }
+    const handleClientsScrolling = computed(() => {
+      const handler = useScrolling<typeof ClientTable>(
+        clientsList.value,
+        clientsStore.loadMoreClients,
+      )
+      return handler
+    })
+    const clientsScrollHandler = async () =>
+      await handleClientsScrolling.value()
 
     onBeforeMount(async () => {
       await clientsStore.getClients()
+      window.addEventListener('scroll', clientsScrollHandler)
+    })
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('scroll', clientsScrollHandler)
     })
 
     return {
       uxuiStore,
       allClients,
-      isTableShown,
       isMobile,
-      onClientClick,
+      clientsList,
     }
   },
 })

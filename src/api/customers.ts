@@ -4,17 +4,18 @@
 import axios from 'axios'
 import {
   Customer,
+  CustomerResponse,
   CustomersFormPayload,
   CustomersSearchPayload,
-  CustomerIdPayload,
-  ClientLawsuitResponseData,
-  CustomersFormSuccessResponse,
+  CustomerLawsuitsPayload,
+  CustomerLawsuitsResponseData,
+  CustomersSuccessResponse,
 } from '@/types/customers'
 
 export const customersApiCall = async (
   abortController?: AbortController,
   params?: Partial<CustomersSearchPayload>,
-): Promise<CustomersFormSuccessResponse<Customer[]>> => {
+): Promise<CustomerResponse> => {
   const response = await axios.get(`/v1/customer`, {
     params: { ...params },
     signal: abortController?.signal,
@@ -25,7 +26,7 @@ export const customersApiCall = async (
 export const editCustomerApiCall = async (
   abortController: AbortController,
   params?: Partial<CustomersFormPayload>,
-): Promise<CustomersFormSuccessResponse<Customer>> => {
+): Promise<CustomersSuccessResponse<Customer>> => {
   const response = await axios.put(
     `/v1/customer/${params?.id}`,
     { ...params?.data },
@@ -37,13 +38,27 @@ export const editCustomerApiCall = async (
   return response.data
 }
 
-export const getClientLawsuitsApiCall = async (
+export const getClientByIdApiCall = async (
   abortController?: AbortController,
-  params?: Partial<CustomerIdPayload>,
-): Promise<CustomersFormSuccessResponse<ClientLawsuitResponseData[]>> => {
-  const response = await axios.get(`/v1/customer/${params?.id}/lawsuits`, {
+  params?: Partial<CustomerLawsuitsPayload>,
+): Promise<CustomersSuccessResponse<Customer>> => {
+  const response = await axios.get(`/v1/customer/${params?.id}`, {
     signal: abortController?.signal,
   })
+
+  return response.data
+}
+
+export const getClientLawsuitsApiCall = async (
+  abortController?: AbortController,
+  params?: Partial<CustomerLawsuitsPayload>,
+): Promise<CustomerLawsuitsResponseData> => {
+  const response = await axios.get(
+    `/v1/customer/${params?.id}/lawsuits${params?.page ? `?page=${params?.page}` : ''}`,
+    {
+      signal: abortController?.signal,
+    },
+  )
 
   return response.data
 }
@@ -51,7 +66,7 @@ export const getClientLawsuitsApiCall = async (
 export const addClientApiCall = async (
   abortController?: AbortController,
   params?: Partial<CustomersFormPayload>,
-): Promise<CustomersFormSuccessResponse<Customer>> => {
+): Promise<CustomersSuccessResponse<Customer>> => {
   const response = await axios.post(
     '/v1/customer',
     { ...params?.data },
@@ -63,8 +78,8 @@ export const addClientApiCall = async (
 
 export const removeClientApiCall = async (
   abortController?: AbortController,
-  params?: Partial<CustomerIdPayload>,
-): Promise<CustomersFormSuccessResponse<''>> => {
+  params?: Partial<CustomerLawsuitsPayload>,
+): Promise<CustomersSuccessResponse<''>> => {
   const result = await axios.delete(`v1/customer/${params?.id}`, {
     signal: abortController?.signal,
   })

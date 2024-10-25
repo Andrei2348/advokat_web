@@ -18,7 +18,7 @@
       :enable-time-picker="false"
       :six-weeks="true"
       :placeholder="placeholder"
-      :year-range="[2020, 2040]"
+      :year-range="yearRange"
       :disabled="disabled"
     >
       <template #input-icon>

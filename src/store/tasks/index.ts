@@ -10,7 +10,6 @@ import {
   deleteTaskApiCall,
 } from '@/api/tasks'
 import {
-  PartialTask,
   Task,
   TaskSearchPayload,
   TaskSearchData,
@@ -63,16 +62,19 @@ export const useTasksStore = defineStore<
       try {
         await getAllTasks(params)
         if (allTasks.value) {
-          this.lastPage = allTasks.value.meta.lastPage
+          const { lastPage, currentPage } = allTasks.value.meta
+          this.currentPage = currentPage
+          this.lastPage = lastPage
+
           if (this.currentPage === 1) {
             this.allTasks = allTasks.value
-          } else {
-            if (Array.isArray(this.allTasks?.data)) {
-              this.allTasks = {
-                data: [...this.allTasks.data, ...allTasks.value.data],
-                links: allTasks.value.links,
-                meta: allTasks.value.meta,
-              }
+            return
+          }
+          if (Array.isArray(this.allTasks?.data)) {
+            this.allTasks = {
+              data: [...this.allTasks.data, ...allTasks.value.data],
+              links: allTasks.value.links,
+              meta: allTasks.value.meta,
             }
           }
         }
@@ -154,7 +156,14 @@ export const useTasksStore = defineStore<
         }
       }
     },
-    replaceTask(newTaskObject?: PartialTask, removeTaskId?: number) {
+    addTask(newTaskObject: Task) {
+      if (!this.allTasks) {
+        return
+      }
+
+      this.allTasks.data = [...this.allTasks.data, newTaskObject]
+    },
+    replaceTask(newTaskObject?: Task, removeTaskId?: number) {
       if (!this.allTasks) {
         return
       }

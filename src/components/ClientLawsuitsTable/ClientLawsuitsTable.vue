@@ -1,5 +1,5 @@
 <template>
-  <table class="table">
+  <table class="table" ref="list">
     <caption>
       Все дела клиента
     </caption>
@@ -32,40 +32,33 @@
                 {{
                   item.lawsuit.contractValidity
                     ? getFormatDate(item.lawsuit.contractValidity)
-                    : 'Дата окончания отсутствует!'
+                    : 'Дата окончания отсутствует'
                 }}
               </span>
-              Договор заканчивается через:
+              Заканчивается через:
               {{
-                item.lawsuit.contractValidity &&
-                checkDateValidityByDays(item.lawsuit.contractValidity) < 0
-                  ? `${Math.abs(checkDateValidityByDays(item.lawsuit.contractValidity))} дней`
+                item.lawsuit.contractEndDays > 0
+                  ? `${item.lawsuit.contractEndDays} ${getDaysWord(item.lawsuit.contractEndDays)}`
                   : '-'
               }}
             </p>
             <p class="table__lawsuit-item-category">
               {{ item.lawsuit.lawsuitCategory.name }}
             </p>
-            <span class="table__lawsuit-item-waste">Нет API</span>
-            <span
-              :class="[
-                'table__lawsuit-item-status',
-                {
-                  'table__lawsuit-item-status_type_active':
-                    item.lawsuit?.status === 'planned',
-                  'table__lawsuit-item-status_type_finished':
-                    item.lawsuit?.status === 'finished',
-                },
-              ]"
-              >{{
-                item.lawsuit?.status === 'planned' ? 'Активно' : 'Завершено'
-              }}</span
-            >
+            <div class="table__lawsuit-item-footer">
+              <span class="table__lawsuit-item-waste">Нет API</span>
+              <span
+                :class="['table__lawsuit-item-status', item.lawsuit?.status]"
+                >{{
+                  item.lawsuit?.status === 'planned' ? 'Активно' : 'Завершено'
+                }}</span
+              >
+            </div>
           </article>
           <article v-else class="table__lawsuit-item">
             <div class="table__lawsuit-item-line"></div>
             <router-link
-              :to="`/lawsuit/${item.event?.id}`"
+              :to="`/event/${item.event?.id}`"
               class="table__lawsuit-item-header"
             >
               <span>Дело</span>
@@ -75,32 +68,25 @@
               <span>
                 {{ item.event?.till ? getFormatDate(item.event?.till) : '' }}
               </span>
-              Договор заканчивается через:
+              Заканчивается через:
               {{
-                item.event?.till &&
-                checkDateValidityByDays(item.event?.till) < 0
-                  ? `${Math.abs(checkDateValidityByDays(item.event?.till))} дней`
+                item.event?.remainDays && item.event?.remainDays > 0
+                  ? `${item.event.remainDays} ${getDaysWord(item.event?.remainDays)}`
                   : '-'
               }}
             </p>
             <p class="table__lawsuit-item-category">
               {{ item.event?.lawsuitEventCategory.name }}
             </p>
-            <span class="table__lawsuit-item-waste">Нет API</span>
-            <span
-              :class="[
-                'table__lawsuit-item-status',
-                {
-                  'table__lawsuit-item-status_type_active':
-                    item.event?.status === 'planned',
-                  'table__lawsuit-item-status_type_finished':
-                    item.event?.status === 'finished',
-                },
-              ]"
-              >{{
-                item.event?.status === 'planned' ? 'Активно' : 'Завершено'
-              }}</span
-            >
+            <div class="table__lawsuit-item-footer">
+              <span class="table__lawsuit-item-waste">Нет API</span>
+              <span
+                :class="['table__lawsuit-item-status', item.event?.status]"
+                >{{
+                  item.event?.status === 'planned' ? 'Активно' : 'Завершено'
+                }}</span
+              >
+            </div>
           </article>
         </td>
       </tr>

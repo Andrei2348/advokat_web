@@ -62,12 +62,12 @@
   &__checkbox {
     @include checkbox;
     cursor: pointer;
-    padding-left: 30px;
-    padding-top: 3px;
+    padding: 2px 0 0 30px;
     display: flex;
     align-items: center;
     &.checked::after {
-      top: 2px;
+      left: 2px;
+      top: 1px;
     }
   }
 

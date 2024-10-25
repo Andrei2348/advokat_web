@@ -1,13 +1,17 @@
 import {
   Customer,
+  CustomersSearchPayload,
+  CustomerLawsuitsPayload,
   CustomerWithLawsuits,
   CustomerResponse,
 } from '@/types/customers'
 
 export type RootState = {
-  allClients: CustomerResponse
+  allClients: CustomerResponse | null
   selectedClient: CustomerWithLawsuits | null
-  isTableShown: boolean
+  lastPage: number
+  currentPage: number
+  searchParams: CustomersSearchPayload | null
 }
 
 export type RootGetters = {
@@ -15,14 +19,15 @@ export type RootGetters = {
 }
 
 export type RootActions = {
-  getClients: (params?: any) => Promise<void>
-  getClientLawsuits: (id: number) => Promise<void>
+  getClients: (params?: CustomersSearchPayload) => Promise<void>
+  loadMoreClients: () => Promise<void>
+  getClient: (params: CustomerLawsuitsPayload) => Promise<void>
+  getClientLawsuits: (params: CustomerLawsuitsPayload) => Promise<void>
+  loadMoreClientLawsuits: (params: CustomerLawsuitsPayload) => Promise<void>
   removeClientApiRequest: (id: number) => Promise<void>
   resetSelectedClient: () => void
   replaceClient: (id: number, editedClient: Customer) => void
   addClient: (newClient: Customer) => void
   removeClient: (id: number) => void
-  openForm: () => void
-  closeForm: () => void
   openRemoveModal: (id: number) => void
 }

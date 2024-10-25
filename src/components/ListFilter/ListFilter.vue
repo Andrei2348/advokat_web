@@ -5,15 +5,20 @@
       <label class="list-filter__input">
         Поиск по фразе
         <input
-          v-model.trim="searchValue"
+          v-model="searchValue"
           type="text"
           placeholder="Введите поисковую фразу"
         />
         <SvgIcon icon="search" />
       </label>
-      <div class="list-filter__options-wrapper">
+      <div
+        v-if="options?.length"
+        ref="list"
+        class="list-filter__options-wrapper"
+        @scroll="$emit('scroll')"
+      >
         <label
-          v-for="{ id, name } of searchedOptions"
+          v-for="{ id, name } of options"
           :key="id"
           class="list-filter__checkbox"
           :class="{
@@ -24,6 +29,9 @@
           {{ name }}
         </label>
       </div>
+      <span v-else-if="searchValue.length" class="list-filter__message"
+        >Попробуйте изменить критерии поиска</span
+      >
     </template>
     <template v-else>
       <div class="list-filter__options-wrapper">

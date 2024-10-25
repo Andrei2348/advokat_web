@@ -47,6 +47,9 @@ export default defineComponent({
       lawsuit: IdType
       comment: string
     }
+    type ValidationErrorsKeys = Partial<TaskFormFields> & {
+      deadline: string
+    }
 
     const fields = reactive<TaskFormFields>({
       theme: '',
@@ -66,7 +69,7 @@ export default defineComponent({
       comment: '',
     })
     const validationErrors = ref<
-      { [K in keyof TaskFormFields]?: string[] } | null
+      { [K in keyof ValidationErrorsKeys]?: string[] } | null
     >(null)
     const isTaskNew = ref(true)
     const taskId = ref<number | null>(null)
@@ -74,6 +77,7 @@ export default defineComponent({
     const previousLawsuitId = ref('')
     const selectedCustomerId = ref('')
     const lawsuitEvent = ref<Event | null>()
+
     const tasksStore = useTasksStore()
     const tagsStore = useTagsStore()
     const clientsStore = useClientsStore()
@@ -93,7 +97,7 @@ export default defineComponent({
       }
 
       const dateAndTime = getTimezoneDate(selectedTask.deadline)
-      fields.date = dateAndTime.date
+      fields.date = selectedTask.deadline
       fields.time = dateAndTime.time ?? ''
       fields.cost = String(selectedTask.cost) ?? ''
       fields.tag = { id: String(selectedTask.taskTag?.id) ?? '' }
@@ -113,8 +117,7 @@ export default defineComponent({
 
     if (
       isTaskNew.value &&
-      router.currentRoute.value.name === 'clients' &&
-      !clientsStore.isTableShown &&
+      router.currentRoute.value.name === 'client-details' &&
       clientsStore.selectedClient
     ) {
       fields.customer.id = String(clientsStore.selectedClient.id)
@@ -128,7 +131,7 @@ export default defineComponent({
     }
 
     const selectTagOptions = computed(() => tagsStore.tagsList ?? [])
-    const selectClientOptions = computed(() => clientsStore.allClients.data)
+    const selectClientOptions = computed(() => clientsStore.allClients?.data)
     const selectLawsuitOptions = computed(() => {
       if (selectedCustomerId.value && lawsuitStore.lawsuitData) {
         return lawsuitStore.lawsuitData?.filter(
@@ -141,7 +144,7 @@ export default defineComponent({
       const tag = selectTagOptions.value.find(
         (tag) => tag.id === Number(fields.tag.id),
       )
-      const client = selectClientOptions.value.find(
+      const client = selectClientOptions.value?.find(
         (client) => client.id === Number(fields.customer.id),
       )
       const lawsuit = selectLawsuitOptions.value?.find(
@@ -159,11 +162,14 @@ export default defineComponent({
           !/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/.test(fields.time)),
     }))
 
-    const { executeApiCall: createTask, error: newTaskError } = useApiCall<
-      TaskResponse<Task>,
-      Error,
-      TaskCreatePayload
-    >(createTaskApiCall, true)
+    const {
+      data: newTaskData,
+      executeApiCall: createTask,
+      error: newTaskError,
+    } = useApiCall<TaskResponse<Task>, Error, TaskCreatePayload>(
+      createTaskApiCall,
+      true,
+    )
 
     const {
       data: changeTaskData,
@@ -211,7 +217,6 @@ export default defineComponent({
         ;(fields as any)[objKey] = ''
         return
       }
-
       ;(fields as any)[objKey] = value
     }
 
@@ -234,7 +239,9 @@ export default defineComponent({
 
       try {
         await createTask(taskBody)
-        await tasksStore.getTasks()
+        if (newTaskData.value?.data) {
+          tasksStore.addTask(newTaskData.value?.data)
+        }
         closeModalForm()
       } catch (error) {
         if (newTaskError.value?.data.errors) {
@@ -319,6 +326,7 @@ export default defineComponent({
       previousLawsuitId,
       validation,
       getHour,
+      getTimezoneDate,
       tasksStore,
       onValueChange,
       selectTagOptions,

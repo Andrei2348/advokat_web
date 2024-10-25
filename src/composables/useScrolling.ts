@@ -1,23 +1,20 @@
-import { onMounted, onUnmounted } from 'vue'
+import { DefineComponent } from 'vue'
 
-export const useScrolling = (
-  scrollingContainerRef: HTMLElement | null,
+export const useScrolling = <D, N = undefined>(
+  scrollingContainerRef: DefineComponent<D> | null,
   callback: (params?: any) => Promise<void>,
+  params?: N,
 ) => {
-  const handleScroll = async () => {
+  const list = scrollingContainerRef?.$refs.list
+  const handler = async () => {
     if (
-      scrollingContainerRef &&
-      scrollingContainerRef.getBoundingClientRect().bottom < window.innerHeight
+      list &&
+      list.getBoundingClientRect().bottom <= window.innerHeight &&
+      window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight
     ) {
-      await callback()
+      await callback(params)
     }
   }
-
-  onMounted(() => {
-    window.addEventListener('scroll', handleScroll)
-  })
-
-  onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll)
-  })
+  return handler
 }

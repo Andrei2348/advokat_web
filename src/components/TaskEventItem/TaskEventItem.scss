@@ -131,6 +131,7 @@
     text-align: left;
     @include tablet {
       text-decoration: underline;
+      text-underline-offset: 3px;
     }
   }
   &__cost {

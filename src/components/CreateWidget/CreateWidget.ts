@@ -4,7 +4,7 @@ import { Position } from '@/types/createWidget'
 import { menuItems } from '@/config/createWidgetConfig'
 import { useUXUIStore } from '@/store/uxui'
 import { useLawsuitStore } from '@/store/lawsuite'
-import { useClientsStore } from '@/store/client'
+//import { useClientsStore } from '@/store/client'
 import { useTasksStore } from '@/store/tasks'
 import { LawsuitEmptyObject } from '@/config/lawsuitTableHeadConfig'
 
@@ -13,7 +13,7 @@ export default defineComponent({
   setup() {
     const uxuiStore = useUXUIStore()
     const lawsuitStore = useLawsuitStore()
-    const clientsStore = useClientsStore()
+    //const clientsStore = useClientsStore()
     const tasksStore = useTasksStore()
     const menuOpen = ref<boolean>(false)
     const position = ref<Position>({ x: 52, y: 32 })
@@ -24,18 +24,9 @@ export default defineComponent({
 
     const createMenuItems = computed(() => {
       const currentRoute = router.currentRoute.value
-      return menuItems.filter((item) => {
-        return item.routes?.some((route) => {
-          if (route.options) {
-            return (
-              route.name === currentRoute.name &&
-              route.options.inTable === clientsStore.isTableShown
-            )
-          } else {
-            return route.name === currentRoute.name
-          }
-        })
-      })
+      return menuItems.filter((item) =>
+        item.routes?.some((route) => route === currentRoute.name),
+      )
     })
 
     const startDrag = (event: MouseEvent): void => {
@@ -70,13 +61,8 @@ export default defineComponent({
       uxuiStore.setModalName('EditLawsuit', 3)
     }
 
-    const createClient = async () => {
-      if (router.currentRoute.value.name === 'clients') {
-        clientsStore.openForm()
-      } else {
-        await router.push('/clients')
-        clientsStore.openForm()
-      }
+    const createClient = () => {
+      uxuiStore.setModalName('ClientForm', 5)
     }
 
     const createTask = () => {

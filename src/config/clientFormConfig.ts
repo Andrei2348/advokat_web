@@ -1,5 +1,5 @@
 export const clientFormFields = {
-  client: {
+  name: {
     title: 'Клиент',
     required: true,
     type: 'text',

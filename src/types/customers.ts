@@ -4,6 +4,17 @@ export type ClientTableSortingDirection = 'desc' | 'asc'
 
 export type ClientTableColumn = 'name' | 'lawsuit' | 'lastActiveAt'
 
+export type Meta = {
+  currentPage: number
+  from: number
+  lastPage: number
+  links: []
+  path: string
+  perPage: number
+  to: number
+  total: number
+}
+
 export type ClientTableSortingType = {
   currentColumnSorted: null | ClientTableColumn
   sortingDirection: ClientTableSortingDirection
@@ -17,13 +28,15 @@ export type CustomersFormPayload = {
 export type CustomersSearchPayload = {
   name?: string
   contractValidityValid?: 1 | 0
+  page?: number
 }
 
-export type CustomerIdPayload = {
+export type CustomerLawsuitsPayload = {
   id: number
+  page?: number
 }
 
-export type CustomersFormSuccessResponse<T> = {
+export type CustomersSuccessResponse<T> = {
   data: T
   success: number
   error: null | string
@@ -35,6 +48,7 @@ export type CustomerResponse = {
     first: string
     last: string
   }
+  meta: Meta
 }
 
 export type Customer = {
@@ -53,7 +67,7 @@ export type Customer = {
 }
 
 export type CustomerWithLawsuits = Customer & {
-  lawsuits?: ClientLawsuitResponseData[]
+  lawsuits?: CustomerLawsuitsResponseData
 }
 
 export type ModifiedCustomer = Customer & {
@@ -68,8 +82,12 @@ export type CustomerTableHeaderItem = {
   willBeSorting: boolean
 }
 
-export type ClientLawsuitResponseData = {
+export type ClientLawsuit = {
   type: 'lawsuit' | 'event'
   lawsuit: LawsuitForm | null
   event: Event | null
+}
+
+export type CustomerLawsuitsResponseData = Meta & {
+  data: ClientLawsuit[]
 }

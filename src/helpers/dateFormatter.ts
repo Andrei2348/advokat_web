@@ -48,7 +48,7 @@ export const checkDateValidityByDays = (date: string) => {
 }
 
 export const checkDateValidity = (date: string) => {
-  return dayjs(date).isValid()
+  return dayjs(date, 'DD.MM.YYYY').isValid()
 }
 
 export const getDaysUntilToday = (date: string) => {

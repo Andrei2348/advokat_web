@@ -1,4 +1,4 @@
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, ref } from 'vue'
 import TableHead from '@/components/TableHead/TableHead.vue'
 import { TableItems } from '@/types/lawsuit'
 import { LawsuitTaskEventTableTab } from '@/types/lawsuit'
@@ -28,12 +28,15 @@ export default defineComponent({
       typeof tabName === 'string',
   },
   setup(_, { emit }) {
+    const list = ref<HTMLDivElement | null>(null)
+
     const clickOnTab = (tabName: LawsuitTaskEventTableTab | TaskTableTabs) => {
       emit('changeTab', tabName)
     }
 
     return {
       clickOnTab,
+      list,
     }
   },
 })

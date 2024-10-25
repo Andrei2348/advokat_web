@@ -1,4 +1,4 @@
-import { defineComponent, reactive, computed, ComputedRef } from 'vue'
+import { defineComponent, ref, reactive, computed, ComputedRef } from 'vue'
 import ClientItem from '@/components/ClientItem/ClientItem.vue'
 import { clientTableHeaderItems } from '@/config/clientTableHeadConfig'
 import dayjs from 'dayjs'
@@ -19,14 +19,14 @@ export default defineComponent({
   components: {
     ClientItem,
   },
-  emits: ['clientClick'],
-  setup(_, { emit }) {
+  setup() {
     const sorting = reactive<ClientTableSortingType>({
       currentColumnSorted: null,
       sortingDirection: 'desc',
     })
     const clientsStore = useClientsStore()
-    const allClients = computed(() => clientsStore.allClients.data)
+    const allClients = computed(() => clientsStore.allClients?.data)
+    const list = ref<HTMLTableElement | null>(null)
 
     const sortArrayDescending = (
       array: Customer[],
@@ -65,6 +65,9 @@ export default defineComponent({
     }
 
     const clients = computed(() => {
+      if (!allClients.value) {
+        return { sortedClientsWithoutLawsuit: [], sortedClientsWithLawsuit: [] }
+      }
       const clientsWithoutLawsuit = allClients.value?.filter(
         (client) =>
           !client.latestValidityLawsuit ||
@@ -122,7 +125,7 @@ export default defineComponent({
     const statusedClientsWithLawsuit: ComputedRef<{
       [key: string]: ModifiedCustomer[]
     }> = computed(() => {
-      if (!clients.value.sortedClientsWithLawsuit) {
+      if (!clients.value?.sortedClientsWithLawsuit) {
         return {}
       }
       const clientsWithStatus = clients.value.sortedClientsWithLawsuit.map(
@@ -169,10 +172,6 @@ export default defineComponent({
       return keys[0]
     })
 
-    const clientClick = () => {
-      emit('clientClick')
-    }
-
     const sortingBtnClick = (column?: ClientTableColumn) => {
       if (!column) {
         return
@@ -192,10 +191,10 @@ export default defineComponent({
 
     return {
       clients,
+      list,
       firstGroupTitle,
       statusedClientsWithLawsuit,
       clientTableHeaderItems,
-      clientClick,
       sortingBtnClick,
     }
   },

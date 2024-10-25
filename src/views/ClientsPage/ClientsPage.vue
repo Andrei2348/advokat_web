@@ -1,8 +1,6 @@
 <template>
   <div :class="['clients', { collapsed: uxuiStore.asideCollapsed }]">
-    <span v-if="!allClients && isTableShown">Загрузка!</span>
-    <ClientTable v-if="isTableShown" @client-click="onClientClick" />
-    <ClientForm v-else />
+    <ClientTable ref="clientsList" />
   </div>
 </template>
 

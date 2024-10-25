@@ -1,5 +1,6 @@
 import { defineComponent, PropType, inject } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { useSwipe } from '@/composables/useSwipe'
 import { useClientsStore } from '@/store/client'
 import { getFormatDate } from '@/helpers/dateFormatter'
@@ -21,10 +22,10 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: ['clientClick'],
-  setup(props, { emit }) {
+  setup(props) {
     const isMobile = inject<boolean>('isMobile', false)
     const clientsStore = useClientsStore()
+    const router = useRouter()
 
     const { onTouchStart, onTouchMove, onTouchEnd, position, resetPosition } =
       useSwipe(isMobile)
@@ -47,10 +48,7 @@ export default defineComponent({
     ]
 
     const onClientClick = async () => {
-      emit('clientClick')
-      clientsStore.selectedClient = props.item
-      await clientsStore.getClientLawsuits(props.item.id)
-      resetPosition()
+      await router.push(`/clients/${props.item.id}`)
     }
 
     const onRemoveClick = (id: number) => {

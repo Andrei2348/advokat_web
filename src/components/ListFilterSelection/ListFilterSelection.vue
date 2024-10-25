@@ -18,7 +18,7 @@
         :key="value.id"
         class="list-selection__options-item"
       >
-        <span :class="{ single: !data.modal.multiple }">
+        <span :class="{ single: !data?.modal.multiple }">
           {{
             purpose === 'customerIds'
               ? value.name
@@ -32,7 +32,7 @@
         />
       </div>
       <div
-        v-show="data.modal.multiple ? valuesForDisplaying.length > 2 : false"
+        v-show="data?.modal.multiple ? valuesForDisplaying.length > 2 : false"
         class="list-selection__options-item"
       >
         ...ещё {{ valuesForDisplaying.slice(2).length }}
@@ -42,13 +42,15 @@
     <ListFilter
       v-if="isModalVisible"
       ref="modal"
-      :multiple="data.modal.multiple"
+      :multiple="data?.modal.multiple"
       :options="listOptions"
       :initialValue="selectedValues"
       :isOpen="isModalVisible"
       class="list-selection__modal"
       :style="{ top: getModalPosition.top, bottom: getModalPosition.bottom }"
       @update:value="onGetValues"
+      @scroll="handleClientsListScrolling"
+      @search="handleClientsSearch"
       @cancel="onSelectionClose"
     />
   </div>

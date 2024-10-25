@@ -17,6 +17,12 @@
       @open="handleOpen"
       @close="handleClose"
     >
+      <template #noOptions>
+        <span>Список пуст</span>
+      </template>
+      <template #noResult>
+        <span>Не найдено</span>
+      </template>
       <template #singleLabel="props">
         <div class="select__option-wrapper">
           <span

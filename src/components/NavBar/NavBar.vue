@@ -16,6 +16,9 @@
 
     <div class="navbar__smart-wrapper">
       <div
+        v-if="
+          !['lawsuit-details', 'client-details'].includes(String($route.name))
+        "
         :class="['navbar__notification-wrapper', { active: isSearchOpen }]"
         @click="toggleSearchOnMobile"
       >
@@ -32,6 +35,9 @@
         'navbar__search-wrapper',
         { open: (isMobile || isTablet) && isSearchOpen },
       ]"
+      v-if="
+        !['lawsuit-details', 'client-details'].includes(String($route.name))
+      "
       v-click-outside="filtersCloseHandler"
     >
       <div class="navbar__search-wrapper-header">
@@ -81,15 +87,15 @@
         </div>
         <SearchFilters
           v-show="filterContent?.filtersList && areFiltersOpen"
-          :areButtonsShown="currentRoute.name !== 'clients'"
+          :areButtonsShown="currentRoute.name !== 'clients-table'"
           :content="filterContent?.filtersList"
           :selectedFilters="filtersSelection"
           :valuesChange="onValuesChange"
           :resetSearchFields="resetSearchFields"
         />
         <SearchButtonsContainer
-          v-if="currentRoute.name === 'clients'"
-          :class="{ type_clients: currentRoute.name === 'clients' }"
+          v-if="currentRoute.name === 'clients-table'"
+          :class="{ type_clients: currentRoute.name === 'clients-table' }"
           @onResetBtnClick="resetSearchFields"
         />
       </form>

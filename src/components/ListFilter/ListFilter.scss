@@ -55,7 +55,8 @@
 
     &.checked {
       &::after {
-        top: 3px;
+        top: 1px;
+        left: 1px;
       }
     }
   }
@@ -79,6 +80,11 @@
         transform: translateY(-70%);
       }
     }
+  }
+
+  &__message {
+    display: block;
+    text-align: center;
   }
 
   &__btn-container {

@@ -5,75 +5,42 @@ export const menuItems: MenuItemDropdown[] = [
     id: 1,
     title: 'Клиента',
     color: '',
-    routes: [
-      {
-        name: 'clients',
-        options: {
-          inTable: true,
-        },
-      },
-    ],
+    routes: ['clients-table'],
     function: 'createClient',
   },
   {
     id: 2,
     title: 'Дело',
     color: '',
-    routes: [
-      { name: 'home' },
-      {
-        name: 'clients',
-        options: {
-          inTable: false,
-        },
-      },
-    ],
+    routes: ['home', 'client-details'],
     function: 'createLawsuit',
   },
   {
     id: 3,
     title: 'Событие',
     color: '',
-    routes: [
-      { name: 'lawsuit-details' },
-      {
-        name: 'clients',
-        options: {
-          inTable: false,
-        },
-      },
-      { name: 'calendar' },
-    ],
+    routes: ['lawsuit-details', 'client-details', 'calendar'],
     function: '',
   },
   {
     id: 4,
     title: 'Задачу',
     color: '',
-    routes: [
-      { name: 'lawsuit-details' },
-      {
-        name: 'clients',
-        options: {
-          inTable: false,
-        },
-      },
-      { name: 'tasks' },
-    ],
+    routes: ['lawsuit-details', 'client-details', 'tasks'],
     function: 'createTask',
   },
   {
     id: 5,
     title: 'Заметку',
     color: '',
-    routes: [{ name: 'notes' }],
+    routes: ['notes'],
     function: '',
   },
   {
     id: 6,
     title: 'Транзакцию',
     color: '',
-    routes: [{ name: 'finance' }],
+    routes: ['finance'],
     function: '',
   },
 ]

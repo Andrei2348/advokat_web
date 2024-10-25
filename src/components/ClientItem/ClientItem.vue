@@ -33,13 +33,17 @@
         ]"
       >
         <span>Клиент</span>
-        <p
+        <RouterLink
           :class="[{ link: !isMobile }, 'client-item__column-text']"
-          @click="onClientClick"
+          :to="`/clients/${item.id}`"
         >
           {{ item.name }}
-        </p>
-        <a :href="`tel:${item.phone}`" class="client-item__phone-btn">
+        </RouterLink>
+        <a
+          v-if="item.phone"
+          :href="`tel:${item.phone}`"
+          class="client-item__phone-btn"
+        >
           <SvgIcon icon="phone" />
         </a>
       </div>
@@ -93,7 +97,7 @@
       <div v-if="!isMobile" class="client-item__menu-wrapper">
         <DropdownMenu
           :menu-items="menuItems"
-          :menu-icon="'menudots'"
+          menu-icon="menudots"
           @on-remove-click="onRemoveClick(item.id)"
         />
       </div>

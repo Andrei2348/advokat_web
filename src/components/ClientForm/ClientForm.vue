@@ -1,7 +1,7 @@
 <template>
   <div>
     <form
-      :class="['client-form']"
+      :class="['client-form', { 'client-form_new-client': isClientNew }]"
       novalidate
       @submit.prevent="clientFormSubmitHandler"
     >
@@ -11,6 +11,8 @@
           <DateElement
             v-model:value="birthDate"
             :object-key="'birthday'"
+            :error-text="errors?.birthDate"
+            :year-range="[1920, 2020]"
             @dataChanged="onDataChange"
           />
         </div>
@@ -34,9 +36,11 @@
                 :type="clientFormFields[key].type"
                 :placeholder="clientFormFields[key].placeholder"
                 :max-length="clientFormFields[key].maxLength"
+                :error-text="errors ? errors[key] : null"
                 ref="formElement"
               />
               <button
+                v-if="!isClientNew"
                 class="client-form__input-wrapper-copy"
                 type="button"
                 @click="onCopyClick(fields[key])"
@@ -45,10 +49,10 @@
               </button>
             </div>
             <span
-              v-if="isUserNew || !clientFormFields[key].link"
+              v-if="isClientNew || !clientFormFields[key].link"
               :class="[
                 'client-form__input-wrapper-link',
-                { 'client-form__input-wrapper-link_client': key === 'client' },
+                { 'client-form__input-wrapper-link_client': key === 'name' },
               ]"
             >
               <SvgIcon :icon="clientFormFields[key].icon" />
@@ -68,16 +72,19 @@
         </div>
       </template>
       <div class="client-form__btn-container">
-        <button type="submit">
-          {{ isUserNew ? 'Создать' : 'Сохранить изменения' }}
+        <button type="submit" :disabled="!fields.name">
+          {{ isClientNew ? 'Создать' : 'Сохранить изменения' }}
         </button>
-        <button type="button" @click="onRemoveBtnClick">
+        <button v-if="!isClientNew" type="button" @click="onRemoveBtnClick">
           Удалить клиента
           <SvgIcon icon="trash04" />
         </button>
       </div>
     </form>
-    <ClientLawsuitsTable v-if="!isUserNew && clientLawsuits?.length" />
+    <ClientLawsuitsTable
+      v-if="!isClientNew && clientLawsuits?.length"
+      ref="clientLawsuitsList"
+    />
   </div>
 </template>
 

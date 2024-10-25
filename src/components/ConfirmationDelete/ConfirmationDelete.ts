@@ -1,4 +1,5 @@
 import { defineComponent } from 'vue'
+import { useRouter } from 'vue-router'
 import { useUXUIStore } from '@/store/uxui'
 import { useNotesStore } from '@/store/notes'
 import { useAuthorityStore } from '@/store/authorities'
@@ -17,6 +18,7 @@ export default defineComponent({
     const eventsStore = useEventsStore()
     const tasksStore = useTasksStore()
     const clientsStore = useClientsStore()
+    const router = useRouter()
 
     const deleteLawsuite = async (id: number) => {
       await lawsuitStore.deletelawsuitItem({ id })
@@ -25,6 +27,7 @@ export default defineComponent({
 
     const deleteClient = async (id: number) => {
       await clientsStore.removeClientApiRequest(id)
+      await router.push('/clients')
       uxuiStore.setModalName('')
     }
 

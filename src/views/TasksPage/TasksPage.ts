@@ -1,5 +1,11 @@
-import { defineComponent, ref, computed } from 'vue'
-import { onBeforeMount } from 'vue'
+import {
+  defineComponent,
+  ref,
+  computed,
+  onBeforeMount,
+  onBeforeUnmount,
+  DefineComponent,
+} from 'vue'
 import { useTasksStore } from '@/store/tasks'
 import { useUXUIStore } from '@/store/uxui'
 import TabsNav from '@/components/TabsNav/TabsNav.vue'
@@ -17,13 +23,22 @@ export default defineComponent({
 
     const selectedTab = ref<TaskTableTabs>('Мой день')
     const tabs: TaskTableTabs[] = ['Мой день', 'Запланировано', 'Архив']
-    const tasksList = ref<HTMLElement | null>(null)
+    const tasksList = ref<DefineComponent<typeof TabsNav> | null>(null)
 
     const tabsMeaning = {
       'Мой день': 'myDay',
       Запланировано: 'planned',
       Архив: 'finished',
     }
+
+    const handleTasksScrolling = computed(() => {
+      const handler = useScrolling<typeof TabsNav>(
+        tasksList.value,
+        tasksStore.loadMoreTasks,
+      )
+      return handler
+    })
+    const tasksScrollHandler = async () => await handleTasksScrolling.value()
 
     const taskItems = computed(() => {
       const key = tabsMeaning[selectedTab.value]
@@ -42,8 +57,12 @@ export default defineComponent({
     }
 
     onBeforeMount(async () => {
-      await tasksStore.getTasks({ page: 1 })
-      useScrolling(tasksList.value, tasksStore.loadMoreTasks)
+      await tasksStore.getTasks()
+      await tasksScrollHandler()
+      window.addEventListener('scroll', tasksScrollHandler)
+    })
+    onBeforeUnmount(() => {
+      window.removeEventListener('scroll', tasksScrollHandler)
     })
     return {
       tasksStore,

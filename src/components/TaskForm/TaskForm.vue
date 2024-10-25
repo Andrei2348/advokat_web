@@ -22,7 +22,7 @@
         tagName="textarea"
         v-model:value="fields.theme"
         placeholder="Задача"
-        required
+        :error-text="validationErrors?.theme"
       />
       <div class="task-form__checkbox-wrapper">
         <label
@@ -41,6 +41,7 @@
             class="task-form__middle-time-picker"
             v-model:value="fields.date"
             object-key="date"
+            :error-text="validationErrors?.deadline"
             @dataChanged="onValueChange"
           />
           <FormElement
@@ -102,25 +103,28 @@
     <FormElement
       title="Примечание"
       tagName="textarea"
+      :error-text="validationErrors?.comment"
       v-model:value="fields.comment"
     />
     <section v-if="!isTaskNew" class="task-form__info">
       <article v-if="lawsuitEvent" class="task-form__event">
         <div class="event-box">
           <span class="gray-text">Связанное событие</span>
-          <!--Make it to be link in the future-->
           <p class="blue-text blue-text_link">
-            Подготовить документы для Иванова к судебному заседанию
+            {{ lawsuitEvent.theme }}
           </p>
         </div>
         <div class="task-form__event-bottom">
           <div class="event-box">
             <span class="gray-text">Место события</span>
-            <p class="blue-text">Гатчинский гор суд</p>
+            <p class="blue-text">{{ lawsuitEvent.place }}</p>
           </div>
           <div class="event-box">
             <span class="gray-text">Дата и время события</span>
-            <p class="blue-text">08.04.2024 16:00</p>
+            <p class="blue-text">
+              {{ getTimezoneDate(lawsuitEvent.till).date }}
+              {{ getTimezoneDate(lawsuitEvent.till).time }}
+            </p>
           </div>
         </div>
         <button type="button" class="task-form__event-remove-btn">
@@ -149,7 +153,9 @@
       <div class="task-form__form-controls">
         <button :disabled="isSubmitBtnDisabled" type="submit">Сохранить</button>
         <button
-          v-if="!isTaskNew && Object.keys(taskStatus)[0] === 'planned'"
+          v-if="
+            !isTaskNew && taskStatus && Object.keys(taskStatus)[0] === 'planned'
+          "
           type="button"
           @click="onCompleteBtnClick"
         >

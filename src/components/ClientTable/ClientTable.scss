@@ -1,3 +1,25 @@
+.link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  color: $black;
+  transition: opacity 0.3s ease;
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  @media (hover: none) {
+    &:active {
+      opacity: 0.7;
+    }
+  }
+
+  &:visited {
+    color: $black;
+  }
+}
+
 .client-table {
   width: 100%;
   color: $gray;

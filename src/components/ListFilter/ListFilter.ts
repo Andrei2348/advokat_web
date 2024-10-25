@@ -1,4 +1,4 @@
-import { defineComponent, PropType, ref, computed, toRaw } from 'vue'
+import { defineComponent, PropType, ref, toRaw, watch } from 'vue'
 
 export default defineComponent({
   name: 'ListFilter',
@@ -8,18 +8,20 @@ export default defineComponent({
     initialValue: Array as PropType<number[]>,
     isOpen: Boolean,
   },
-  emits: ['update:value', 'cancel'],
+  emits: ['update:value', 'scroll', 'search', 'cancel'],
   setup(props, { emit }) {
     const searchValue = ref('')
     const selectedValues = ref<number[]>(props.initialValue || [])
     const wrapper = ref<HTMLElement | null>(null)
+    const list = ref<HTMLDivElement | null>(null)
 
     // Компонент для отображения списка клиентов или дел (multiple: true - клиенты, multiple: false - дела)
 
-    const searchedOptions = computed(() =>
-      props.options?.filter((option) =>
-        option.name.toLowerCase().includes(searchValue.value.toLowerCase()),
-      ),
+    watch(
+      () => searchValue.value,
+      () => {
+        emit('search', searchValue.value)
+      },
     )
 
     const onMultipleValueSelect = (id: number) => {
@@ -28,6 +30,8 @@ export default defineComponent({
       } else {
         selectedValues.value = [...selectedValues.value, id]
       }
+
+      console.log(selectedValues.value)
     }
 
     const onSingleValueSelect = (id: number) => {
@@ -44,9 +48,9 @@ export default defineComponent({
     }
 
     return {
+      list,
       searchValue,
       selectedValues,
-      searchedOptions,
       wrapper,
       onMultipleValueSelect,
       onSingleValueSelect,
