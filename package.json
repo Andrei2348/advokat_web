@@ -2,7 +2,7 @@
   "name": "lawyer",
   "version": "0.0.0",
   "private": true,
-  "author": "kaputin <kaputinea@gmail.com>",
+  "author": "Makarevich <makarevichandco@gmail.com>",
   "scripts": {
     "serve": "vite",
     "build": "vue-tsc --noEmit && vite build",
